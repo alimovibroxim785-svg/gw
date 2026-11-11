@@ -1,0 +1,2718 @@
+﻿<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WO & MAN Студия Красоты | Go'zallik Saloni & Barbershop</title>
+    <link rel="icon" type="image/png" href="assets/logo.png">
+    <!-- Telegram va ijtimoiy tarmoqlar uchun havola ko'rinishi -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="WO & MAN Студия Красоты">
+    <meta property="og:title" content="WO & MAN Студия Красоты — Barbershop va Go'zallik Saloni">
+    <meta property="og:description" content="Erkaklar uchun zamonaviy barbershop va xonimlar uchun premium go'zallik saloni. Yangiyo'l, Toshkent viloyati. Onlayn navbat oling!">
+    <meta property="og:url" content="https://wo-man-studio-539vw0r6hb7.qoder.website/">
+    <meta property="og:image" content="https://wo-man-studio-539vw0r6hb7.qoder.website/assets/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="WO & MAN Студия Красоты logotipi">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="WO & MAN Студия Красоты — Barbershop va Go'zallik Saloni">
+    <meta name="twitter:description" content="Erkaklar uchun zamonaviy barbershop va xonimlar uchun premium go'zallik saloni. Onlayn navbat oling!">
+    <meta name="twitter:image" content="https://wo-man-studio-539vw0r6hb7.qoder.website/assets/og-image.jpg">
+    <meta name="theme-color" content="#090a0c">
+    <!-- Mobil ilova (PWA) -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/icon-180.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="WO &amp; MAN">
+    <!-- Tailwind CSS -->
+    <script src="assets/vendor/tailwind.js"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="assets/vendor/fonts.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neonPink: '#ff2079',
+                        neonPinkHover: '#e01465',
+                        dark: {
+                            800: '#1b1e23',
+                            900: '#111317',
+                            950: '#090a0c',
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['Montserrat', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-padding-top: 96px;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090a0c;
+            color: #e2e8f0;
+        }
+        #servicesGrid img, #gallery img,
+        #servicesGrid .service-media, #gallery .aspect-square {
+            cursor: zoom-in;
+        }
+        .nav-active {
+            color: #ff2079 !important;
+        }
+        .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .neon-glow {
+            box-shadow: 0 0 25px rgba(255, 32, 121, 0.45), 0 0 50px rgba(255, 32, 121, 0.2);
+        }
+        .glass-card {
+            background: rgba(20, 23, 28, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glass-card:hover {
+            border-color: rgba(255, 32, 121, 0.45);
+        }
+        .neon-pink-text {
+            color: #ff2079;
+            text-shadow: 0 0 14px rgba(255, 32, 121, 0.55);
+        }
+        .master-card-active {
+            border-color: #ff2079 !important;
+            background: rgba(255, 32, 121, 0.15) !important;
+            box-shadow: 0 0 15px rgba(255, 32, 121, 0.35);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090a0c;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #232730;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ff2079;
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-slate-100 antialiased selection:bg-neonPink selection:text-white">
+
+    <!-- PROMO BANNER -->
+    <div id="promoBanner" class="relative bg-gradient-to-r from-neonPink via-rose-600 to-neonPink text-white text-center text-[11px] sm:text-sm font-bold py-2 pl-4 pr-12">
+        <i class="fa-solid fa-tags mr-1.5"></i><span data-i18n="promo.text">Dushanba–seshanba barcha xizmatlarga 10% chegirma</span>
+        <button type="button" onclick="dismissPromo()" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 rounded-full bg-black/20 hover:bg-black/40 flex items-center justify-center transition" aria-label="Yopish" data-i18n-aria="lightbox.close">
+            <i class="fa-solid fa-xmark text-xs"></i>
+        </button>
+    </div>
+    <script>
+        try { if (localStorage.getItem('woman_promo_dismissed_v1') === '1') document.getElementById('promoBanner').classList.add('hidden'); } catch (e) {}
+    </script>
+
+    <!-- TOP BAR -->
+    <div class="bg-dark-900 border-b border-white/5 py-2.5 px-4 text-xs text-slate-400">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-6">
+                <span><i class="fa-solid fa-location-dot text-neonPink mr-1.5"></i> <span id="siteTopAddressText" data-i18n="top.address">Yangiyo'l sh., Toshkent viloyati</span></span>
+                <span class="hidden md:inline"><i class="fa-solid fa-clock text-neonPink mr-1.5"></i> <span id="siteTopHoursText" data-i18n="top.hours">Har kuni: 09:00 - 22:00 (Dam olishsiz)</span></span>
+            </div>
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <div id="langSwitch" class="flex items-center gap-1" role="group" aria-label="Language">
+                    <button type="button" data-lang="uz" onclick="setLanguage('uz')" class="lang-btn px-2 py-1 rounded-md text-[10px] font-bold bg-neonPink text-white">UZ</button>
+                    <button type="button" data-lang="ru" onclick="setLanguage('ru')" class="lang-btn px-2 py-1 rounded-md text-[10px] font-bold text-slate-400 hover:text-white bg-white/5">RU</button>
+                    <button type="button" data-lang="en" onclick="setLanguage('en')" class="lang-btn px-2 py-1 rounded-md text-[10px] font-bold text-slate-400 hover:text-white bg-white/5">EN</button>
+                </div>
+                <a href="tel:+998979775994" id="siteTopPhone" class="hover:text-neonPink transition font-medium text-slate-200">
+                    <i class="fa-solid fa-phone text-neonPink mr-1"></i> <span id="siteTopPhoneText">+998 97 977 5994</span>
+                </a>
+                <span class="text-white/20">|</span>
+                <a href="admin.html?v=39" class="text-slate-400 hover:text-neonPink font-medium transition flex items-center gap-1">
+                    <i class="fa-solid fa-shield-halved text-xs"></i> Admin Panel
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN NAVBAR -->
+    <header class="sticky top-0 z-50 glass-card bg-dark-950/95 backdrop-blur-md border-b border-white/10 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO (SIZ YUBORGAN HAQIQIY RASM) -->
+                <a href="#home" class="flex items-center space-x-3.5 group">
+                    <div class="relative w-12 h-12 rounded-xl overflow-hidden border border-neonPink/40 shadow-md shadow-neonPink/30 group-hover:scale-105 transition bg-black shrink-0 flex items-center justify-center">
+                        <img src="assets/logo.png" 
+                             alt="WO & MAN Logo" 
+                             onerror="this.style.display='none'" 
+                             class="w-full h-full object-cover select-none pointer-events-none">
+                    </div>
+                    <div>
+                        <div class="brand-font text-2xl font-black tracking-wider flex items-center gap-1 leading-none">
+                            <span class="text-neonPink">WO</span>
+                            <span class="text-white/60 text-lg">&amp;</span>
+                            <span class="text-white">MAN</span>
+                        </div>
+                        <span class="text-[9px] tracking-[0.25em] uppercase text-slate-400 font-bold block mt-0.5">Студия Красоты</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAV -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#home" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.home">Bosh sahifa</a>
+                    <a href="#services" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.services">Xizmatlar &amp; Narxlar</a>
+                    <a href="#masters" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.masters">Ustalarimiz</a>
+                    <a href="#gallery" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.gallery">Galereya</a>
+                    <a href="#about" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.about">Salon Haqida</a>
+                    <a href="#contacts" class="text-slate-300 hover:text-neonPink transition" data-i18n="nav.contacts">Aloqa</a>
+                </nav>
+
+                <!-- CTA BUTTON -->
+                <div class="hidden sm:flex items-center space-x-3">
+                    <a href="#booking" class="px-6 py-2.5 rounded-full font-bold text-sm bg-gradient-to-r from-neonPink to-rose-600 text-white shadow-lg shadow-neonPink/25 hover:shadow-neonPink/45 transition-all hover:scale-105 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-check"></i> <span data-i18n="nav.book">Onlayn Navbat</span>
+                    </a>
+                </div>
+
+                <!-- MOBILE MENU TOGGLE -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="text-slate-300 hover:text-neonPink p-2 focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark-900 border-b border-white/10 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.home">Bosh sahifa</a>
+            <a href="#services" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.services">Xizmatlar &amp; Narxlar</a>
+            <a href="#masters" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.masters">Ustalarimiz</a>
+            <a href="#gallery" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.gallery">Galereya</a>
+            <a href="#about" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.about">Salon Haqida</a>
+            <a href="#contacts" class="block py-2 text-slate-300 hover:text-neonPink font-medium" data-i18n="nav.contacts">Aloqa</a>
+            <a href="#booking" class="block text-center py-3 bg-gradient-to-r from-neonPink to-rose-600 text-white font-bold rounded-xl mt-4">
+                <i class="fa-solid fa-calendar-check mr-2"></i> <span data-i18n="nav.bookLong">Onlayn Navbat Olish</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION (SIZ TASHAGAN LOGO RASMI BILAN) -->
+    <section id="home" class="relative min-h-[85vh] sm:min-h-[90vh] flex items-center justify-center overflow-hidden">
+        <!-- Atmosphere Background -->
+        <div class="absolute inset-0 z-0">
+            <img src="assets/web/photo-1560066984-138dadb4c035-1920.jpg" 
+                 alt="WO & MAN Studio" 
+                 class="w-full h-full object-cover opacity-20 filter grayscale contrast-125">
+            <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/85 to-transparent"></div>
+            <!-- Neon Ambient Glows -->
+            <div class="absolute -top-24 -left-24 w-96 h-96 bg-neonPink/25 rounded-full filter blur-[110px] pointer-events-none"></div>
+            <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-white/10 rounded-full filter blur-[110px] pointer-events-none"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-6 sm:pt-10 pb-16">
+            
+            <!-- SIZ YUBORGAN HAQIQIY SARTAROSHXONA LOGOTIPI (DUMALOQ HOSHIYASI OLIB TASHLANDI, TEPAROQ VA O'RTADA JOYLASHTIRILDI) -->
+            <div class="relative mx-auto mb-6 flex flex-col items-center justify-center">
+                <!-- Orqa fondagi nafis neon nurlanish -->
+                <div class="absolute w-64 h-64 sm:w-80 sm:h-80 bg-neonPink/25 rounded-3xl blur-[85px] pointer-events-none"></div>
+
+                <!-- Logo Container (Dumaloq joyi olib tashlangan, to'liq toza va zamonaviy) -->
+                <div class="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden bg-black shadow-2xl shadow-neonPink/20 border border-white/10 hover:border-neonPink/50 transition-all duration-500 group flex items-center justify-center">
+                    <img src="assets/logo.png" 
+                         alt="WO & MAN Студия Красоты" 
+                         onerror="this.style.display='none'" 
+                         class="w-full h-full object-cover select-none pointer-events-none">
+                </div>
+            </div>
+
+            <!-- Main Heading -->
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-neonPink/15 text-neonPink text-xs font-bold tracking-wider uppercase mb-5 border border-neonPink/30">
+                <i class="fa-solid fa-crown text-xs"></i> <span data-i18n="hero.badge">Yangiyo'ldagi Premium Erkaklar va Ayollar Saloni</span>
+            </div>
+
+            <h1 class="brand-font text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+                <span data-i18n="hero.title1">ERKAKLAR VA AYOLLAR UCHUN</span> <br/>
+                <span class="bg-gradient-to-r from-neonPink via-rose-400 to-white bg-clip-text text-transparent" data-i18n="hero.title2">PREMIUM GO'ZALLIK STUDIYASI</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 mb-10 leading-relaxed font-light" data-i18n-html="hero.desc">
+                Erkaklar uchun zamonaviy <b>Barbershop</b> va xonimlar uchun eksklyuziv <b>Go'zallik Saloni</b> bitta qulay manzilda. Yuqori servis va professional ustalar xizmatingizda.
+            </p>
+
+            <!-- Action buttons -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#booking" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-gradient-to-r from-neonPink to-rose-600 text-white shadow-xl shadow-neonPink/30 hover:shadow-neonPink/50 hover:scale-105 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-days"></i> <span data-i18n="hero.btn1">Onlayn Navbatga Yozilish</span>
+                </a>
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base bg-white/5 hover:bg-white/10 text-white border border-white/10 hover:border-neonPink/50 transition-all flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-list-check text-neonPink"></i> <span data-i18n="nav.services">Xizmatlar &amp; Narxlar</span>
+                </a>
+            </div>
+
+            <!-- Highlights -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-16 pt-10 border-t border-white/10 text-left">
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="brand-font text-3xl font-extrabold text-neonPink">2 ta</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1" data-i18n="hi.zones">Alohida Erkak &amp; Ayol Zonalari</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="brand-font text-3xl font-extrabold text-white">4+</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1" data-i18n="hi.masters">Professional Stilist Ustalar</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="brand-font text-3xl font-extrabold text-neonPink">100%</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1" data-i18n="hi.sterile">Tibbiy Sterilizatsiya</div>
+                </div>
+                <div class="p-4 rounded-2xl bg-white/[0.02] border border-white/5">
+                    <div class="brand-font text-3xl font-extrabold text-amber-400">4.9 ★</div>
+                    <div class="text-xs sm:text-sm text-slate-400 mt-1" data-i18n="hi.rating">Mijozlarimiz Bahosi</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MASTERS SECTION -->
+    <section id="masters" class="py-20 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="mst.kicker">O'z sohasining mutaxassislari</span>
+                <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-4" data-i18n="mst.title">BIZNING USTALARIMIZ</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mb-4"></div>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="mst.sub">O'zingizga ma'qul bo'lgan ustani tanlang va qulay vaqtga yoziling</p>
+            </div>
+
+            <!-- Filter for Masters -->
+            <div class="flex justify-center mb-10">
+                <div class="p-1 rounded-2xl bg-dark-950 border border-white/10 flex gap-1">
+                    <button onclick="filterMastersCategory('all')" id="masterTab-all" class="px-5 py-2.5 rounded-xl font-bold text-xs transition bg-neonPink text-white">
+                        <span data-i18n="mst.tab.all">Barcha Ustalar</span>
+                    </button>
+                    <button onclick="filterMastersCategory('male')" id="masterTab-male" class="px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-mars mr-1.5 text-blue-400"></i> <span data-i18n="mst.tab.male">Erkaklar Ustalari</span>
+                    </button>
+                    <button onclick="filterMastersCategory('female')" id="masterTab-female" class="px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-venus mr-1.5 text-neonPink"></i> <span data-i18n="mst.tab.female">Ayollar Ustalari</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- MASTERS GRID -->
+            <div id="mastersGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Ustalar admin paneldagi woman_masters_v3 ma'lumotidan render qilinadi -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION (SIFATLI RASMLAR BILAN BOYITILGAN) -->
+    <section id="services" class="py-20 bg-dark-900/60 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-10">
+                <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="svc.kicker">Shaffof va qulay narxlar</span>
+                <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-4" data-i18n="svc.title">XIZMATLAR VA NARXLAR</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mb-4"></div>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="svc.sub">Har bir xizmat uchun sifatli fotosuratlar va batafsil narxlar</p>
+            </div>
+
+            <!-- Gender Filter Tabs -->
+            <div class="flex justify-center mb-10">
+                <div class="p-1 rounded-2xl bg-dark-950 border border-white/10 flex gap-1">
+                    <button onclick="filterServicesCategory('all')" id="srvTab-all" class="px-5 py-2.5 rounded-xl font-bold text-xs transition bg-neonPink text-white">
+                        <span data-i18n="svc.tab.all">Barcha Xizmatlar</span>
+                    </button>
+                    <button onclick="filterServicesCategory('male')" id="srvTab-male" class="px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-mars mr-1.5 text-blue-400"></i> <span data-i18n="svc.tab.male">Erkaklar (Barber)</span>
+                    </button>
+                    <button onclick="filterServicesCategory('female')" id="srvTab-female" class="px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white">
+                        <i class="fa-solid fa-venus mr-1.5 text-neonPink"></i> <span data-i18n="svc.tab.female">Ayollar (Beauty)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- SERVICES GRID (JS orqali render qilinadi — admin panel bilan bog'langan) -->
+            <div id="servicesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Xizmat kartalari renderServicesGrid() orqali to'ldiriladi -->
+            </div>
+
+            <!-- AYOLLAR NARX JADVALI -->
+            <div id="womenPriceList" class="hidden">
+                    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-neonPink/20 shadow-2xl relative overflow-hidden">
+                        <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-neonPink/10 blur-3xl pointer-events-none"></div>
+                        <div class="text-center mb-8 relative">
+                            <span class="inline-flex items-center gap-2 text-neonPink text-xs font-bold uppercase tracking-widest mb-2">
+                                <i class="fa-solid fa-venus"></i> <span data-i18n="gender.female">Ayollar</span>
+                            </span>
+                            <h3 class="brand-font text-2xl sm:text-3xl font-black text-white">AYOLLAR XIZMATLARI VA NARXLAR</h3>
+                            <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mt-3"></div>
+                        </div>
+                        <div id="womenPriceRows" class="grid md:grid-cols-2 gap-x-12 gap-y-0 max-w-4xl mx-auto relative">
+                            <!-- Narx qatorlari renderWomenPriceList() orqali to'ldiriladi -->
+                        </div>
+                        <p class="text-center text-slate-500 text-xs mt-8 relative">* Narx soch uzunligi va ishning qiyinligiga qarab belgilanadi. Aniq narx uchun ustaga yozing.</p>
+                    </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ONLINE BOOKING SECTION -->
+    <section id="booking" class="py-20 bg-gradient-to-b from-dark-900 via-dark-950 to-dark-900 border-t border-b border-neonPink/20 relative">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-neonPink/10 text-neonPink text-xs font-semibold mb-3 border border-neonPink/25">
+                    <i class="fa-solid fa-bolt"></i> <span data-i18n="bk.kicker">Tezkor va Navbatsiz</span>
+                </div>
+                <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-3" data-i18n="bk.title">ONLAYN NAVBATGA YOZILISH</h2>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="bk.sub">Bo'limni, ustani va o'zingizga qulay vaqtni tanlang. Qolganini bizga topshiring!</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- BOOKING FORM -->
+                <div class="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl shadow-2xl relative border-white/10">
+                    <form id="bookingForm" onsubmit="handleBookingSubmit(event)">
+                        
+                        <!-- Step 1: Gender Selection Switch -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                <span class="w-5 h-5 rounded-full bg-neonPink text-white inline-flex items-center justify-center text-xs mr-1 font-bold">1</span>
+                                <span data-i18n="bk.step1">Bo'limni tanlang</span> <span class="text-rose-500">*</span>
+                            </label>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button type="button" onclick="setBookingGender('male')" id="btnGenderMale" class="p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-blue-500/10 border-blue-500/40 text-blue-400">
+                                    <i class="fa-solid fa-mars text-base"></i> <span data-i18n="svc.tab.male">Erkaklar (Barber)</span>
+                                </button>
+                                <button type="button" onclick="setBookingGender('female')" id="btnGenderFemale" class="p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-dark-950 border-white/10 text-slate-400 hover:text-white">
+                                    <i class="fa-solid fa-venus text-base"></i> <span data-i18n="svc.tab.female">Ayollar (Beauty)</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Select Master (Interactive Cards + Select) -->
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-2">
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider">
+                                    <span class="w-5 h-5 rounded-full bg-neonPink text-white inline-flex items-center justify-center text-xs mr-1 font-bold">2</span>
+                                    <span data-i18n="bk.step2">Ustani tanlang</span> <span class="text-rose-500">*</span>
+                                </label>
+                                <span class="text-[11px] text-slate-400" data-i18n="bk.masterHint">Ustani bosing:</span>
+                            </div>
+
+                            <!-- VISUAL MASTER CARDS (Dastlabki kartalar tayyor turadi) -->
+                            <div id="bookingMasterCards" class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3 max-h-64 overflow-y-auto pr-1">
+                                <!-- Pre-rendered cards -->
+                                <div onclick="chooseMaster('m1')" id="masterCard-m1" class="flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-dark-950 hover:border-neonPink/50 cursor-pointer transition">
+                                    <img src="assets/web/photo-1507003211169-0a1dd7228f2d-600.jpg" alt="Azizbek Rahimov" class="w-12 h-12 rounded-xl object-cover shrink-0">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-xs font-bold text-white truncate">Azizbek Rahimov</div>
+                                        <div class="text-[11px] text-neonPink truncate">Top Barber</div>
+                                        <div class="text-[10px] text-slate-400">★ 4.9 (7 yil tajriba)</div>
+                                    </div>
+                                    <div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0 text-transparent">
+                                        <i class="fa-solid fa-check text-[10px]"></i>
+                                    </div>
+                                </div>
+
+                                <div onclick="chooseMaster('m2')" id="masterCard-m2" class="flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-dark-950 hover:border-neonPink/50 cursor-pointer transition">
+                                    <img src="assets/web/photo-1500648767791-00dcc994a43e-600.jpg" alt="Jasur Mirzayev" class="w-12 h-12 rounded-xl object-cover shrink-0">
+                                    <div class="flex-1 min-w-0">
+                                        <div class="text-xs font-bold text-white truncate">Jasur Mirzayev</div>
+                                        <div class="text-[11px] text-neonPink truncate">Senior Barber</div>
+                                        <div class="text-[10px] text-slate-400">★ 4.8 (5 yil tajriba)</div>
+                                    </div>
+                                    <div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0 text-transparent">
+                                        <i class="fa-solid fa-check text-[10px]"></i>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- SYNCED SELECT DROPDOWN -->
+                            <select id="selectBarber" required onchange="handleSelectDropdownChange()" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-slate-200 text-xs focus:border-neonPink focus:outline-none transition">
+                                <option value="" data-i18n="bk.selectMaster">-- Ro'yxatdan tanlang --</option>
+                                <option value="m1">Azizbek Rahimov (Top Barber)</option>
+                                <option value="m2">Jasur Mirzayev (Senior Barber)</option>
+                            </select>
+                        </div>
+
+                        <!-- Step 3: Select Services -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                <span class="w-5 h-5 rounded-full bg-neonPink text-white inline-flex items-center justify-center text-xs mr-1 font-bold">3</span>
+                                <span data-i18n="bk.step3">Xizmat(lar)ni tanlang</span> <span class="text-rose-500">*</span>
+                            </label>
+                            <div id="servicesCheckboxes" class="space-y-2 max-h-56 overflow-y-auto pr-2">
+                                <!-- Checkbox list -->
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Date & Time -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                    <span class="w-5 h-5 rounded-full bg-neonPink text-white inline-flex items-center justify-center text-xs mr-1 font-bold">4</span>
+                                    <span data-i18n="bk.step4">Sanani tanlang</span> <span class="text-rose-500">*</span>
+                                </label>
+                                <input type="date" id="bookingDate" required onchange="renderTimeSlots(); updateBookingSummary()" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-3 text-slate-200 text-sm focus:border-neonPink focus:outline-none transition">
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                    <span class="w-5 h-5 rounded-full bg-neonPink text-white inline-flex items-center justify-center text-xs mr-1 font-bold">5</span>
+                                    <span data-i18n="bk.step5">Vaqtni tanlang</span> <span class="text-rose-500">*</span>
+                                </label>
+                                <select id="bookingTime" required onchange="updateBookingSummary()" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-3 text-slate-200 text-sm focus:border-neonPink focus:outline-none transition">
+                                    <option value="" data-i18n="bk.timePlaceholder">-- Qulay vaqt --</option>
+                                </select>
+                                <p id="timeAvailabilityHint" class="text-[11px] text-slate-400 mt-2">
+                                    <i class="fa-solid fa-circle-info text-[10px] mr-1"></i><span data-i18n="bk.timeHintNoMaster">Ustani tanlasangiz, ish vaqti va band soatlari ko'rsatiladi.</span>
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Step 5: Client Info -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                    <span data-i18n="bk.fullName">Ism va Familiyangiz</span> <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                                    <input type="text" id="clientName" required placeholder="Masalan: Jasur Aliyev" data-i18n-ph="bk.fullNamePh" class="w-full bg-dark-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-slate-200 text-sm focus:border-neonPink focus:outline-none transition">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">
+                                    <span data-i18n="bk.phone">Telefon raqamingiz</span> <span class="text-rose-500">*</span>
+                                </label>
+                                <div class="relative">
+                                    <i class="fa-solid fa-phone absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                                    <input type="tel" id="clientPhone" required placeholder="+998 90 123 45 67" class="w-full bg-dark-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-slate-200 text-sm focus:border-neonPink focus:outline-none transition">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Optional comment -->
+                        <div class="mb-6">
+                            <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2" data-i18n="bk.comment">Qo'shimcha izoh (ixtiyoriy)</label>
+                            <textarea id="clientComment" rows="2" placeholder="Masalan: Bayramga tayyorgarlik, sochni davolash..." data-i18n-ph="bk.commentPh" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-slate-200 text-sm focus:border-neonPink focus:outline-none transition"></textarea>
+                        </div>
+
+                        <!-- SUBMIT BUTTON -->
+                        <button type="submit" id="submitBtn" class="w-full py-4 rounded-xl font-bold text-base bg-gradient-to-r from-neonPink to-rose-600 text-white shadow-xl shadow-neonPink/25 hover:shadow-neonPink/40 hover:scale-[1.01] transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> <span data-i18n="bk.submit">Arizani yuborish &amp; Navbatni band qilish</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- LIVE BOOKING SUMMARY CARD -->
+                <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border-neonPink/30 sticky top-28">
+                    <div class="border-b border-white/10 pb-4 mb-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="brand-font text-lg font-black text-white" data-i18n="bk.summaryTitle">ARIZA CHEKI</h3>
+                            <p class="text-xs text-slate-400">WO &amp; MAN Студия Красоты</p>
+                        </div>
+                        <span id="summaryBadgeGender" class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20" data-i18n="gender.maleSection">
+                            Erkaklar bo'limi
+                        </span>
+                    </div>
+
+                    <div class="space-y-4 text-sm">
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400"><i class="fa-solid fa-scissors mr-2 text-neonPink"></i> <span data-i18n="bk.master">Usta:</span></span>
+                            <span id="summaryBarber" class="font-semibold text-white" data-i18n="common.notSelected">Tanlanmagan</span>
+                        </div>
+
+                        <div class="flex justify-between items-start py-2 border-b border-white/5">
+                            <span class="text-slate-400"><i class="fa-solid fa-list-check mr-2 text-neonPink"></i> <span data-i18n="bk.services">Xizmatlar:</span></span>
+                            <span id="summaryServices" class="font-semibold text-white text-right max-w-[200px]" data-i18n="common.notSelected">Tanlanmagan</span>
+                        </div>
+
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400"><i class="fa-solid fa-calendar mr-2 text-neonPink"></i> <span data-i18n="bk.date">Sana:</span></span>
+                            <span id="summaryDate" class="font-semibold text-white" data-i18n="common.notSelected">Tanlanmagan</span>
+                        </div>
+
+                        <div class="flex justify-between items-center py-2 border-b border-white/5">
+                            <span class="text-slate-400"><i class="fa-solid fa-clock mr-2 text-neonPink"></i> <span data-i18n="bk.time">Vaqt:</span></span>
+                            <span id="summaryTime" class="font-semibold text-white" data-i18n="common.notSelected">Tanlanmagan</span>
+                        </div>
+                    </div>
+
+                    <!-- Total Price Box -->
+                    <div class="mt-6 p-4 rounded-2xl bg-dark-950 border border-neonPink/30 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-slate-400 block" data-i18n="bk.total">Jami To'lov</span>
+                            <span id="summaryTotal" class="brand-font text-2xl font-black text-neonPink">0 so'm</span>
+                        </div>
+                        <i class="fa-solid fa-receipt text-3xl text-white/20"></i>
+                    </div>
+
+                    <div class="mt-4 p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-400 flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check mt-0.5"></i>
+                        <span data-i18n="bk.note">Arizangiz qabul qilingach, administratorimiz tasdiqlash uchun siz bilan bog'lanadi.</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY SECTION -->
+    <section id="gallery" class="py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-14">
+                <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="gal.kicker">Ijodiy ishlarimiz</span>
+                <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-4" data-i18n="gal.title">FOTOGALEREYA</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mb-4"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="overflow-hidden rounded-2xl group relative aspect-square">
+                    <img src="assets/web/photo-1622286342621-4bd786c2447c-600.jpg" alt="Style 1" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <span class="text-xs font-bold text-white uppercase"><i class="fa-solid fa-mars text-blue-400 mr-1"></i> Fade &amp; Beard</span>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-2xl group relative aspect-square">
+                    <img src="assets/web/photo-1522337360788-8b13dee7a37e-600.jpg" alt="Style 2" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <span class="text-xs font-bold text-white uppercase"><i class="fa-solid fa-venus text-neonPink mr-1"></i> AirTouch &amp; Styling</span>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-2xl group relative aspect-square">
+                    <img src="assets/web/photo-1503951914875-452162b0f3f1-600.jpg" alt="Style 3" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <span class="text-xs font-bold text-white uppercase"><i class="fa-solid fa-mars text-blue-400 mr-1"></i> <span data-i18n="gal.zal1">Erkaklar Zali</span></span>
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-2xl group relative aspect-square">
+                    <img src="assets/web/photo-1487412720507-e7ab37603c6f-600.jpg" alt="Style 4" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/90 to-transparent opacity-0 group-hover:opacity-100 transition flex items-end p-4">
+                        <span class="text-xs font-bold text-white uppercase"><i class="fa-solid fa-venus text-neonPink mr-1"></i> <span data-i18n="gal.vizaj">Professional Vizaj</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REVIEWS SECTION -->
+    <section id="reviews" class="py-20 bg-dark-900/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="rev.kicker">Mijozlar fikri</span>
+                <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-4" data-i18n="rev.title">MIJOZLAR FIKRI</h2>
+                <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mb-4"></div>
+                <p class="text-slate-400 text-sm sm:text-base" data-i18n="rev.sub">Bizga ishonch bildirgan mijozlar taassurotlari</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fa-solid fa-quote-left text-2xl text-neonPink/60"></i>
+                            <div class="text-amber-400 text-xs tracking-widest">★★★★★</div>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6" data-i18n="rev.r1.text">Ukladka juda chiroyli chiqdi, usta har bir detalga e'tibor berdi. Endi doim shu yerga kelaman.</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-neonPink/15 text-neonPink flex items-center justify-center font-bold shrink-0">D</div>
+                        <div>
+                            <div class="text-sm font-bold text-white" data-i18n="rev.r1.name">Dilnoza A.</div>
+                            <div class="text-[11px] text-slate-400" data-i18n="rev.r1.service">Ukladka va bo'yash</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fa-solid fa-quote-left text-2xl text-neonPink/60"></i>
+                            <div class="text-amber-400 text-xs tracking-widest">★★★★★</div>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6" data-i18n="rev.r2.text">Barber Akrom sochni aynan o'zim xohlaganidek oldi. Atmosfera va xizmat darajasi zo'r.</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-blue-500/15 text-blue-400 flex items-center justify-center font-bold shrink-0">J</div>
+                        <div>
+                            <div class="text-sm font-bold text-white" data-i18n="rev.r2.name">Jasur M.</div>
+                            <div class="text-[11px] text-slate-400" data-i18n="rev.r2.service">Erkaklar sartaroshligi</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card rounded-3xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <i class="fa-solid fa-quote-left text-2xl text-neonPink/60"></i>
+                            <div class="text-amber-400 text-xs tracking-widest">★★★★★</div>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-6" data-i18n="rev.r3.text">Salon juda toza, vositalar steril. Ayollar zonasi alohida bo'lgani juda qulay.</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-4 border-t border-white/10">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500/15 text-emerald-400 flex items-center justify-center font-bold shrink-0">M</div>
+                        <div>
+                            <div class="text-sm font-bold text-white" data-i18n="rev.r3.name">Malika S.</div>
+                            <div class="text-[11px] text-slate-400" data-i18n="rev.r3.service">Salon xizmatlari</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-20 bg-dark-900/40 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="about.kicker">Biz haqimizda</span>
+                    <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-6 leading-tight" data-i18n="about.title">
+                        WO &amp; MAN — ERKAK VA AYOLLAR UCHUN MUKAMMAL GO'ZALLIK MAKONIDIR
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6" data-i18n-html="about.desc">
+                        Biz bitta tom ostida ikkita mustaqil zallarni birlashtirdik: erkaklar uchun klassik va zamonaviy <b>Barbershop</b> hamda xonimlar uchun nafis <b>Go'zallik Studiyasi</b>.
+                    </p>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-neonPink/10 text-neonPink flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-shield-virus"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm" data-i18n="about.f1">Steril va Xavfsiz</h4>
+                                <p class="text-xs text-slate-400" data-i18n="about.f1d">Har bir mijoz uchun alohida tibbiy dezinfeksiya qilingan vositalar.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <div class="w-9 h-9 rounded-xl bg-white/10 text-white flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-coffee"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-sm" data-i18n="about.f2">Qulay Lounge Zona</h4>
+                                <p class="text-xs text-slate-400" data-i18n="about.f2d">Yangi qovurilgan kofe, shirinliklar va erkin Wi-Fi zonasi.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="rounded-3xl overflow-hidden border border-white/10 shadow-2xl">
+                        <img src="assets/web/photo-1521590832167-7bcbfaa6381f-800.jpg" alt="WO & MAN Studio" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACTS SECTION -->
+    <section id="contacts" class="py-20 bg-dark-900/60 border-t border-white/5">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <div>
+                    <span class="text-neonPink text-xs font-bold uppercase tracking-widest block mb-2" data-i18n="ct.kicker">Aloqa va Lokatsiya</span>
+                    <h2 class="brand-font text-3xl sm:text-5xl font-black text-white mb-6" data-i18n="ct.title">MANZILIMIZ</h2>
+                    <p class="text-slate-400 text-sm sm:text-base mb-8" data-i18n="ct.desc">
+                        Biz sizni har kuni kutamiz. Qo'shimcha ma'lumot yoki guruh bo'lib yozilish uchun qo'ng'iroq qiling.
+                    </p>
+
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-neonPink/10 text-neonPink flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400" data-i18n="ct.address">Manzilimiz:</div>
+                                <div class="text-white font-semibold text-sm sm:text-base" id="siteContactAddress" data-i18n="ct.addressValue">Yangiyo'l sh., Toshkent viloyati</div>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-neonPink/10 text-neonPink flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400" data-i18n="ct.phone">Telefon raqam:</div>
+                                <a href="tel:+998979775994" id="siteContactPhone" class="text-neonPink hover:underline font-semibold text-sm sm:text-base">+998 97 977 5994</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-neonPink/10 text-neonPink flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">Instagram:</div>
+                                <a href="https://instagram.com/wo_man_yangiyol" target="_blank" rel="noopener" class="text-neonPink hover:underline font-semibold text-sm sm:text-base">@wo_man_yangiyol</a>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <div class="text-xs text-slate-400">WhatsApp:</div>
+                                <a href="https://wa.me/998979775994" id="siteContactWhatsApp" target="_blank" rel="noopener" class="text-emerald-400 hover:underline font-semibold text-sm sm:text-base">+998 97 977 5994</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="h-80 sm:h-96 rounded-3xl overflow-hidden border border-white/10 relative">
+                        <iframe 
+                            src="https://www.google.com/maps?q=41.1178493,69.0702794&amp;z=16&amp;hl=uz&amp;output=embed" 
+                            class="w-full h-full border-0 filter invert contrast-125 opacity-80" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <div class="mt-4 flex items-center gap-4">
+                        <div class="w-24 h-24 rounded-2xl bg-white p-1.5 shrink-0">
+                            <img src="assets/qr.png" alt="QR kod" class="w-full h-full object-contain">
+                        </div>
+                        <div class="min-w-0">
+                            <a href="https://www.google.com/maps/search/?api=1&amp;query=41.1178493,69.0702794" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 hover:bg-neonPink/20 text-neonPink text-xs font-bold border border-neonPink/30 transition">
+                                <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="ct.openMap">Xaritada ochish</span>
+                            </a>
+                            <p class="text-[11px] text-slate-500 mt-2" data-i18n="ct.qrHint">Telefon kamerasi bilan QR kodni skanerlab, saytni oching</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-950 border-t border-white/10 py-10 text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center space-x-3">
+                    <div class="brand-font text-xl font-black">
+                        <span class="text-neonPink">WO</span> <span class="text-white/60">&amp;</span> <span class="text-white">MAN</span>
+                    </div>
+                    <span class="text-xs text-slate-500">| Студия Красоты</span>
+                </div>
+                
+                <p class="text-xs text-slate-500 text-center md:text-left">
+                    <span data-i18n="ft.rights">&copy; 2026 WO &amp; MAN Студия Красоты. Barcha huquqlar himoyalangan.</span> <span class="text-slate-600">v3.24</span>
+                </p>
+
+                <div>
+                    <a href="admin.html?v=39" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 hover:bg-neonPink/20 text-neonPink text-xs font-semibold border border-neonPink/30 transition">
+                        <i class="fa-solid fa-lock text-xs"></i> Admin Panel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-dark-950/80 backdrop-blur-md hidden">
+        <div class="glass-card max-w-md w-full p-8 rounded-3xl border-neonPink/40 text-center relative shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center text-3xl mb-4 border border-emerald-500/40">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <h3 class="brand-font text-2xl font-black text-white mb-2" data-i18n="modal.title">Arizangiz Qabul Qilindi!</h3>
+            <p class="text-sm text-slate-300 mb-4" data-i18n-html="modal.desc">
+                Sizning arizangiz <b>WO &amp; MAN Студия Красоты</b> tizimiga muvaffaqiyatli kiritildi.
+            </p>
+
+            <div class="bg-dark-950 p-4 rounded-2xl border border-white/10 text-left text-xs space-y-2 mb-6">
+                <div class="flex justify-between">
+                    <span class="text-slate-400" data-i18n="modal.appId">Ariza ID:</span>
+                    <span id="modalAppId" class="font-bold text-neonPink font-mono">WM-0000</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400" data-i18n="modal.client">Mijoz:</span>
+                    <span id="modalClientName" class="font-semibold text-white">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400" data-i18n="bk.master">Usta:</span>
+                    <span id="modalBarberName" class="font-semibold text-white">-</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-400" data-i18n="modal.datetime">Sana va vaqt:</span>
+                    <span id="modalDateTime" class="font-semibold text-white">-</span>
+                </div>
+                <div class="flex justify-between border-t border-white/5 pt-1.5">
+                    <span class="text-slate-400" data-i18n="modal.total">Jami summa:</span>
+                    <span id="modalPrice" class="font-bold text-emerald-400">-</span>
+                </div>
+            </div>
+
+            <button onclick="closeSuccessModal()" class="w-full py-3 bg-gradient-to-r from-neonPink to-rose-600 text-white font-bold rounded-xl text-sm hover:scale-105 transition">
+                <span data-i18n="modal.btn">Tushunarli, Rahmat!</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- FLOATING INSTAGRAM BUTTON -->
+    <a href="https://instagram.com/wo_man_yangiyol" target="_blank" rel="noopener" id="floatingInstagram" class="fixed bottom-44 right-5 md:bottom-48 md:right-8 z-40 w-14 h-14 rounded-full bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-xl shadow-rose-500/30 hover:scale-110 transition-transform flex items-center justify-center" aria-label="Instagram sahifamiz" data-i18n-aria="float.instagram">
+        <i class="fa-brands fa-instagram text-2xl"></i>
+    </a>
+
+    <!-- FLOATING WHATSAPP BUTTON -->
+    <a href="https://wa.me/998979775994" target="_blank" rel="noopener" id="floatingWhatsApp" class="fixed bottom-24 right-5 md:bottom-28 md:right-8 z-40 w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#1fb857] text-white shadow-xl shadow-emerald-500/30 hover:scale-110 transition-transform flex items-center justify-center" aria-label="WhatsApp orqali yozish" data-i18n-aria="float.whatsapp">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- FLOATING CALL BUTTON -->
+    <a href="tel:+998979775994" id="floatingCall" class="fixed bottom-5 right-5 md:bottom-8 md:right-8 z-40 w-14 h-14 rounded-full bg-gradient-to-r from-neonPink to-rose-600 text-white shadow-xl shadow-neonPink/40 hover:scale-110 transition-transform flex items-center justify-center" aria-label="Qo'ng'iroq qilish" data-i18n-aria="float.call">
+        <span class="absolute inset-0 rounded-full bg-neonPink opacity-30 animate-ping pointer-events-none"></span>
+        <i class="fa-solid fa-phone text-xl relative"></i>
+    </a>
+
+    <!-- LIGHTBOX (rasmni kattalashtirish) -->
+    <div id="lightbox" class="fixed inset-0 z-[100] bg-dark-950/95 backdrop-blur-sm hidden items-center justify-center p-4 cursor-zoom-out" onclick="closeLightbox()">
+        <img id="lightboxImg" alt="Katta rasm" class="max-w-full max-h-[88vh] rounded-2xl shadow-2xl border border-white/10 object-contain pointer-events-none">
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-neonPink transition cursor-pointer" aria-label="Yopish" data-i18n-aria="lightbox.close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <span class="absolute bottom-4 left-1/2 -translate-x-1/2 text-[11px] text-slate-400 bg-dark-950/70 px-3 py-1 rounded-full" data-i18n="lightbox.hint">Yopish uchun ustiga bosing yoki Esc</span>
+    </div>
+
+    <!-- MAIN JAVASCRIPT SYSTEM -->
+    <script>
+        // ===== KO'P TILLILIK: O'ZBEKCHA / RUSCHA / INGLIZCHA =====
+        const LANG_KEY = 'woman_lang_v1';
+        const I18N = {
+            uz: {
+                'meta.title': "WO & MAN Студия Красоты | Go'zallik Saloni & Barbershop",
+                'top.address': "Yangiyo'l sh., Toshkent viloyati",
+                'top.hours': "Har kuni: 09:00 - 22:00 (Dam olishsiz)",
+                'promo.text': "Dushanba–seshanba barcha xizmatlarga 10% chegirma",
+                'nav.home': "Bosh sahifa",
+                'nav.services': "Xizmatlar & Narxlar",
+                'nav.masters': "Ustalarimiz",
+                'nav.gallery': "Galereya",
+                'nav.about': "Salon Haqida",
+                'nav.contacts': "Aloqa",
+                'nav.book': "Onlayn Navbat",
+                'nav.bookLong': "Onlayn Navbat Olish",
+                'hero.badge': "Yangiyo'ldagi Premium Erkaklar va Ayollar Saloni",
+                'hero.title1': "ERKAKLAR VA AYOLLAR UCHUN",
+                'hero.title2': "PREMIUM GO'ZALLIK STUDIYASI",
+                'hero.desc': "Erkaklar uchun zamonaviy <b>Barbershop</b> va xonimlar uchun eksklyuziv <b>Go'zallik Saloni</b> bitta qulay manzilda. Yuqori servis va professional ustalar xizmatingizda.",
+                'hero.btn1': "Onlayn Navbatga Yozilish",
+                'hero.btn2': "Xizmatlar & Narxlar",
+                'hi.zones': "Alohida Erkak & Ayol Zonalari",
+                'hi.masters': "Professional Stilist Ustalar",
+                'hi.sterile': "Tibbiy Sterilizatsiya",
+                'hi.rating': "Mijozlarimiz Bahosi",
+                'svc.kicker': "Shaffof va qulay narxlar",
+                'svc.title': "XIZMATLAR VA NARXLAR",
+                'svc.sub': "Har bir xizmat uchun sifatli fotosuratlar va batafsil narxlar",
+                'svc.tab.all': "Barcha Xizmatlar",
+                'svc.tab.male': "Erkaklar (Barber)",
+                'svc.tab.female': "Ayollar (Beauty)",
+                'gender.male': "Erkaklar",
+                'gender.female': "Ayollar",
+                'gender.maleSection': "Erkaklar bo'limi",
+                'gender.femaleSection': "Ayollar bo'limi",
+                'common.price': "Narxi",
+                'common.select': "Tanlash",
+                'common.notSelected': "Tanlanmagan",
+                'svc.sm1.title': "Soch olish",
+                'svc.sm1.desc': "Zamonaviy fade yoki klassik uslub, bosh yuvish va styling bilan.",
+                'svc.sm2.title': "Soch + soqol",
+                'svc.sm2.desc': "To'liq soch olish va soqol parvarishi - bitta kompleksda.",
+                'svc.sm3.title': "Detskiy (bolalar soch turmagi)",
+                'svc.sm3.desc': "12 yoshgacha bolalar uchun xavfsiz va chiroyli soch turmagi.",
+                'svc.sw1.title': "Kalaristika",
+                'svc.sw1.desc': "Professional koloristika - istalgan uslub va rang.",
+                'svc.sw2.title': "Strika",
+                'svc.sw2.desc': "Zamonaviy ayolar strijkasi.",
+                'svc.sm4.title': "Soqol",
+                'svc.sm4.desc': "Ustarada shakllantirish, kontur va parvarishlovchi vositalar.",
+                'svc.sm5.title': "Vosk",
+                'svc.sm5.desc': "Quloq va burun uchun vosk bilan nozik tozalash.",
+                'svc.sm6.title': "Maska",
+                'svc.sm6.desc': "Tozalovchi va namlantiruvchi yuz maskasi.",
+                'svc.sm7.title': "Massaj golovi",
+                'svc.sm7.desc': "Bosh terisini bo'shashtiruvchi relaks massaj.",
+                'svc.sm8.title': "Kuyov obraz",
+                'svc.sm8.desc': "Kuyov uchun to'liq tayyorgarlik: soch, soqol va styling.",
+                'mst.kicker': "O'z sohasining mutaxassislari",
+                'mst.title': "BIZNING USTALARIMIZ",
+                'mst.sub': "O'zingizga ma'qul bo'lgan ustani tanlang va qulay vaqtga yoziling",
+                'mst.tab.all': "Barcha Ustalar",
+                'mst.tab.male': "Erkaklar Ustalari",
+                'mst.tab.female': "Ayollar Ustalari",
+                'mst.book': "Ustaga Yozilish",
+                'master.experienced': "Tajribali usta",
+                'master.defaultRole': "Usta",
+                'bk.kicker': "Tezkor va Navbatsiz",
+                'bk.title': "ONLAYN NAVBATGA YOZILISH",
+                'bk.sub': "Bo'limni, ustani va o'zingizga qulay vaqtni tanlang. Qolganini bizga topshiring!",
+                'bk.step1': "Bo'limni tanlang",
+                'bk.step2': "Ustani tanlang",
+                'bk.step3': "Xizmat(lar)ni tanlang",
+                'bk.step4': "Sanani tanlang",
+                'bk.step5': "Vaqtni tanlang",
+                'bk.masterHint': "Ustani bosing:",
+                'bk.selectMaster': "-- Ro'yxatdan tanlang --",
+                'bk.timePlaceholder': "-- Qulay vaqt --",
+                'bk.timeHintNoMaster': "Ustani tanlasangiz, ish vaqti va band soatlari ko'rsatiladi.",
+                'bk.timeHintNoDate': "Sanani tanlang — band soatlar shunda ko'rinadi.",
+                'bk.timeFreeBusy': "Bu kunda <b class=\"text-emerald-400\">{free} ta bo'sh</b>, <b class=\"text-rose-400\">{busy} ta band</b> soat bor.",
+                'bk.slotBusy': " — band",
+                'bk.slotPast': " — o'tgan",
+                'bk.noSlotsToday': "Bugun uchun bo'sh vaqt qolmadi — ertangi kunni tanlang.",
+                'bk.fullName': "Ism va Familiyangiz",
+                'bk.fullNamePh': "Masalan: Jasur Aliyev",
+                'bk.phone': "Telefon raqamingiz",
+                'bk.comment': "Qo'shimcha izoh (ixtiyoriy)",
+                'bk.commentPh': "Masalan: Bayramga tayyorgarlik, sochni davolash...",
+                'bk.submit': "Arizani yuborish & Navbatni band qilish",
+                'bk.submitting': "Ariza rasmiylashtirilmoqda...",
+                'bk.summaryTitle': "ARIZA CHEKI",
+                'bk.master': "Usta:",
+                'bk.services': "Xizmatlar:",
+                'bk.date': "Sana:",
+                'bk.time': "Vaqt:",
+                'bk.total': "Jami To'lov",
+                'bk.note': "Arizangiz qabul qilingach, administratorimiz tasdiqlash uchun siz bilan bog'lanadi.",
+                'bk.alertMaster': "Iltimos, navbat uchun ustani tanlang!",
+                'bk.alertService': "Iltimos, kamida bitta xizmat turini tanlang!",
+                'bk.alertBusy': "Bu vaqt usta uchun allaqachon band. Iltimos, boshqa vaqtni tanlang.",
+                'bk.dateAt': "{date} soat {time}",
+                'gal.kicker': "Ijodiy ishlarimiz",
+                'gal.title': "FOTOGALEREYA",
+                'gal.zal1': "Erkaklar Zali",
+                'gal.vizaj': "Professional Vizaj",
+                'about.kicker': "Biz haqimizda",
+                'about.title': "WO & MAN — ERKAK VA AYOLLAR UCHUN MUKAMMAL GO'ZALLIK MAKONIDIR",
+                'about.desc': "Biz bitta tom ostida ikkita mustaqil zallarni birlashtirdik: erkaklar uchun klassik va zamonaviy <b>Barbershop</b> hamda xonimlar uchun nafis <b>Go'zallik Studiyasi</b>.",
+                'about.f1': "Steril va Xavfsiz",
+                'about.f1d': "Har bir mijoz uchun alohida tibbiy dezinfeksiya qilingan vositalar.",
+                'about.f2': "Qulay Lounge Zona",
+                'about.f2d': "Yangi qovurilgan kofe, shirinliklar va erkin Wi-Fi zonasi.",
+                'ct.kicker': "Aloqa va Lokatsiya",
+                'ct.title': "MANZILIMIZ",
+                'ct.desc': "Biz sizni har kuni kutamiz. Qo'shimcha ma'lumot yoki guruh bo'lib yozilish uchun qo'ng'iroq qiling.",
+                'ct.address': "Manzilimiz:",
+                'ct.addressValue': "Yangiyo'l sh., Toshkent viloyati",
+                'ct.phone': "Telefon raqam:",
+                'ct.openMap': "Xaritada ochish",
+                'ct.qrHint': "Telefon kamerasi bilan QR kodni skanerlab, saytni oching",
+                'float.call': "Qo'ng'iroq qilish",
+                'float.whatsapp': "WhatsApp orqali yozish",
+                'float.instagram': "Instagram sahifamiz",
+                'wa.message': "Assalomu alaykum! Sayt orqali navbat olmoqchiman.",
+                'rev.kicker': "Mijozlar fikri",
+                'rev.title': "MIJOZLAR FIKRI",
+                'rev.sub': "Bizga ishonch bildirgan mijozlar taassurotlari",
+                'rev.r1.text': "Ukladka juda chiroyli chiqdi, usta har bir detalga e'tibor berdi. Endi doim shu yerga kelaman.",
+                'rev.r1.name': "Dilnoza A.",
+                'rev.r1.service': "Ukladka va bo'yash",
+                'rev.r2.text': "Barber Akrom sochni aynan o'zim xohlaganidek oldi. Atmosfera va xizmat darajasi zo'r.",
+                'rev.r2.name': "Jasur M.",
+                'rev.r2.service': "Erkaklar sartaroshligi",
+                'rev.r3.text': "Salon juda toza, vositalar steril. Ayollar zonasi alohida bo'lgani juda qulay.",
+                'rev.r3.name': "Malika S.",
+                'rev.r3.service': "Salon xizmatlari",
+                'ft.rights': "© 2026 WO & MAN Студия Красоты. Barcha huquqlar himoyalangan.",
+                'modal.title': "Arizangiz Qabul Qilindi!",
+                'modal.desc': "Sizning arizangiz <b>WO & MAN Студия Красоты</b> tizimiga muvaffaqiyatli kiritildi.",
+                'modal.appId': "Ariza ID:",
+                'modal.client': "Mijoz:",
+                'modal.datetime': "Sana va vaqt:",
+                'modal.total': "Jami summa:",
+                'modal.btn': "Tushunarli, Rahmat!",
+                'lightbox.hint': "Yopish uchun ustiga bosing yoki Esc",
+                'lightbox.close': "Yopish"
+            },
+            ru: {
+                'meta.title': "WO & MAN Студия Красоты | Салон красоты и барбершоп",
+                'top.address': "г. Янгиюль, Ташкентская область",
+                'top.hours': "Ежедневно: 09:00 - 22:00 (без выходных)",
+                'promo.text': "Понедельник–вторник скидка 10% на все услуги",
+                'nav.home': "Главная",
+                'nav.services': "Услуги и цены",
+                'nav.masters': "Наши мастера",
+                'nav.gallery': "Галерея",
+                'nav.about': "О салоне",
+                'nav.contacts': "Контакты",
+                'nav.book': "Онлайн-запись",
+                'nav.bookLong': "Записаться онлайн",
+                'hero.badge': "Премиальный салон для мужчин и женщин в Янгиюле",
+                'hero.title1': "ДЛЯ МУЖЧИН И ЖЕНЩИН",
+                'hero.title2': "ПРЕМИУМ СТУДИЯ КРАСОТЫ",
+                'hero.desc': "Современный <b>барбершоп</b> для мужчин и эксклюзивный <b>салон красоты</b> для женщин по одному удобному адресу. Высокий сервис и профессиональные мастера к вашим услугам.",
+                'hero.btn1': "Записаться онлайн",
+                'hero.btn2': "Услуги и цены",
+                'hi.zones': "Отдельные мужская и женская зоны",
+                'hi.masters': "Профессиональные мастера-стилисты",
+                'hi.sterile': "Медицинская стерилизация",
+                'hi.rating': "Оценка наших клиентов",
+                'svc.kicker': "Прозрачные и доступные цены",
+                'svc.title': "УСЛУГИ И ЦЕНЫ",
+                'svc.sub': "Качественные фото и подробные цены на каждую услугу",
+                'svc.tab.all': "Все услуги",
+                'svc.tab.male': "Мужчины (Barber)",
+                'svc.tab.female': "Женщины (Beauty)",
+                'gender.male': "Мужчины",
+                'gender.female': "Женщины",
+                'gender.maleSection': "Мужская зона",
+                'gender.femaleSection': "Женская зона",
+                'common.price': "Цена",
+                'common.select': "Выбрать",
+                'common.notSelected': "Не выбрано",
+                'svc.sm1.title': "Стрижка",
+                'svc.sm1.desc': "Современный фейд или классика, мытьё головы и укладка.",
+                'svc.sm2.title': "Стрижка + борода",
+                'svc.sm2.desc': "Полная стрижка и уход за бородой — в одном комплексе.",
+                'svc.sm3.title': "Детская стрижка",
+                'svc.sm3.desc': "Безопасная и красивая стрижка для детей до 12 лет.",
+                'svc.sw1.title': "Колористика",
+                'svc.sw1.desc': "Профессиональное окрашивание любой сложности и в любом стиле.",
+                'svc.sw2.title': "Стрижка",
+                'svc.sw2.desc': "Современная женская стрижка.",
+                'svc.sw3.title': "Укладка",
+                'svc.sw3.desc': "Придание объёма и укладка волос.",
+                'svc.sw4.title': "Причёска",
+                'svc.sw4.desc': "Профессиональная причёска для свадеб и мероприятий.",
+                'svc.sw5.title': "Макияж",
+                'svc.sw5.desc': "Дневной и вечерний макияж.",
+                'svc.sw6.title': "Ламинирование бровей",
+                'svc.sw6.desc': "Укладка и ламинирование бровей.",
+                'svc.sw7.title': "Ламинирование ресниц",
+                'svc.sw7.desc': "Лифтинг и ламинирование ресниц.",
+                'svc.sw8.title': "Наращивание ресниц",
+                'svc.sw8.desc': "Естественные и объёмные наращенные ресницы.",
+                'svc.sw9.title': "Перманентный макияж",
+                'svc.sw9.desc': "Долговременный перманентный макияж.",
+                'svc.sw10.title': "Депиляция",
+                'svc.sw10.desc': "Профессиональная депиляция по зонам.",
+                'svc.sw11.title': "Чистка лица",
+                'svc.sw11.desc': "Глубокая очищающая чистка лица.",
+                'svc.sw12.title': "Массаж лица",
+                'svc.sw12.desc': "Расслабляющий массаж лица с эффектом лифтинга.",
+                'svc.sm4.title': "Борода",
+                'svc.sm4.desc': "Моделирование бороды машинкой, контур и уход.",
+                'svc.sm5.title': "Воск",
+                'svc.sm5.desc': "Деликатная эпиляция воском ушей и носа.",
+                'svc.sm6.title': "Маска",
+                'svc.sm6.desc': "Очищающая и увлажняющая маска для лица.",
+                'svc.sm7.title': "Массаж головы",
+                'svc.sm7.desc': "Расслабляющий массаж кожи головы.",
+                'svc.sm8.title': "Образ жениха",
+                'svc.sm8.desc': "Полная подготовка жениха: стрижка, борода и укладка.",
+                'mst.kicker': "Эксперты своего дела",
+                'mst.title': "НАШИ МАСТЕРА",
+                'mst.sub': "Выберите подходящего мастера и запишитесь на удобное время",
+                'mst.tab.all': "Все мастера",
+                'mst.tab.male': "Мужские мастера",
+                'mst.tab.female': "Женские мастера",
+                'mst.book': "Записаться к мастеру",
+                'master.experienced': "Опытный мастер",
+                'master.defaultRole': "Мастер",
+                'bk.kicker': "Быстро и без очереди",
+                'bk.title': "ОНЛАЙН-ЗАПИСЬ",
+                'bk.sub': "Выберите зону, мастера и удобное время. Остальное мы возьмём на себя!",
+                'bk.step1': "Выберите зону",
+                'bk.step2': "Выберите мастера",
+                'bk.step3': "Выберите услугу(и)",
+                'bk.step4': "Выберите дату",
+                'bk.step5': "Выберите время",
+                'bk.masterHint': "Нажмите на мастера:",
+                'bk.selectMaster': "-- Выберите из списка --",
+                'bk.timePlaceholder': "-- Удобное время --",
+                'bk.timeHintNoMaster': "После выбора мастера появится рабочее время и занятые часы.",
+                'bk.timeHintNoDate': "Выберите дату — занятые часы появятся здесь.",
+                'bk.timeFreeBusy': "Свободно: <b class=\"text-emerald-400\">{free}</b>, занято: <b class=\"text-rose-400\">{busy}</b> ч.",
+                'bk.slotBusy': " — занято",
+                'bk.slotPast': " — прошло",
+                'bk.noSlotsToday': "На сегодня свободных часов не осталось — выберите завтрашний день.",
+                'bk.fullName': "Имя и фамилия",
+                'bk.fullNamePh': "Например: Джасур Алиев",
+                'bk.phone': "Ваш номер телефона",
+                'bk.comment': "Дополнительный комментарий (необязательно)",
+                'bk.commentPh': "Например: подготовка к празднику, лечение волос...",
+                'bk.submit': "Отправить заявку и забронировать",
+                'bk.submitting': "Заявка оформляется...",
+                'bk.summaryTitle': "ЧЕК ЗАЯВКИ",
+                'bk.master': "Мастер:",
+                'bk.services': "Услуги:",
+                'bk.date': "Дата:",
+                'bk.time': "Время:",
+                'bk.total': "Итого к оплате",
+                'bk.note': "После получения заявки наш администратор свяжется с вами для подтверждения.",
+                'bk.alertMaster': "Пожалуйста, выберите мастера!",
+                'bk.alertService': "Пожалуйста, выберите хотя бы одну услугу!",
+                'bk.alertBusy': "Это время уже занято мастером. Пожалуйста, выберите другое время.",
+                'bk.dateAt': "{date} в {time}",
+                'gal.kicker': "Наши работы",
+                'gal.title': "ФОТОГАЛЕРЕЯ",
+                'gal.zal1': "Мужской зал",
+                'gal.vizaj': "Профессиональный визаж",
+                'about.kicker': "О нас",
+                'about.title': "WO & MAN — ИДЕАЛЬНОЕ ПРОСТРАНСТВО КРАСОТЫ ДЛЯ МУЖЧИН И ЖЕНЩИН",
+                'about.desc': "Мы объединили под одной крышей два независимых зала: классический и современный <b>барбершоп</b> для мужчин и изящную <b>студию красоты</b> для женщин.",
+                'about.f1': "Стерильно и безопасно",
+                'about.f1d': "Отдельные медицински продезинфицированные инструменты для каждого клиента.",
+                'about.f2': "Удобная лаундж-зона",
+                'about.f2d': "Свежеобжаренный кофе, сладости и бесплатный Wi-Fi.",
+                'ct.kicker': "Контакты и локация",
+                'ct.title': "НАШ АДРЕС",
+                'ct.desc': "Мы ждём вас каждый день. Звоните для дополнительной информации или групповой записи.",
+                'ct.address': "Наш адрес:",
+                'ct.addressValue': "г. Янгиюль, Ташкентская область",
+                'ct.phone': "Телефон:",
+                'ct.openMap': "Открыть на карте",
+                'ct.qrHint': "Отсканируйте QR-код камерой телефона, чтобы открыть сайт",
+                'float.call': "Позвонить",
+                'float.whatsapp': "Написать в WhatsApp",
+                'float.instagram': "Наш Instagram",
+                'wa.message': "Здравствуйте! Хочу записаться через сайт.",
+                'rev.kicker': "Отзывы клиентов",
+                'rev.title': "ОТЗЫВЫ КЛИЕНТОВ",
+                'rev.sub': "Впечатления клиентов, которые нам доверяют",
+                'rev.r1.text': "Укладка получилась очень красивой, мастер учёл каждую деталь. Теперь всегда хожу сюда.",
+                'rev.r1.name': "Дилноза А.",
+                'rev.r1.service': "Укладка и окрашивание",
+                'rev.r2.text': "Барбер Акром сделал причёску именно так, как я хотел. Атмосфера и уровень сервиса отличные.",
+                'rev.r2.name': "Жасур М.",
+                'rev.r2.service': "Мужской барбершоп",
+                'rev.r3.text': "В салоне очень чисто, инструменты стерильные. Отдельная женская зона — очень удобно.",
+                'rev.r3.name': "Малика С.",
+                'rev.r3.service': "Услуги салона",
+                'ft.rights': "© 2026 WO & MAN Студия Красоты. Все права защищены.",
+                'modal.title': "Заявка принята!",
+                'modal.desc': "Ваша заявка успешно добавлена в систему <b>WO & MAN Студия Красоты</b>.",
+                'modal.appId': "ID заявки:",
+                'modal.client': "Клиент:",
+                'modal.datetime': "Дата и время:",
+                'modal.total': "Итого:",
+                'modal.btn': "Понятно, спасибо!",
+                'lightbox.hint': "Нажмите на фото или Esc, чтобы закрыть",
+                'lightbox.close': "Закрыть"
+            },
+            en: {
+                'meta.title': "WO & MAN Студия Красоты | Beauty Salon & Barbershop",
+                'top.address': "Yangiyul, Tashkent Region",
+                'top.hours': "Daily: 09:00 - 22:00 (open every day)",
+                'promo.text': "Monday–Tuesday: 10% off all services",
+                'nav.home': "Home",
+                'nav.services': "Services & Pricing",
+                'nav.masters': "Our Masters",
+                'nav.gallery': "Gallery",
+                'nav.about': "About",
+                'nav.contacts': "Contacts",
+                'nav.book': "Book Online",
+                'nav.bookLong': "Book an Appointment",
+                'hero.badge': "Premium men's & women's salon in Yangiyul",
+                'hero.title1': "FOR MEN AND WOMEN",
+                'hero.title2': "PREMIUM BEAUTY STUDIO",
+                'hero.desc': "A modern <b>barbershop</b> for men and an exclusive <b>beauty salon</b> for women at one convenient location. Premium service and professional masters at your disposal.",
+                'hero.btn1': "Book Online",
+                'hero.btn2': "Services & Pricing",
+                'hi.zones': "Separate men's & women's areas",
+                'hi.masters': "Professional stylist masters",
+                'hi.sterile': "Medical-grade sterilization",
+                'hi.rating': "Our clients' rating",
+                'svc.kicker': "Transparent and fair prices",
+                'svc.title': "SERVICES & PRICES",
+                'svc.sub': "Quality photos and detailed prices for every service",
+                'svc.tab.all': "All Services",
+                'svc.tab.male': "Men (Barber)",
+                'svc.tab.female': "Women (Beauty)",
+                'gender.male': "Men",
+                'gender.female': "Women",
+                'gender.maleSection': "Men's section",
+                'gender.femaleSection': "Women's section",
+                'common.price': "Price",
+                'common.select': "Select",
+                'common.notSelected': "Not selected",
+                'svc.sm1.title': "Haircut",
+                'svc.sm1.desc': "Modern fade or classic style with hair wash and styling.",
+                'svc.sm2.title': "Haircut + beard",
+                'svc.sm2.desc': "Full haircut and beard care in one package.",
+                'svc.sm3.title': "Kids' haircut",
+                'svc.sm3.desc': "Safe, stylish haircut for children under 12.",
+                'svc.sw1.title': "Hair coloring",
+                'svc.sw1.desc': "Professional coloring in any style and shade.",
+                'svc.sw2.title': "Haircut",
+                'svc.sw2.desc': "Modern women's haircut.",
+                'svc.sw3.title': "Hair styling",
+                'svc.sw3.desc': "Volumizing and styling your hair.",
+                'svc.sw4.title': "Hairstyle",
+                'svc.sw4.desc': "Professional hairstyling for weddings and events.",
+                'svc.sw5.title': "Makeup",
+                'svc.sw5.desc': "Daytime and event makeup.",
+                'svc.sw6.title': "Brow lamination",
+                'svc.sw6.desc': "Brow shaping and lamination.",
+                'svc.sw7.title': "Lash lamination",
+                'svc.sw7.desc': "Lash lift and lamination.",
+                'svc.sw8.title': "Lash extensions",
+                'svc.sw8.desc': "Natural and voluminous lash extensions.",
+                'svc.sw9.title': "Permanent makeup",
+                'svc.sw9.desc': "Long-lasting permanent makeup.",
+                'svc.sw10.title': "Depilation",
+                'svc.sw10.desc': "Professional depilation by zones.",
+                'svc.sw11.title': "Facial cleansing",
+                'svc.sw11.desc': "Deep cleansing facial treatment.",
+                'svc.sw12.title': "Face massage",
+                'svc.sw12.desc': "Relaxing face massage with lifting effect.",
+                'svc.sm4.title': "Beard",
+                'svc.sm4.desc': "Beard shaping, edging and care products.",
+                'svc.sm5.title': "Waxing",
+                'svc.sm5.desc': "Gentle wax hair removal for ears and nose.",
+                'svc.sm6.title': "Face mask",
+                'svc.sm6.desc': "Cleansing and moisturizing face mask.",
+                'svc.sm7.title': "Head massage",
+                'svc.sm7.desc': "Relaxing scalp massage.",
+                'svc.sm8.title': "Groom look",
+                'svc.sm8.desc': "Complete groom prep: haircut, beard and styling.",
+                'mst.kicker': "Experts in their craft",
+                'mst.title': "OUR MASTERS",
+                'mst.sub': "Choose your preferred master and book a convenient time",
+                'mst.tab.all': "All Masters",
+                'mst.tab.male': "Male Masters",
+                'mst.tab.female': "Female Masters",
+                'mst.book': "Book with master",
+                'master.experienced': "Experienced master",
+                'master.defaultRole': "Master",
+                'bk.kicker': "Fast and no waiting",
+                'bk.title': "ONLINE BOOKING",
+                'bk.sub': "Pick a section, master and time. Leave the rest to us!",
+                'bk.step1': "Choose a section",
+                'bk.step2': "Choose a master",
+                'bk.step3': "Choose service(s)",
+                'bk.step4': "Choose a date",
+                'bk.step5': "Choose a time",
+                'bk.masterHint': "Tap a master:",
+                'bk.selectMaster': "-- Select from the list --",
+                'bk.timePlaceholder': "-- Preferred time --",
+                'bk.timeHintNoMaster': "Select a master to see working hours and busy slots.",
+                'bk.timeHintNoDate': "Pick a date to see busy slots.",
+                'bk.timeFreeBusy': "Free: <b class=\"text-emerald-400\">{free}</b>, busy: <b class=\"text-rose-400\">{busy}</b>.",
+                'bk.slotBusy': " — busy",
+                'bk.slotPast': " — past",
+                'bk.noSlotsToday': "No free slots left for today — please pick tomorrow.",
+                'bk.fullName': "Full name",
+                'bk.fullNamePh': "e.g. Jasur Aliyev",
+                'bk.phone': "Your phone number",
+                'bk.comment': "Additional note (optional)",
+                'bk.commentPh': "e.g. holiday prep, hair treatment...",
+                'bk.submit': "Send request & book a slot",
+                'bk.submitting': "Submitting request...",
+                'bk.summaryTitle': "BOOKING SUMMARY",
+                'bk.master': "Master:",
+                'bk.services': "Services:",
+                'bk.date': "Date:",
+                'bk.time': "Time:",
+                'bk.total': "Total",
+                'bk.note': "Once your request is received, our administrator will contact you to confirm.",
+                'bk.alertMaster': "Please choose a master!",
+                'bk.alertService': "Please choose at least one service!",
+                'bk.alertBusy': "This time is already booked for the master. Please choose another time.",
+                'bk.dateAt': "{date} at {time}",
+                'gal.kicker': "Our work",
+                'gal.title': "PHOTO GALLERY",
+                'gal.zal1': "Men's hall",
+                'gal.vizaj': "Professional makeup",
+                'about.kicker': "About us",
+                'about.title': "WO & MAN — THE PERFECT BEAUTY SPACE FOR MEN AND WOMEN",
+                'about.desc': "We combined two independent halls under one roof: a classic and modern <b>barbershop</b> for men and an elegant <b>beauty studio</b> for women.",
+                'about.f1': "Sterile & safe",
+                'about.f1d': "Individually sterilized tools for every client.",
+                'about.f2': "Comfy lounge area",
+                'about.f2d': "Freshly roasted coffee, sweets and free Wi-Fi.",
+                'ct.kicker': "Contact & location",
+                'ct.title': "OUR ADDRESS",
+                'ct.desc': "We're open every day. Call us for more information or group bookings.",
+                'ct.address': "Our address:",
+                'ct.addressValue': "Yangiyul, Tashkent Region",
+                'ct.phone': "Phone:",
+                'ct.openMap': "Open in maps",
+                'ct.qrHint': "Scan the QR code with your phone camera to open the site",
+                'float.call': "Call us",
+                'float.whatsapp': "Message us on WhatsApp",
+                'float.instagram': "Our Instagram",
+                'wa.message': "Hello! I'd like to book an appointment via the website.",
+                'rev.kicker': "Client reviews",
+                'rev.title': "CLIENT REVIEWS",
+                'rev.sub': "Impressions from clients who trust us",
+                'rev.r1.text': "The styling turned out beautiful — the master paid attention to every detail. I'll keep coming back.",
+                'rev.r1.name': "Dilnoza A.",
+                'rev.r1.service': "Styling & coloring",
+                'rev.r2.text': "Barber Akrom cut my hair exactly the way I wanted. Great atmosphere and service level.",
+                'rev.r2.name': "Jasur M.",
+                'rev.r2.service': "Men's barbershop",
+                'rev.r3.text': "The salon is very clean and the tools are sterile. The separate women's area is very convenient.",
+                'rev.r3.name': "Malika S.",
+                'rev.r3.service': "Salon services",
+                'ft.rights': "© 2026 WO & MAN Студия Красоты. All rights reserved.",
+                'modal.title': "Request received!",
+                'modal.desc': "Your request has been successfully added to <b>WO & MAN Студия Красоты</b>.",
+                'modal.appId': "Request ID:",
+                'modal.client': "Client:",
+                'modal.datetime': "Date & time:",
+                'modal.total': "Total:",
+                'modal.btn': "Got it, thanks!",
+                'lightbox.hint': "Tap the photo or press Esc to close",
+                'lightbox.close': "Close"
+            }
+        };
+
+        let currentLang = (function () {
+            try {
+                const saved = localStorage.getItem(LANG_KEY);
+                if (saved && I18N[saved]) return saved;
+            } catch (e) {}
+            const nav = String(navigator.language || 'uz').toLowerCase();
+            if (nav.startsWith('ru')) return 'ru';
+            if (nav.startsWith('en')) return 'en';
+            return 'uz';
+        })();
+
+        function t(key) {
+            const pack = I18N[currentLang] || I18N.uz;
+            if (pack[key] != null) return pack[key];
+            if (I18N.uz[key] != null) return I18N.uz[key];
+            return key;
+        }
+
+        function fillText(template, vars) {
+            return String(template).replace(/\{(\w+)\}/g, (m, k) => vars && vars[k] != null ? vars[k] : m);
+        }
+
+        function fmtPrice(num) {
+            const value = Number(num) || 0;
+            const digits = String(value).replace(/\B(?=(\d{3})+(?!\d))/g, currentLang === 'en' ? ',' : ' ');
+            if (currentLang === 'en') return digits + ' UZS';
+            if (currentLang === 'ru') return digits + ' сум';
+            return digits + " so'm";
+        }
+
+        function fmtDuration(minutes) {
+            const n = Number(minutes) || 0;
+            if (currentLang === 'ru') return n + ' мин';
+            if (currentLang === 'en') return n + ' min';
+            return n + ' daqiqa';
+        }
+
+        function fmtExperience(value) {
+            const match = String(value || '').match(/\d+/);
+            if (!match) return t('master.experienced');
+            const n = Number(match[0]);
+            if (currentLang === 'ru') {
+                const mod10 = n % 10;
+                const mod100 = n % 100;
+                let word = 'лет';
+                if (mod10 === 1 && mod100 !== 11) word = 'год';
+                else if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) word = 'года';
+                return n + ' ' + word + ' опыта';
+            }
+            if (currentLang === 'en') return n + (n === 1 ? ' year' : ' years') + ' of experience';
+            return n + ' yil tajriba';
+        }
+
+        function masterRoleText(role) {
+            const key = String(role || '').trim().toLowerCase();
+            const map = {
+                soch: { uz: "Soch", ru: "Стрижка", en: "Hair" },
+                barber: { uz: "Barber", ru: "Барбер", en: "Barber" },
+                stilist: { uz: "Stilist", ru: "Стилист", en: "Stylist" }
+            };
+            if (map[key]) return map[key][currentLang] || map[key].uz;
+            return role || t('master.defaultRole');
+        }
+
+        function masterBadgeText(badge) {
+            const key = String(badge || '').trim().toLowerCase();
+            if (!key) return '';
+            const map = {
+                asoschi: { uz: 'Asoschi', ru: 'Основатель', en: 'Founder' },
+                usta: { uz: 'Usta', ru: 'Мастер', en: 'Master' },
+                'katta usta': { uz: 'Katta usta', ru: 'Старший мастер', en: 'Senior master' },
+                'bosh stilist': { uz: 'Bosh stilist', ru: 'Главный стилист', en: 'Head stylist' },
+                'bosh kolarist': { uz: 'Bosh kolarist', ru: 'Главный колорист', en: 'Head colorist' },
+                'katta barber': { uz: 'Katta usta', ru: 'Старший мастер', en: 'Senior master' },
+                'top barber': { uz: 'Usta', ru: 'Мастер', en: 'Master' }
+            };
+            if (map[key]) return map[key][currentLang] || map[key].uz;
+            return String(badge).trim();
+        }
+
+        function serviceTitle(service) {
+            if (!service) return '';
+            const def = APP_SERVICES.find(s => s.id === service.id);
+            if (def && service.title && service.title !== def.title) return service.title;
+            const translated = I18N[currentLang] && I18N[currentLang]['svc.' + service.id + '.title'];
+            return translated || service.title;
+        }
+
+        function serviceDesc(service) {
+            if (!service) return '';
+            const def = APP_SERVICES.find(s => s.id === service.id);
+            if (def && service.description && service.description !== def.description) return service.description;
+            const translated = I18N[currentLang] && I18N[currentLang]['svc.' + service.id + '.desc'];
+            return translated || service.description || '';
+        }
+
+        function dateTimeText(date, time) {
+            return fillText(t('bk.dateAt'), { date: date, time: time });
+        }
+
+        function applyStaticLanguage() {
+            document.documentElement.lang = currentLang;
+            document.title = t('meta.title');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                el.textContent = t(el.getAttribute('data-i18n'));
+            });
+            document.querySelectorAll('[data-i18n-html]').forEach(el => {
+                el.innerHTML = t(el.getAttribute('data-i18n-html'));
+            });
+            document.querySelectorAll('[data-i18n-ph]').forEach(el => {
+                el.setAttribute('placeholder', t(el.getAttribute('data-i18n-ph')));
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+                el.setAttribute('aria-label', t(el.getAttribute('data-i18n-aria')));
+            });
+            document.querySelectorAll('[data-duration]').forEach(el => {
+                el.textContent = fmtDuration(el.getAttribute('data-duration'));
+            });
+            document.querySelectorAll('span[data-price]').forEach(el => {
+                el.textContent = fmtPrice(el.getAttribute('data-price'));
+            });
+            document.querySelectorAll('#langSwitch [data-lang]').forEach(btn => {
+                const active = btn.getAttribute('data-lang') === currentLang;
+                btn.className = active
+                    ? 'lang-btn px-2 py-1 rounded-md text-[10px] font-bold bg-neonPink text-white'
+                    : 'lang-btn px-2 py-1 rounded-md text-[10px] font-bold text-slate-400 hover:text-white bg-white/5';
+            });
+        }
+
+        function setLanguage(lang) {
+            if (!I18N[lang]) return;
+            const changed = lang !== currentLang;
+            currentLang = lang;
+            try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+            applyStaticLanguage();
+            applySiteSettings();
+            if (!changed) return;
+            const checked = Array.from(document.querySelectorAll('input[name="selectedService"]:checked')).map(cb => cb.value);
+            renderServicesGrid();
+            filterServicesCategory(currentServiceFilter);
+            renderMastersGrid();
+            setBookingGender(currentBookingGender);
+            checked.forEach(id => {
+                const cb = document.querySelector(`input[name="selectedService"][value="${id}"]`);
+                if (cb) cb.checked = true;
+            });
+            updateBookingSummary();
+        }
+
+        const APP_BARBERS = [
+            {
+                id: 'm1',
+                name: 'Akrom',
+                gender: 'male',
+                role: 'soch',
+                badge: 'Usta',
+                experience: '6 yil tajriba',
+                rating: 4.9,
+                phone: '+998 97 548 77 97',
+                telegram: '',
+                photo: 'assets/akrom-hd.jpg',
+                specialties: ['Fade', 'Soch turmaklash']
+            },
+            {
+                id: 'm2',
+                name: 'Ahror',
+                gender: 'male',
+                role: 'Barber',
+                badge: 'Katta usta',
+                experience: '8 yil tajriba',
+                rating: 4.9,
+                phone: '+998 77 071 78 37',
+                telegram: '',
+                photo: 'assets/ahror-hd.jpg',
+                specialties: ['Soqol', 'Fade']
+            },
+            {
+                id: 'm3',
+                name: 'Jamoliddin',
+                gender: 'male',
+                role: 'Barber',
+                badge: 'Asoschi',
+                experience: '15 yil tajriba',
+                rating: 4.9,
+                phone: '+998 97 977 59 94',
+                telegram: '',
+                photo: 'assets/jamoliddin-hd.jpg',
+                specialties: ['Klassik soch olish', 'Soqol', 'Kuyov obraz']
+            },
+            {
+                id: 'w1',
+                name: 'Lobar',
+                gender: 'female',
+                role: 'Ayolar sartaroshi',
+                badge: 'Bosh stilist',
+                experience: '4 yil tajriba',
+                rating: 4.9,
+                phone: '+998 97 719 97 17',
+                telegram: '',
+                photo: 'assets/lobar.jpg',
+                specialties: ['Parikmaxer', 'Vizajist']
+            },
+            {
+                id: 'w2',
+                name: 'Umida',
+                gender: 'female',
+                role: 'Kolarist',
+                badge: 'Bosh kolarist',
+                experience: '5 yil tajriba',
+                rating: 4.9,
+                phone: '',
+                telegram: '',
+                photo: 'assets/madina.jpg',
+                specialties: ['Vizajist', 'Parikmaxer']
+            }
+        ];
+
+        const STORAGE_KEY_MASTERS = 'woman_masters_v3';
+        const STORAGE_KEY_APPOINTMENTS = 'woman_appointments_v3';
+        let SITE_MASTERS = [];
+        let currentMasterFilter = 'all';
+        let currentServiceFilter = 'all';
+
+        function escapeHtml(value) {
+            return String(value == null ? '' : value)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        }
+
+        const PHOTO_ALIASES = {
+            'assets/akrom.jpg': 'assets/akrom-hd.jpg',
+            'assets/ahror.jpg': 'assets/ahror-hd.jpg',
+            'assets/jamoliddin.jpg': 'assets/jamoliddin-hd.jpg'
+        };
+
+        function safePhotoUrl(value) {
+            const url = String(value || '').trim();
+            if (!url) return '';
+            if (/^(https?:\/\/|data:image\/)/i.test(url)) return url;
+            if (/^[a-z][a-z0-9+.-]*:/i.test(url) || url.startsWith('//')) return '';
+            const clean = url.replace(/^\.\//, '');
+            const mapped = PHOTO_ALIASES[clean] || clean;
+            return /^assets\//.test(mapped) ? mapped + '?v=5' : mapped;
+        }
+
+        function localDateStr(date) {
+            const d = date || new Date();
+            const pad = n => String(n).padStart(2, '0');
+            return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+        }
+
+        function normalizeTelegram(value) {
+            return String(value || '').trim()
+                .replace(/^https?:\/\/(t\.me|telegram\.me)\//i, '')
+                .replace(/^@/, '')
+                .replace(/[^A-Za-z0-9_]/g, '');
+        }
+
+        const MASTER_TITLES = {
+            akrom: 'Usta',
+            ahror: 'Katta usta',
+            jamoliddin: 'Asoschi',
+            lobar: 'Bosh stilist',
+            umida: 'Bosh kolarist'
+        };
+
+        function normalizeMaster(master, index) {
+            const gender = master.gender === 'female' ? 'female' : 'male';
+            const name = String(master.name || '').trim() || 'Usta';
+            const titled = MASTER_TITLES[name.toLowerCase()];
+            return {
+                id: String(master.id || 'b_' + index),
+                name: name,
+                gender: gender,
+                role: String(master.role || '').trim() || (gender === 'male' ? 'Barber' : 'Stilist'),
+                badge: titled || String(master.badge || '').trim(),
+                experience: String(master.experience || '').trim() || 'Tajribali usta',
+                rating: Number(master.rating) > 0 ? Number(master.rating) : 4.9,
+                phone: String(master.phone || '').trim(),
+                telegram: normalizeTelegram(master.telegram),
+                photo: safePhotoUrl(master.photo),
+                specialties: Array.isArray(master.specialties)
+                    ? master.specialties.map(s => String(s).trim()).filter(Boolean)
+                    : String(master.specialties || '').split(',').map(s => s.trim()).filter(Boolean)
+            };
+        }
+
+        function getSiteMasters() {
+            let stored = null;
+            try {
+                stored = JSON.parse(localStorage.getItem(STORAGE_KEY_MASTERS) || 'null');
+            } catch (e) {
+                console.warn("Ustalar ma'lumotini o'qishda xatolik", e);
+            }
+            if (Array.isArray(stored) && stored.length > 0) {
+                return stored.map((master, index) => {
+                    const def = APP_BARBERS.find(d => d.id === master.id);
+                    const merged = def
+                        ? {
+                            ...def,
+                            ...master,
+                            phone: master.phone || def.phone,
+                            badge: master.badge || def.badge,
+                            specialties: (Array.isArray(master.specialties) && master.specialties.length)
+                                ? master.specialties
+                                : def.specialties
+                        }
+                        : master;
+                    return normalizeMaster(merged, index);
+                });
+            }
+            return APP_BARBERS.map(normalizeMaster);
+        }
+
+        function findSiteMaster(id) {
+            if (!SITE_MASTERS.length) SITE_MASTERS = getSiteMasters();
+            return SITE_MASTERS.find(b => b.id === id) || null;
+        }
+
+        function getBusyTimes(masterId, date) {
+            const busy = {};
+            if (!masterId || !date) return busy;
+            let apps = [];
+            try {
+                apps = JSON.parse(localStorage.getItem(STORAGE_KEY_APPOINTMENTS) || '[]');
+            } catch (e) {
+                apps = [];
+            }
+            if (!Array.isArray(apps)) return busy;
+            apps.forEach(app => {
+                if (!app || app.status === 'cancelled') return;
+                if (app.barberId !== masterId || app.date !== date || !app.time) return;
+                busy[String(app.time).slice(0, 2)] = true;
+            });
+            return busy;
+        }
+
+        function isSlotBusy(masterId, date, time) {
+            if (!time) return false;
+            return !!getBusyTimes(masterId, date)[String(time).slice(0, 2)];
+        }
+
+        function renderTimeSlots() {
+            const timeSelect = document.getElementById('bookingTime');
+            const dateInput = document.getElementById('bookingDate');
+            const hint = document.getElementById('timeAvailabilityHint');
+            if (!timeSelect) return;
+
+            const master = selectedMasterId ? findSiteMaster(selectedMasterId) : null;
+            if (!master) {
+                timeSelect.innerHTML = `<option value="">${t('bk.timePlaceholder')}</option>`;
+                if (hint) {
+                    hint.innerHTML = '<i class="fa-solid fa-circle-info text-[10px] mr-1"></i>' + t('bk.timeHintNoMaster');
+                }
+                return;
+            }
+
+            const date = dateInput ? dateInput.value : '';
+            const busy = getBusyTimes(master.id, date);
+            const startHour = 9;
+            const endHour = 21;
+            const previous = timeSelect.value;
+            const now = new Date();
+            const isToday = date === localDateStr(now);
+            const currentHour = now.getHours();
+
+            let slots = [];
+            let freeCount = 0;
+            let busyCount = 0;
+            for (let h = startHour; h <= endHour; h++) {
+                const value = String(h).padStart(2, '0') + ':00';
+                const isBusy = !!busy[String(h).padStart(2, '0')];
+                const isPast = isToday && h <= currentHour;
+                const disabled = isBusy || isPast;
+                if (isBusy) busyCount++;
+                if (!disabled) freeCount++;
+                const suffix = isBusy ? t('bk.slotBusy') : (isPast ? t('bk.slotPast') : '');
+                slots.push(`<option value="${value}" ${disabled ? 'disabled' : ''}>${value}${suffix}</option>`);
+            }
+            timeSelect.innerHTML = `<option value="">${t('bk.timePlaceholder')}</option>` + slots.join('');
+            if (previous) {
+                const stillFree = Array.from(timeSelect.options).some(o => o.value === previous && !o.disabled);
+                timeSelect.value = stillFree ? previous : '';
+            }
+
+            if (hint) {
+                if (!date) {
+                    hint.innerHTML = '<i class="fa-solid fa-clock text-[10px] text-emerald-400 mr-1"></i>' + t('bk.timeHintNoDate');
+                } else if (isToday && freeCount === 0) {
+                    hint.innerHTML = '<i class="fa-solid fa-circle-exclamation text-[10px] text-amber-400 mr-1"></i>' + t('bk.noSlotsToday');
+                } else {
+                    hint.innerHTML = '<i class="fa-solid fa-clock text-[10px] text-emerald-400 mr-1"></i>' + fillText(t('bk.timeFreeBusy'), { free: freeCount, busy: busyCount });
+                }
+            }
+        }
+
+        function applyMasterFilter() {
+            document.querySelectorAll('.master-grid-card').forEach(card => {
+                const visible = currentMasterFilter === 'all' || card.getAttribute('data-gender') === currentMasterFilter;
+                card.style.display = visible ? 'flex' : 'none';
+            });
+        }
+
+        function renderMastersGrid() {
+            SITE_MASTERS = getSiteMasters();
+            const grid = document.getElementById('mastersGrid');
+            if (!grid) return;
+
+            grid.innerHTML = SITE_MASTERS.map(b => {
+                const isFemale = b.gender === 'female';
+                const icon = isFemale
+                    ? '<i class="fa-solid fa-venus text-neonPink ml-1.5"></i>'
+                    : '<i class="fa-solid fa-mars text-blue-400 ml-1.5"></i>';
+                const specs = b.specialties.length
+                    ? `<div class="flex flex-wrap gap-1.5 mb-4">${b.specialties.slice(0, 3).map(s => `<span class="text-[11px] px-2 py-0.5 rounded bg-white/5 text-slate-300">${escapeHtml(s)}</span>`).join('')}</div>`
+                    : '';
+                const badgeLabel = masterBadgeText(b.badge);
+                const isFounder = String(b.badge || '').trim().toLowerCase() === 'asoschi';
+                const badgeBlock = badgeLabel ? `
+                    <div class="absolute top-4 left-4 ${isFounder ? 'bg-gradient-to-r from-amber-300 to-amber-500 text-dark-950 shadow-[0_0_20px_-4px_rgba(251,191,36,0.7)]' : 'bg-dark-950/80 backdrop-blur-md text-neonPink border border-neonPink/30'} px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide flex items-center gap-1">
+                        <i class="fa-solid ${isFounder ? 'fa-crown' : 'fa-award'} text-[9px]"></i> ${escapeHtml(badgeLabel)}
+                    </div>` : '';
+                const rawPhone = b.phone.replace(/[^0-9+]/g, '');
+                const telegramUrl = b.telegram
+                    ? 'https://t.me/' + b.telegram
+                    : '';
+                const phoneBlock = (rawPhone || telegramUrl) ? `
+                    <div class="flex flex-wrap items-center gap-2 text-[11px] mb-4">
+                        ${rawPhone ? `<a href="tel:${rawPhone}" class="inline-flex items-center gap-1.5 text-slate-300 hover:text-emerald-400 transition">
+                            <i class="fa-solid fa-phone text-[10px] text-emerald-400"></i> ${escapeHtml(b.phone)}
+                        </a>` : ''}
+                        ${telegramUrl ? `<a href="${telegramUrl}" target="_blank" rel="noopener" title="Telegram${b.telegram ? ': @' + escapeHtml(b.telegram) : ''}" class="h-6 rounded bg-sky-500/10 text-sky-400 inline-flex items-center gap-1 px-2 hover:bg-sky-500 hover:text-dark-950 transition">
+                            <i class="fa-brands fa-telegram text-[10px]"></i>${b.telegram ? `<span class="font-semibold">@${escapeHtml(b.telegram)}</span>` : ''}
+                        </a>` : ''}
+                    </div>` : '';
+
+                return `
+                    <div data-gender="${b.gender}" class="master-grid-card glass-card rounded-3xl overflow-hidden hover:border-neonPink/50 transition group flex flex-col justify-between shadow-xl">
+                        <div class="relative h-56 sm:h-64 overflow-hidden p-3">
+                            <div class="absolute inset-0 bg-gradient-to-br from-dark-800 to-dark-950 flex items-center justify-center">
+                                <i class="fa-solid fa-user text-6xl text-slate-700"></i>
+                            </div>
+                            <div class="relative h-full p-[3px] rounded-2xl bg-gradient-to-br from-amber-200/80 via-neonPink/45 to-amber-300/70 shadow-[0_0_30px_-8px_rgba(236,72,153,0.45)]">
+                                <div class="relative h-full rounded-[13px] overflow-hidden ring-1 ring-white/10">
+                                    ${b.photo ? `<img src="${escapeHtml(b.photo)}" alt="${escapeHtml(b.name)}" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover object-top group-hover:scale-105 transition duration-500">` : ''}
+                                    <div class="absolute inset-0 bg-gradient-to-t from-dark-950/30 via-transparent to-transparent pointer-events-none"></div>
+                                </div>
+                            </div>
+                            <div class="absolute top-4 right-4 bg-dark-950/80 backdrop-blur-md px-2.5 py-1 rounded-full border border-white/10 text-xs text-amber-400 flex items-center gap-1 font-semibold">
+                                ★ ${b.rating.toFixed(1)}
+                            </div>
+                            ${badgeBlock}
+                        </div>
+                        <div class="p-5 flex-1 flex flex-col justify-between">
+                            <div>
+                                ${badgeLabel ? `<p class="mb-1.5"><span class="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded-full ${isFounder ? 'bg-amber-400/15 text-amber-300 border border-amber-300/40' : 'bg-white/5 text-amber-200 border border-white/10'}"><i class="fa-solid ${isFounder ? 'fa-crown' : 'fa-award'} text-[9px]"></i> ${escapeHtml(badgeLabel)}</span></p>` : ''}
+                                <h3 class="text-base font-bold text-white group-hover:text-neonPink transition mb-0.5 flex items-center">
+                                    ${escapeHtml(b.name)} ${icon}
+                                </h3>
+                                <p class="text-neonPink text-xs font-semibold mb-1">${escapeHtml(masterRoleText(b.role))}</p>
+                                <p class="text-[11px] text-slate-400 mb-3"><i class="fa-solid fa-briefcase text-[10px] mr-1"></i>${escapeHtml(fmtExperience(b.experience))}</p>
+                                ${specs}
+                                ${phoneBlock}
+                            </div>
+                            <button data-master-id="${escapeHtml(b.id)}" data-gender="${b.gender}" onclick="selectMasterAndBook(this.dataset.masterId, this.dataset.gender)" class="w-full py-2.5 rounded-xl bg-white/5 hover:bg-neonPink hover:text-white text-slate-200 text-xs font-bold border border-white/10 transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-calendar-check"></i> ${escapeHtml(t('mst.book'))}
+                            </button>
+                        </div>
+                    </div>`;
+            }).join('');
+
+            applyMasterFilter();
+        }
+
+        function refreshSiteMasters() {
+            renderMastersGrid();
+        }
+
+        const APP_SERVICES = [
+            {
+                id: 'sm1',
+                gender: 'male',
+                title: "Soch olish",
+                category: "Soch olish",
+                price: 60000,
+                duration: '40 daqiqa',
+                description: "Zamonaviy fade yoki klassik uslub, bosh yuvish va styling bilan.",
+                image: "assets/web/photo-1599351431202-1e0f0137899a-800.jpg"
+            },
+            {
+                id: 'sm2',
+                gender: 'male',
+                title: "Soch + soqol",
+                category: "Kompleks",
+                price: 100000,
+                duration: '60 daqiqa',
+                description: "To'liq soch olish va soqol parvarishi - bitta kompleksda.",
+                image: "assets/web/photo-1622286342621-4bd786c2447c-800.jpg"
+            },
+            {
+                id: 'sm3',
+                gender: 'male',
+                title: "Detskiy (bolalar soch turmagi)",
+                category: "Bolalar",
+                price: 50000,
+                duration: '30 daqiqa',
+                description: "12 yoshgacha bolalar uchun xavfsiz va chiroyli soch turmagi.",
+                image: "assets/detskiy.jpg"
+            },
+            {
+                id: 'sw1',
+                gender: 'female',
+                title: "Kalaristika",
+                category: "Bo'yash",
+                price: 200000,
+                priceMax: 1000000,
+                duration: '120 daqiqa',
+                description: "Professional koloristika - istalgan uslub va rang.",
+                image: "assets/boyash.jpg"
+            },
+            {
+                id: 'sw2',
+                gender: 'female',
+                title: "Strika",
+                category: "Soch turmagi",
+                price: 50000,
+                priceMax: 60000,
+                duration: '40 daqiqa',
+                description: "Zamonaviy ayollar strijkasi.",
+                image: "assets/web/photo-1522337360788-8b13dee7a37e-800.jpg"
+            },
+            {
+                id: 'sw3',
+                gender: 'female',
+                title: "Ukladka",
+                category: "Styling",
+                price: 50000,
+                priceMax: 100000,
+                duration: '50 daqiqa',
+                description: "Sochni hajmli qilib shakllantirish va ukladka.",
+                image: "assets/ukladka.jpg"
+            },
+            {
+                id: 'sw4',
+                gender: 'female',
+                title: "Prichoska",
+                category: "Styling",
+                price: 50000,
+                priceMax: 200000,
+                duration: '60 daqiqa',
+                description: "To'y va tadbirlar uchun professional prichoska.",
+                image: "assets/web/photo-1521590832167-7bcbfaa6381f-800.jpg"
+            },
+            {
+                id: 'sw5',
+                gender: 'female',
+                title: "Makiyaj",
+                category: "Vizaj",
+                price: 70000,
+                priceMax: 150000,
+                duration: '40 daqiqa',
+                description: "Kundalik va tadbir makiyaji.",
+                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+            },
+            {
+                id: 'sw6',
+                gender: 'female',
+                title: "Qosh laminatsiya",
+                category: "Laminatsiya",
+                price: 150000,
+                duration: '30 daqiqa',
+                description: "Qoshlarni tartibga solish va laminatsiya.",
+                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+            },
+            {
+                id: 'sw7',
+                gender: 'female',
+                title: "Kiprik laminatsiya",
+                category: "Laminatsiya",
+                price: 150000,
+                duration: '30 daqiqa',
+                description: "Kipriklarni ko'tarish va laminatsiya.",
+                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+            },
+            {
+                id: 'sw8',
+                gender: 'female',
+                title: "Kiprik narashiviy",
+                category: "Kiprik",
+                price: 120000,
+                priceMax: 250000,
+                duration: '60 daqiqa',
+                description: "Tabiiy va hajmli kiprik narashivie.",
+                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+            },
+            {
+                id: 'sw9',
+                gender: 'female',
+                title: "Permanent makij",
+                category: "Permanent",
+                price: 450000,
+                priceMax: 700000,
+                duration: '90 daqiqa',
+                description: "Uzoq muddatli permanent makij.",
+                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+            },
+            {
+                id: 'sw10',
+                gender: 'female',
+                title: "Diplatsiya",
+                category: "Depilyatsiya",
+                price: 50000,
+                priceMax: 370000,
+                duration: '30 daqiqa',
+                description: "Qismlarga qarab professional diplatsiya.",
+                image: "assets/vosk.jpg"
+            },
+            {
+                id: 'sw11',
+                gender: 'female',
+                title: "Yuz chiskasi",
+                category: "Parvarish",
+                price: 250000,
+                duration: '60 daqiqa',
+                description: "Chuqur tozalovchi yuz chiskasi.",
+                image: "assets/maska.jpg"
+            },
+            {
+                id: 'sw12',
+                gender: 'female',
+                title: "Yuz masaj",
+                category: "Massaj",
+                price: 100000,
+                duration: '30 daqiqa',
+                description: "Relaks va terini yaxshilovchi yuz masaji.",
+                image: "assets/massaj.jpg"
+            },
+            {
+                id: 'sm4',
+                gender: 'male',
+                title: "Soqol",
+                category: "Soqol",
+                price: 40000,
+                duration: '30 daqiqa',
+                description: "Ustarada shakllantirish, kontur va parvarishlovchi vositalar.",
+                image: "assets/web/photo-1503951914875-452162b0f3f1-800.jpg"
+            },
+            {
+                id: 'sm5',
+                gender: 'male',
+                title: "Vosk",
+                category: "Depilyatsiya",
+                price: 30000,
+                duration: '20 daqiqa',
+                description: "Quloq va burun uchun vosk bilan nozik tozalash.",
+                image: "assets/vosk.jpg"
+            },
+            {
+                id: 'sm6',
+                gender: 'male',
+                title: "Maska",
+                category: "Parvarish",
+                price: 40000,
+                duration: '20 daqiqa',
+                description: "Tozalovchi va namlantiruvchi yuz maskasi.",
+                image: "assets/maska.jpg"
+            },
+            {
+                id: 'sm7',
+                gender: 'male',
+                title: "Massaj golovi",
+                category: "Massaj",
+                price: 50000,
+                duration: '20 daqiqa',
+                description: "Bosh terisini bo'shashtiruvchi relaks massaj.",
+                image: "assets/massaj.jpg"
+            },
+            {
+                id: 'sm8',
+                gender: 'male',
+                title: "Kuyov obraz",
+                category: "VIP",
+                price: 400000,
+                duration: '90 daqiqa',
+                description: "Kuyov uchun to'liq tayyorgarlik: soch, soqol va styling.",
+                image: "assets/kuyov.jpg"
+            }
+        ];
+
+        const STORAGE_KEY_SERVICES = 'woman_services_v5';
+        let SITE_SERVICES = [];
+
+        function normalizeService(s, index) {
+            const gender = s.gender === 'female' ? 'female' : 'male';
+            const price = Number(s.price) > 0 ? Number(s.price) : 0;
+            const priceMax = Number(s.priceMax) > price ? Number(s.priceMax) : 0;
+            return {
+                id: String(s.id || 's_' + index),
+                gender: gender,
+                title: String(s.title || '').trim() || 'Xizmat',
+                category: String(s.category || '').trim(),
+                price: price,
+                priceMax: priceMax,
+                duration: String(s.duration || '').trim() || '30 daqiqa',
+                description: String(s.description || '').trim(),
+                image: String(s.image || '').trim()
+            };
+        }
+
+        function getSiteServices() {
+            let stored = null;
+            try {
+                stored = JSON.parse(localStorage.getItem(STORAGE_KEY_SERVICES) || 'null');
+            } catch (e) {
+                console.warn("Xizmatlar ma'lumotini o'qishda xatolik", e);
+            }
+            if (Array.isArray(stored) && stored.length > 0) {
+                return stored.map((s, index) => {
+                    const def = APP_SERVICES.find(d => d.id === s.id);
+                    return normalizeService(def ? { ...def, ...s } : s, index);
+                });
+            }
+            return APP_SERVICES.map(normalizeService);
+        }
+
+        function findSiteService(id) {
+            if (!SITE_SERVICES.length) SITE_SERVICES = getSiteServices();
+            return SITE_SERVICES.find(s => s.id === id) || null;
+        }
+
+        function renderServicesGrid() {
+            SITE_SERVICES = getSiteServices();
+            const grid = document.getElementById('servicesGrid');
+            if (!grid) return;
+            const males = SITE_SERVICES.filter(s => s.gender === 'male');
+            grid.innerHTML = males.map(s => `
+                <div data-gender="male" class="service-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between hover:border-neonPink/50 transition group shadow-xl">
+                    <div class="service-media relative h-48 overflow-hidden bg-gradient-to-br from-dark-800 to-dark-950">
+                        ${s.image
+                            ? `<img src="${escapeHtml(s.image)}" alt="${escapeHtml(serviceTitle(s))}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.remove()">`
+                            : `<div class="absolute inset-0 flex items-center justify-center"><i class="fa-solid fa-scissors text-5xl text-slate-700"></i></div>`}
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
+                        <span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-600/90 text-white font-bold backdrop-blur-md pointer-events-none">
+                            <i class="fa-solid fa-mars mr-1"></i> ${escapeHtml(t('gender.male'))}
+                        </span>
+                        <span class="absolute top-3 right-3 text-xs text-white/90 bg-dark-950/80 backdrop-blur-md px-2.5 py-1 rounded-full font-semibold pointer-events-none">
+                            <i class="fa-solid fa-clock text-neonPink mr-1"></i> ${escapeHtml(fmtDuration(parseInt(s.duration, 10) || 0))}
+                        </span>
+                    </div>
+                    <div class="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="text-base font-bold text-white group-hover:text-neonPink transition mb-2">${escapeHtml(serviceTitle(s))}</h3>
+                            <p class="text-slate-400 text-xs line-clamp-2 mb-4 leading-relaxed">${escapeHtml(serviceDesc(s))}</p>
+                        </div>
+                        <div class="pt-4 border-t border-white/5 flex items-center justify-between">
+                            <div>
+                                <span class="text-[10px] text-slate-500 block">${escapeHtml(t('common.price'))}</span>
+                                <span class="brand-font text-lg font-extrabold text-neonPink">${servicePriceRange(s)}</span>
+                            </div>
+                            <button data-service-id="${escapeHtml(s.id)}" onclick="selectServiceAndBook(this.dataset.serviceId, 'male')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-neonPink hover:text-white text-slate-200 text-xs font-bold border border-white/10 transition flex items-center gap-1">
+                                ${escapeHtml(t('common.select'))} <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            renderWomenPriceList();
+        }
+
+        function renderWomenPriceList() {
+            const rows = document.getElementById('womenPriceRows');
+            if (!rows) return;
+            const females = SITE_SERVICES.filter(s => s.gender === 'female');
+            rows.innerHTML = females.map(s => `
+                <div class="flex items-baseline gap-3 py-3.5 border-b border-white/5 group">
+                    <span class="text-white font-semibold text-sm group-hover:text-neonPink transition">${escapeHtml(serviceTitle(s))}</span>
+                    <span class="flex-1 -translate-y-1 border-b border-dotted border-white/20"></span>
+                    <span class="text-neonPink font-bold text-sm whitespace-nowrap">${servicePriceRange(s)}</span>
+                </div>
+            `).join('');
+        }
+
+        let currentBookingGender = 'male';
+        let selectedMasterId = '';
+
+        function formatPrice(num) {
+            return fmtPrice(num);
+        }
+
+        function servicePriceRange(s) {
+            if (s.priceMax && s.priceMax > s.price) {
+                const from = fmtPrice(s.price).replace(/\s*(so'm|сум|UZS)$/, '');
+                return from + ' – ' + fmtPrice(s.priceMax);
+            }
+            return fmtPrice(s.price);
+        }
+
+        function getWhatsAppDigits() {
+            let settings = {};
+            try {
+                settings = JSON.parse(localStorage.getItem('woman_settings_v3')) || {};
+            } catch (e) {}
+            const digits = String(settings.phone || '').replace(/[^0-9]/g, '');
+            return digits || '998979775994';
+        }
+
+        function refreshWhatsAppLinks() {
+            const href = 'https://wa.me/' + getWhatsAppDigits() + '?text=' + encodeURIComponent(t('wa.message'));
+            ['floatingWhatsApp', 'siteContactWhatsApp'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.setAttribute('href', href);
+            });
+        }
+
+        function applySiteSettings() {
+            let settings = {};
+            try {
+                settings = JSON.parse(localStorage.getItem('woman_settings_v3')) || {};
+            } catch (e) {
+                return;
+            }
+
+            const phone = String(settings.phone || '').trim();
+            const phoneDigits = phone.replace(/[^0-9+]/g, '');
+            if (phone) {
+                const topPhone = document.getElementById('siteTopPhone');
+                const topPhoneText = document.getElementById('siteTopPhoneText');
+                const contactPhone = document.getElementById('siteContactPhone');
+                const contactWhatsApp = document.getElementById('siteContactWhatsApp');
+                const floatingCall = document.getElementById('floatingCall');
+                if (topPhone) topPhone.setAttribute('href', 'tel:' + phoneDigits);
+                if (topPhoneText) topPhoneText.textContent = phone;
+                if (contactPhone) {
+                    contactPhone.setAttribute('href', 'tel:' + phoneDigits);
+                    contactPhone.textContent = phone;
+                }
+                if (floatingCall) floatingCall.setAttribute('href', 'tel:' + phoneDigits);
+                if (contactWhatsApp) contactWhatsApp.textContent = phone;
+            }
+
+            const address = String(settings.address || '').trim();
+            if (address) {
+                const topAddress = document.getElementById('siteTopAddressText');
+                const contactAddress = document.getElementById('siteContactAddress');
+                if (topAddress) topAddress.textContent = address;
+                if (contactAddress) contactAddress.textContent = address;
+            }
+
+            const hours = String(settings.workingHours || '').trim();
+            if (hours) {
+                const topHours = document.getElementById('siteTopHoursText');
+                if (topHours) topHours.textContent = hours;
+            }
+
+            refreshWhatsAppLinks();
+        }
+
+        function initScrollSpy() {
+            const links = Array.from(document.querySelectorAll('header nav a[href^="#"], #mobileMenu a[href^="#"]'))
+                .filter(l => l.getAttribute('href') !== '#booking');
+            const map = {};
+            links.forEach(l => {
+                const id = l.getAttribute('href').slice(1);
+                (map[id] = map[id] || []).push(l);
+            });
+            const sections = Object.keys(map).map(id => document.getElementById(id)).filter(Boolean);
+            if (!('IntersectionObserver' in window) || !sections.length) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(en => {
+                    if (!en.isIntersecting) return;
+                    links.forEach(l => l.classList.remove('nav-active'));
+                    (map[en.target.id] || []).forEach(l => l.classList.add('nav-active'));
+                });
+            }, { rootMargin: '-96px 0px -60% 0px', threshold: 0 });
+            sections.forEach(s => observer.observe(s));
+        }
+
+        function initApp() {
+            applyStaticLanguage();
+            applySiteSettings();
+            renderServicesGrid();
+            renderMastersGrid();
+            renderBookingOptions();
+            initFormDefaults();
+            initScrollSpy();
+
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                mobileMenu.querySelectorAll('a').forEach(a => {
+                    a.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+                });
+            }
+        }
+
+        // XIZMATLARNI FILTERLASH
+        function filterServicesCategory(gender) {
+            currentServiceFilter = gender;
+            document.querySelectorAll('[id^="srvTab-"]').forEach(btn => {
+                btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white';
+            });
+            const activeBtn = document.getElementById(`srvTab-${gender}`);
+            if (activeBtn) {
+                activeBtn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs transition bg-neonPink text-white';
+            }
+
+            const cards = document.querySelectorAll('.service-card');
+            const grid = document.getElementById('servicesGrid');
+            const womenList = document.getElementById('womenPriceList');
+            if (gender === 'female') {
+                if (grid) grid.classList.add('hidden');
+                if (womenList) womenList.classList.remove('hidden');
+                return;
+            }
+            if (grid) grid.classList.remove('hidden');
+            if (womenList) womenList.classList.add('hidden');
+            cards.forEach(card => {
+                if (gender === 'all' || card.getAttribute('data-gender') === gender) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // USTALARNI FILTERLASH
+        function filterMastersCategory(gender) {
+            currentMasterFilter = gender;
+            document.querySelectorAll('[id^="masterTab-"]').forEach(btn => {
+                btn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs transition text-slate-300 hover:text-white';
+            });
+            const activeBtn = document.getElementById(`masterTab-${gender}`);
+            if (activeBtn) {
+                activeBtn.className = 'px-5 py-2.5 rounded-xl font-bold text-xs transition bg-neonPink text-white';
+            }
+
+            applyMasterFilter();
+        }
+
+        // GENDER SWITCH
+        function setBookingGender(gender) {
+            currentBookingGender = gender;
+            if (selectedMasterId) {
+                const selected = findSiteMaster(selectedMasterId);
+                if (!selected || selected.gender !== gender) selectedMasterId = '';
+            }
+            const btnMale = document.getElementById('btnGenderMale');
+            const btnFemale = document.getElementById('btnGenderFemale');
+            const summaryBadge = document.getElementById('summaryBadgeGender');
+
+            if (gender === 'male') {
+                btnMale.className = 'p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-blue-500/10 border-blue-500/40 text-blue-400';
+                btnFemale.className = 'p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-dark-950 border-white/10 text-slate-400 hover:text-white';
+                if (summaryBadge) {
+                    summaryBadge.innerText = t('gender.maleSection');
+                    summaryBadge.className = "px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-semibold border border-blue-500/20";
+                }
+            } else {
+                btnMale.className = 'p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-dark-950 border-white/10 text-slate-400 hover:text-white';
+                btnFemale.className = 'p-3.5 rounded-2xl border text-sm font-bold flex items-center justify-center gap-2 transition bg-neonPink/15 border-neonPink text-neonPink';
+                if (summaryBadge) {
+                    summaryBadge.innerText = t('gender.femaleSection');
+                    summaryBadge.className = "px-2.5 py-1 rounded-full bg-neonPink/15 text-neonPink text-xs font-semibold border border-neonPink/25";
+                }
+            }
+
+            renderBookingOptions();
+            updateBookingSummary();
+        }
+
+        function renderBookingOptions() {
+            if (!SITE_MASTERS.length) SITE_MASTERS = getSiteMasters();
+            const masters = SITE_MASTERS.filter(b => b.gender === currentBookingGender);
+            const cardsContainer = document.getElementById('bookingMasterCards');
+            const selectDropdown = document.getElementById('selectBarber');
+
+            if (cardsContainer) {
+                cardsContainer.innerHTML = masters.map(b => {
+                    const isSelected = (selectedMasterId === b.id);
+                    const activeClass = isSelected ? 'master-card-active' : '';
+
+                    return `
+                        <div onclick="chooseMaster(this.dataset.masterId)" data-master-id="${escapeHtml(b.id)}" id="masterCard-${escapeHtml(b.id)}" class="flex items-center gap-3 p-3 rounded-2xl border border-white/10 bg-dark-950 hover:border-neonPink/50 cursor-pointer transition ${activeClass}">
+                            <span class="relative w-12 h-12 rounded-xl overflow-hidden bg-dark-800 flex items-center justify-center shrink-0">
+                                <i class="fa-solid fa-user text-slate-600"></i>
+                                ${b.photo ? `<img src="${escapeHtml(b.photo)}" alt="${escapeHtml(b.name)}" onerror="this.remove()" class="absolute inset-0 w-full h-full object-cover">` : ''}
+                            </span>
+                            <div class="flex-1 min-w-0">
+                                <div class="text-xs font-bold text-white truncate">${escapeHtml(b.name)}</div>
+                                <div class="text-[11px] text-neonPink truncate">${escapeHtml(masterRoleText(b.role))}</div>
+                                <div class="text-[10px] text-slate-400">★ ${b.rating.toFixed(1)} (${escapeHtml(fmtExperience(b.experience))})</div>
+                            </div>
+                            <div class="w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0 ${isSelected ? 'bg-neonPink border-neonPink text-white' : 'text-transparent'}">
+                                <i class="fa-solid fa-check text-[10px]"></i>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+            if (selectDropdown) {
+                selectDropdown.innerHTML = `<option value="">${t('bk.selectMaster')}</option>` +
+                    masters.map(b => `<option value="${escapeHtml(b.id)}" ${selectedMasterId === b.id ? 'selected' : ''}>${escapeHtml(b.name)} (${escapeHtml(masterRoleText(b.role))})</option>`).join('');
+            }
+
+            const services = (SITE_SERVICES.length ? SITE_SERVICES : getSiteServices()).filter(s => s.gender === currentBookingGender);
+            const checkboxes = document.getElementById('servicesCheckboxes');
+            if (checkboxes) {
+                checkboxes.innerHTML = services.map(s => `
+                    <label class="flex items-center justify-between p-3 rounded-2xl bg-dark-950 border border-white/10 hover:border-neonPink/40 cursor-pointer transition">
+                        <div class="flex items-center space-x-3">
+                            <input type="checkbox" name="selectedService" value="${escapeHtml(s.id)}" data-title="${escapeHtml(s.title)}" data-price="${s.price}" onchange="updateBookingSummary()" class="w-4 h-4 rounded text-neonPink focus:ring-neonPink border-white/20 bg-dark-900">
+                            <div>
+                                <div class="text-sm font-medium text-slate-200">${escapeHtml(serviceTitle(s))}</div>
+                                <div class="text-xs text-slate-400">${escapeHtml(fmtDuration(parseInt(s.duration, 10)))}</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-bold text-neonPink">${servicePriceRange(s)}</span>
+                    </label>
+                `).join('');
+            }
+
+            renderTimeSlots();
+        }
+
+        function chooseMaster(barberId) {
+            selectedMasterId = barberId;
+            const selectDropdown = document.getElementById('selectBarber');
+            if (selectDropdown) {
+                selectDropdown.value = barberId;
+            }
+
+            document.querySelectorAll('#bookingMasterCards > div').forEach(card => {
+                card.classList.remove('master-card-active');
+                const checkIcon = card.querySelector('.fa-check')?.parentElement;
+                if (checkIcon) {
+                    checkIcon.className = 'w-5 h-5 rounded-full border border-white/20 flex items-center justify-center shrink-0 text-transparent';
+                }
+            });
+
+            const activeCard = document.getElementById(`masterCard-${barberId}`);
+            if (activeCard) {
+                activeCard.classList.add('master-card-active');
+                const checkIcon = activeCard.querySelector('.fa-check')?.parentElement;
+                if (checkIcon) {
+                    checkIcon.className = 'w-5 h-5 rounded-full border border-neonPink bg-neonPink flex items-center justify-center shrink-0 text-white';
+                }
+            }
+
+            renderTimeSlots();
+            updateBookingSummary();
+        }
+
+        function handleSelectDropdownChange() {
+            const selectDropdown = document.getElementById('selectBarber');
+            if (selectDropdown && selectDropdown.value) {
+                chooseMaster(selectDropdown.value);
+            } else {
+                selectedMasterId = '';
+                document.querySelectorAll('#bookingMasterCards > div').forEach(card => {
+                    card.classList.remove('master-card-active');
+                });
+                updateBookingSummary();
+            }
+        }
+
+        function initFormDefaults() {
+            const dateInput = document.getElementById('bookingDate');
+            if (dateInput) {
+                const today = localDateStr();
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+            renderTimeSlots();
+            updateBookingSummary();
+        }
+
+        function selectServiceAndBook(serviceId, gender) {
+            setBookingGender(gender);
+            setTimeout(() => {
+                const cb = document.querySelector(`input[name="selectedService"][value="${serviceId}"]`);
+                if (cb) cb.checked = true;
+                updateBookingSummary();
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            }, 50);
+        }
+
+        function selectMasterAndBook(masterId, gender) {
+            setBookingGender(gender);
+            setTimeout(() => {
+                chooseMaster(masterId);
+                document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+            }, 50);
+        }
+
+        function updateBookingSummary() {
+            const summaryBarber = document.getElementById('summaryBarber');
+            const summaryServices = document.getElementById('summaryServices');
+            const summaryDate = document.getElementById('summaryDate');
+            const summaryTime = document.getElementById('summaryTime');
+            const summaryTotal = document.getElementById('summaryTotal');
+            const dateInput = document.getElementById('bookingDate');
+            const timeSelect = document.getElementById('bookingTime');
+
+            if (selectedMasterId) {
+                const barber = findSiteMaster(selectedMasterId);
+                summaryBarber.innerText = barber ? barber.name : t('common.notSelected');
+            } else {
+                summaryBarber.innerText = t('common.notSelected');
+            }
+
+            const checkedBoxes = document.querySelectorAll('input[name="selectedService"]:checked');
+            let total = 0;
+            let names = [];
+            checkedBoxes.forEach(cb => {
+                total += Number(cb.dataset.price) || 0;
+                const service = findSiteService(cb.value);
+                names.push(service ? serviceTitle(service) : cb.dataset.title);
+            });
+
+            summaryServices.innerText = names.length > 0 ? names.join(', ') : t('common.notSelected');
+            summaryTotal.innerText = formatPrice(total);
+            summaryDate.innerText = dateInput && dateInput.value ? dateInput.value : t('common.notSelected');
+            summaryTime.innerText = timeSelect && timeSelect.value ? timeSelect.value : t('common.notSelected');
+        }
+
+        async function handleBookingSubmit(event) {
+            event.preventDefault();
+
+            if (!selectedMasterId) {
+                alert(t('bk.alertMaster'));
+                return;
+            }
+
+            const dateInput = document.getElementById('bookingDate');
+            const timeSelect = document.getElementById('bookingTime');
+            const clientNameInput = document.getElementById('clientName');
+            const clientPhoneInput = document.getElementById('clientPhone');
+            const clientCommentInput = document.getElementById('clientComment');
+            const submitBtn = document.getElementById('submitBtn');
+
+            const checkedBoxes = document.querySelectorAll('input[name="selectedService"]:checked');
+            if (checkedBoxes.length === 0) {
+                alert(t('bk.alertService'));
+                return;
+            }
+
+            let serviceIds = [];
+            let serviceNames = [];
+            let totalPrice = 0;
+            checkedBoxes.forEach(cb => {
+                serviceIds.push(cb.value);
+                serviceNames.push(cb.dataset.title);
+                totalPrice += Number(cb.dataset.price) || 0;
+            });
+
+            if (isSlotBusy(selectedMasterId, dateInput.value, timeSelect.value)) {
+                alert(t('bk.alertBusy'));
+                renderTimeSlots();
+                timeSelect.value = '';
+                updateBookingSummary();
+                return;
+            }
+
+            const barber = findSiteMaster(selectedMasterId);
+
+            const origText = submitBtn.innerHTML;
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${t('bk.submitting')}`;
+
+            const appointmentData = {
+                clientName: clientNameInput.value,
+                clientPhone: clientPhoneInput.value,
+                gender: currentBookingGender,
+                barberId: barber ? barber.id : '',
+                barberName: barber ? barber.name : 'Tanlanmagan usta',
+                serviceIds: serviceIds,
+                serviceNames: serviceNames.join(', '),
+                totalPrice: totalPrice,
+                date: dateInput.value,
+                time: timeSelect.value,
+                comment: clientCommentInput.value
+            };
+
+            // Baza (localStorage) ga yozish - Admin panel bilan to'liq bog'langan
+            const savedApp = {
+                id: 'WM-' + Math.floor(1000 + Math.random() * 9000),
+                ...appointmentData,
+                status: 'pending',
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                let currentApps = JSON.parse(localStorage.getItem('woman_appointments_v3')) || [];
+                currentApps.unshift(savedApp);
+                localStorage.setItem('woman_appointments_v3', JSON.stringify(currentApps));
+
+                // Telegramga yuborish (agar admin sozlagan bo'lsa)
+                const settings = JSON.parse(localStorage.getItem('woman_settings_v3')) || {};
+                if (settings.telegramBotToken && settings.telegramChatId) {
+                    const text = `💈 <b>YANGI ARIZA! WO & MAN СТУДИЯ КРАСОТЫ</b>\n\n` +
+                        `🆔 <b>Raqam:</b> ${savedApp.id}\n` +
+                        `👤 <b>Mijoz:</b> ${savedApp.clientName}\n` +
+                        `📞 <b>Telefon:</b> ${savedApp.clientPhone}\n` +
+                        `✂️ <b>Usta:</b> ${savedApp.barberName}\n` +
+                        `📋 <b>Xizmat:</b> ${savedApp.serviceNames}\n` +
+                        `💵 <b>Summa:</b> ${formatPrice(savedApp.totalPrice)}\n` +
+                        `📅 <b>Sana & Vaqt:</b> ${savedApp.date} soat ${savedApp.time}\n` +
+                        (savedApp.comment ? `💬 <b>Izoh:</b> ${savedApp.comment}\n` : '') +
+                        `\n<i>Admin panel orqali tasdiqlang!</i>`;
+                    
+                    fetch(`https://api.telegram.org/bot${settings.telegramBotToken}/sendMessage`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: settings.telegramChatId,
+                            text: text,
+                            parse_mode: 'HTML'
+                        })
+                    }).catch(e => console.log('Telegram send error', e));
+                }
+            } catch (err) {
+                console.error("Localstorage save error", err);
+            }
+
+            try {
+                const ctx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+                osc.frequency.setValueAtTime(880, ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.3, ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+                osc.start();
+                osc.stop(ctx.currentTime + 0.35);
+            } catch (e) {}
+
+            document.getElementById('modalAppId').innerText = savedApp.id;
+            document.getElementById('modalClientName').innerText = savedApp.clientName;
+            document.getElementById('modalBarberName').innerText = savedApp.barberName;
+            document.getElementById('modalDateTime').innerText = dateTimeText(savedApp.date, savedApp.time);
+            document.getElementById('modalPrice').innerText = formatPrice(savedApp.totalPrice);
+
+            document.getElementById('successModal').classList.remove('hidden');
+
+            document.getElementById('bookingForm').reset();
+            selectedMasterId = '';
+            setBookingGender('male');
+            initFormDefaults();
+
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origText;
+        }
+
+        function closeSuccessModal() {
+            document.getElementById('successModal').classList.add('hidden');
+        }
+
+        function dismissPromo() {
+            const banner = document.getElementById('promoBanner');
+            if (banner) banner.classList.add('hidden');
+            try {
+                localStorage.setItem('woman_promo_dismissed_v1', '1');
+            } catch (e) {}
+        }
+
+        // LIGHTBOX: xizmat va galereya rasmlarini bosganda kattalashtirish
+        function openLightbox(src) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = src;
+            lb.classList.remove('hidden');
+            lb.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.add('hidden');
+            lb.classList.remove('flex');
+            document.body.style.overflow = '';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('#lightbox, button, a, input, select, textarea, label')) return;
+            const cell = e.target.closest('#servicesGrid .service-media, #gallery .aspect-square');
+            if (!cell) return;
+            const img = cell.querySelector('img');
+            if (img && img.src) openLightbox(img.src);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initApp);
+        } else {
+            initApp();
+        }
+
+        if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js').catch(() => {});
+            });
+        }
+
+        // Admin panelda usta qo'shilsa/o'chirilsa, ochiq sahifa darhol yangilanadi
+        window.addEventListener('storage', (event) => {
+            if (!event.key || event.key === STORAGE_KEY_MASTERS) {
+                renderMastersGrid();
+                renderBookingOptions();
+                updateBookingSummary();
+            }
+            if (!event.key || event.key === STORAGE_KEY_APPOINTMENTS) {
+                renderTimeSlots();
+            }
+            if (!event.key || event.key === STORAGE_KEY_SERVICES) {
+                const checked = Array.from(document.querySelectorAll('input[name="selectedService"]:checked')).map(cb => cb.value);
+                renderServicesGrid();
+                filterServicesCategory(currentServiceFilter);
+                renderBookingOptions();
+                checked.forEach(id => {
+                    const cb = document.querySelector(`input[name="selectedService"][value="${id}"]`);
+                    if (cb) cb.checked = true;
+                });
+                updateBookingSummary();
+            }
+            if (!event.key || event.key === 'woman_settings_v3') {
+                applySiteSettings();
+            }
+        });
+    </script>
+</body>
+</html>

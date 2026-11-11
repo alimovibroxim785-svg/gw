@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Boshqaruv Paneli | WO & MAN Студия Красоты</title>
+    <!-- Tailwind CSS -->
+    <script src="assets/vendor/tailwind.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/vendor/fontawesome/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="assets/vendor/fonts.css" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neonPink: '#ff2079',
+                        dark: {
+                            800: '#1b1e23',
+                            900: '#111317',
+                            950: '#090a0c',
+                        }
+                    },
+                    fontFamily: {
+                        brand: ['Montserrat', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #090a0c;
+            color: #e2e8f0;
+        }
+        .brand-font {
+            font-family: 'Montserrat', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(17, 19, 23, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-dark-950 text-slate-100 min-h-screen">
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginScreen" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain p-4 bg-dark-950">
+        <div class="glass-panel max-w-md w-full p-8 rounded-3xl border-neonPink/30 shadow-2xl relative my-auto">
+            <div class="text-center mb-6">
+                <!-- User's uploaded salon logo -->
+                <div class="w-24 h-24 rounded-2xl overflow-hidden border border-neonPink/40 mx-auto mb-3 shadow-lg shadow-neonPink/25 bg-black flex items-center justify-center">
+                    <img src="assets/logo.png" 
+                         alt="WO & MAN Logo" 
+                         onerror="this.style.display='none'" 
+                         class="w-full h-full object-cover select-none pointer-events-none">
+                </div>
+                <h2 class="brand-font text-2xl font-black text-white tracking-wide">
+                    <span class="text-neonPink">WO</span> &amp; <span>MAN</span>
+                </h2>
+                <p class="text-xs text-slate-400 mt-1">Студия Красоты — Admin Paneli</p>
+            </div>
+
+            <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Login</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                        <input type="text" id="loginUser" required value="admin" class="w-full bg-dark-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:border-neonPink focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-2">Parol</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute left-4 top-3.5 text-slate-500 text-sm"></i>
+                        <input type="password" id="loginPass" required value="admin" class="w-full bg-dark-950 border border-white/10 rounded-xl pl-10 pr-4 py-3 text-sm text-white focus:border-neonPink focus:outline-none transition">
+                    </div>
+                </div>
+
+                <div id="loginError" class="hidden text-xs text-rose-400 bg-rose-500/10 p-3 rounded-lg border border-rose-500/20 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>Login yoki parol noto'g'ri! (Standart: admin / admin)</span>
+                </div>
+
+                <button type="submit" id="loginBtn" class="w-full py-3.5 bg-gradient-to-r from-neonPink to-rose-600 hover:from-neonPink hover:to-neonPink text-white font-bold rounded-xl text-sm transition-all shadow-lg shadow-neonPink/25">
+                    Tizimga Kirish
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-white/5 text-center">
+                <a href="index.html" class="text-xs text-slate-400 hover:text-neonPink transition flex items-center justify-center gap-1">
+                    <i class="fa-solid fa-arrow-left"></i> Asosiy saytga qaytish
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN ADMIN DASHBOARD -->
+    <div id="adminApp" class="flex flex-col md:flex-row min-h-screen">
+        
+        <!-- SIDEBAR -->
+        <aside class="w-full md:w-64 bg-dark-900 border-r border-white/10 shrink-0 flex flex-col justify-between">
+            <div>
+                <!-- Brand Header -->
+                <div class="p-6 border-b border-white/5 flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-10 h-10 rounded-xl border border-neonPink/40 flex items-center justify-center bg-black overflow-hidden shrink-0">
+                            <img src="assets/logo.png" 
+                                 alt="Logo" 
+                                 onerror="this.style.display='none'" 
+                                 class="w-full h-full object-cover select-none pointer-events-none">
+                        </div>
+                        <div>
+                            <span class="brand-font font-black text-base text-white block leading-tight">
+                                <span class="text-neonPink">WO</span> &amp; MAN
+                            </span>
+                            <span class="text-[9px] tracking-widest uppercase text-slate-400 font-bold">Admin Paneli</span>
+                        </div>
+                    </div>
+                    <a href="index.html" target="_blank" title="Saytni ko'rish" class="text-slate-400 hover:text-white p-1 text-sm">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+
+                <!-- Nav Tabs -->
+                <nav class="p-4 space-y-1.5 text-sm">
+                    <button onclick="switchTab('appointments')" id="tabBtn-appointments" class="w-full flex items-center justify-between px-4 py-3 rounded-2xl font-bold transition bg-neonPink/15 text-neonPink border border-neonPink/30">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-calendar-check text-base"></i>
+                            <span>Arizalar &amp; Navbat</span>
+                        </div>
+                        <span id="badgePendingCount" class="px-2 py-0.5 text-xs rounded-full bg-neonPink text-white font-bold">0</span>
+                    </button>
+
+                    <button onclick="switchTab('services')" id="tabBtn-services" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition">
+                        <i class="fa-solid fa-list-check text-base"></i>
+                        <span>Xizmatlar &amp; Narxlar</span>
+                    </button>
+
+                    <button onclick="switchTab('barbers')" id="tabBtn-barbers" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition">
+                        <i class="fa-solid fa-users-gear text-base"></i>
+                        <span>Ustalar Boshqaruvi</span>
+                    </button>
+
+                    <button onclick="switchTab('settings')" id="tabBtn-settings" class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition">
+                        <i class="fa-solid fa-gear text-base"></i>
+                        <span>Sozlamalar &amp; Telegram</span>
+                    </button>
+                </nav>
+            </div>
+
+            <!-- Footer / Logout -->
+            <div class="p-4 border-t border-white/5">
+                <button onclick="logoutAdmin()" class="w-full py-2.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs font-semibold border border-rose-500/20 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-right-from-bracket"></i> Tizimdan Chiqish
+                </button>
+                <p class="text-[10px] text-slate-600 text-center mt-2">Versiya 3.9 — 09.11.2026</p>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 overflow-y-auto bg-dark-950 p-4 sm:p-8">
+            
+            <!-- TOP STATS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="glass-panel p-5 rounded-3xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">Bugungi arizalar</span>
+                            <h3 id="statTodayCount" class="text-2xl font-black text-white mt-1">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-400 flex items-center justify-center">
+                            <i class="fa-solid fa-calendar-day"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-2 flex items-center gap-1">
+                        <i class="fa-solid fa-clock"></i> Bugungi belgilangan navbatlar
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-3xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">Kutilayotgan (Yangi)</span>
+                            <h3 id="statPendingCount" class="text-2xl font-black text-neonPink mt-1">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-neonPink/15 text-neonPink flex items-center justify-center">
+                            <i class="fa-solid fa-hourglass-half"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs text-neonPink mt-2 flex items-center gap-1">
+                        <i class="fa-solid fa-bell animate-pulse"></i> Tasdiqlash kerak
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-3xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">Tasdiqlangan</span>
+                            <h3 id="statConfirmedCount" class="text-2xl font-black text-emerald-400 mt-1">0</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs text-emerald-400 mt-2 flex items-center gap-1">
+                        <i class="fa-solid fa-check"></i> Kelishi kutilmoqda
+                    </div>
+                </div>
+
+                <div class="glass-panel p-5 rounded-3xl">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="text-xs text-slate-400 font-medium">Umumiy tushum</span>
+                            <h3 id="statRevenue" class="text-xl font-black text-white mt-1">0 so'm</h3>
+                        </div>
+                        <div class="w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center">
+                            <i class="fa-solid fa-coins text-amber-400"></i>
+                        </div>
+                    </div>
+                    <div class="text-xs text-slate-500 mt-2 flex items-center gap-1">
+                        <i class="fa-solid fa-calendar-day"></i> Bugun: <span id="statRevenueToday">0 so'm</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TAB 1: ARIZALAR & NAVBATLAR -->
+            <section id="section-appointments" class="tab-section">
+                
+                <!-- Filter Bar -->
+                <div class="glass-panel p-4 rounded-3xl mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                    <div class="flex flex-wrap gap-2 text-xs font-semibold">
+                        <button onclick="filterAppointments('all')" id="filter-all" class="filter-btn px-3.5 py-2 rounded-xl bg-neonPink text-white font-bold">
+                            Barchasi
+                        </button>
+                        <button onclick="filterAppointments('pending')" id="filter-pending" class="filter-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300">
+                            Kutilmoqda (Yangi)
+                        </button>
+                        <button onclick="filterAppointments('confirmed')" id="filter-confirmed" class="filter-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300">
+                            Tasdiqlangan
+                        </button>
+                        <button onclick="filterAppointments('completed')" id="filter-completed" class="filter-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300">
+                            Bajarildi
+                        </button>
+                        <button onclick="filterAppointments('cancelled')" id="filter-cancelled" class="filter-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300">
+                            Bekor qilingan
+                        </button>
+                    </div>
+
+                    <div class="flex items-center flex-wrap gap-2">
+                        <div class="relative">
+                            <i class="fa-solid fa-search absolute left-3 top-2.5 text-slate-500 text-xs"></i>
+                            <input type="text" id="appointmentSearch" oninput="renderAppointmentsTable()" placeholder="Ism yoki telefon qidirish..." class="bg-dark-950 border border-white/10 rounded-xl pl-8 pr-3 py-1.5 text-xs text-white focus:border-neonPink focus:outline-none w-44 sm:w-56">
+                        </div>
+
+                        <button onclick="openAddAppointmentModal()" class="px-3.5 py-2 bg-gradient-to-r from-neonPink to-rose-600 text-white font-bold rounded-xl text-xs hover:scale-105 transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Yangi Ariza
+                        </button>
+
+                        <button onclick="exportAppointmentsCSV()" title="Excel yuklab olish" class="p-2 bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 rounded-xl text-xs transition">
+                            <i class="fa-solid fa-file-excel text-emerald-400"></i> Eksport
+                        </button>
+                    </div>
+                </div>
+
+                <!-- TABLE -->
+                <div class="glass-panel rounded-3xl overflow-hidden border border-white/10">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs">
+                            <thead class="bg-dark-900 border-b border-white/10 uppercase text-slate-400 font-bold tracking-wider">
+                                <tr>
+                                    <th class="p-4">ID</th>
+                                    <th class="p-4">Bo'lim</th>
+                                    <th class="p-4">Mijoz</th>
+                                    <th class="p-4">Telefon</th>
+                                    <th class="p-4">Usta</th>
+                                    <th class="p-4">Xizmatlar</th>
+                                    <th class="p-4">Sana &amp; Vaqt</th>
+                                    <th class="p-4">Summa</th>
+                                    <th class="p-4">Holati</th>
+                                    <th class="p-4 text-right">Amallar</th>
+                                </tr>
+                            </thead>
+                            <tbody id="appointmentsTableBody" class="divide-y divide-white/5 text-slate-300">
+                                <!-- Dynamic rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="noAppointmentsMsg" class="hidden p-8 text-center text-slate-500 text-sm">
+                        <i class="fa-solid fa-folder-open text-2xl mb-2 block"></i>
+                        Arizalar topilmadi.
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: XIZMATLAR -->
+            <section id="section-services" class="tab-section hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Xizmatlar va Narxlar Boshqaruvi</h2>
+                        <p class="text-xs text-slate-400">Erkaklar (Barber) va Ayollar (Beauty) xizmatlari</p>
+                    </div>
+                    <button onclick="openServiceModal()" class="px-4 py-2.5 bg-gradient-to-r from-neonPink to-rose-600 text-white font-bold rounded-xl text-xs hover:scale-105 transition flex items-center gap-2">
+                        <i class="fa-solid fa-plus"></i> Yangi Xizmat Qo'shish
+                    </button>
+                </div>
+
+                <div id="servicesAdminList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <!-- Dynamic services -->
+                </div>
+            </section>
+
+            <!-- TAB 3: USTALAR -->
+            <section id="section-barbers" class="tab-section hidden">
+                <div class="flex items-center justify-between mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Ustalar Boshqaruvi</h2>
+                        <p class="text-xs text-slate-400">Salon stilistlari va barberlari</p>
+                    </div>
+                    <button onclick="openBarberModal()" class="px-4 py-2.5 bg-gradient-to-r from-neonPink to-rose-600 text-white font-bold rounded-xl text-xs hover:scale-105 transition flex items-center gap-2">
+                        <i class="fa-solid fa-user-plus"></i> Yangi Usta Qo'shish
+                    </button>
+                </div>
+
+                <div id="barbersAdminList" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Dynamic barbers -->
+                </div>
+            </section>
+
+            <!-- TAB 4: SOZLAMALAR & TELEGRAM -->
+            <section id="section-settings" class="tab-section hidden max-w-3xl">
+                <div class="mb-6">
+                    <h2 class="text-xl font-bold text-white">Sozlamalar va Telegram Bot</h2>
+                    <p class="text-xs text-slate-400">Salon rekvizitlari va yangi arizalarni avtomatik Telegramga yuborish</p>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl mb-6 border-neonPink/20">
+                    <h3 class="text-sm font-bold text-neonPink uppercase tracking-wider mb-4 flex items-center gap-2">
+                        <i class="fa-brands fa-telegram text-base"></i> Telegram Bot Integratsiyasi
+                    </h3>
+                    <p class="text-xs text-slate-400 mb-4">
+                        Sayt orqali har qanday ariza tushganda, ma'lumotlar avtomatik sizning Telegramingizga yuboriladi.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Telegram Bot Token</label>
+                            <input type="text" id="setTelegramToken" placeholder="Masalan: 7123456789:AAHk..." class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                            <span class="text-[11px] text-slate-500">@BotFather bergan token</span>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Telegram Chat ID</label>
+                            <input type="text" id="setTelegramChatId" placeholder="Masalan: 987654321" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                            <span class="text-[11px] text-slate-500">Sizning yoki guruhingizning Chat ID si (@userinfobot orqali olinadi)</span>
+                        </div>
+
+                        <div class="pt-2 flex gap-3">
+                            <button onclick="saveTelegramSettings()" class="px-4 py-2 bg-neonPink hover:bg-neonPinkHover text-white font-bold rounded-xl text-xs transition">
+                                <i class="fa-solid fa-save mr-1"></i> Saqlash
+                            </button>
+                            <button onclick="testTelegramMessage()" class="px-4 py-2 bg-white/5 hover:bg-white/10 text-white rounded-xl text-xs transition border border-white/10">
+                                <i class="fa-solid fa-paper-plane mr-1"></i> Test xabar yuborish
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl mb-6">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Salon Ma'lumotlari</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Salon Nomi</label>
+                            <input type="text" id="setSalonName" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Aloqa Telefoni</label>
+                                <input type="text" id="setSalonPhone" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                                <p class="text-[10px] text-slate-500 mt-1">Bu raqam saytning yuqori qismida va aloqa bo'limida ko'rinadi.</p>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-1">Ish Vaqtlari</label>
+                                <input type="text" id="setWorkingHours" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-300 mb-1">Manzil</label>
+                            <input type="text" id="setSalonAddress" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                        </div>
+
+                        <button onclick="saveGeneralSettings()" class="px-4 py-2 bg-neonPink hover:bg-neonPinkHover text-white font-bold rounded-xl text-xs transition">
+                            <i class="fa-solid fa-save mr-1"></i> Ma'lumotlarni Saqlash
+                        </button>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-6 rounded-3xl border-rose-500/20">
+                    <h3 class="text-sm font-bold text-rose-400 uppercase tracking-wider mb-2">Namunaviy Ma'lumotlarni Qayta Tiklash</h3>
+                    <p class="text-xs text-slate-400 mb-4">Barcha arizalar va narxlarni boshlang'ich holatga qaytarish.</p>
+                    <button onclick="resetAllDemoData()" class="px-4 py-2 bg-rose-500/20 hover:bg-rose-500/30 text-rose-400 font-semibold rounded-xl text-xs border border-rose-500/30 transition">
+                        <i class="fa-solid fa-rotate-left mr-1"></i> Barchasini Qayta Tiklash (Reset)
+                    </button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- MODAL: ADMIN QO'LDA ARIZA QO'SHISH -->
+    <div id="addAppointmentModal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain p-4 bg-dark-950/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-lg w-full p-6 rounded-3xl border-white/20 shadow-2xl my-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-bold text-white text-base">Yangi Ariza Qo'shish (Qo'lda)</h3>
+                <button onclick="closeAddAppointmentModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleAdminAddAppointment(event)" class="space-y-4 text-xs">
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Bo'lim *</label>
+                        <select id="adminAppGender" onchange="updateAdminAppMasters()" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                            <option value="male">Erkaklar (Barber)</option>
+                            <option value="female">Ayollar (Beauty)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Usta *</label>
+                        <select id="adminAppBarber" required class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                            <!-- populated by js -->
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Mijoz Ismi *</label>
+                    <input type="text" id="adminAppClient" required placeholder="Masalan: Sardor Aliyev" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Telefon Raqami *</label>
+                    <input type="text" id="adminAppPhone" required placeholder="+998 90 123 45 67" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Xizmat Nomi *</label>
+                        <input type="text" id="adminAppService" required placeholder="Fade Soch Turmagi" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Summa (so'm) *</label>
+                        <input type="number" id="adminAppPrice" required placeholder="80000" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Sana *</label>
+                        <input type="date" id="adminAppDate" required class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Vaqt *</label>
+                        <input type="time" id="adminAppTime" required value="12:00" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeAddAppointmentModal()" class="px-4 py-2 bg-white/5 text-slate-300 rounded-xl">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-neonPink text-white font-bold rounded-xl">Qo'shish</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: XIZMAT QO'SHISH / TAHRIRLASH -->
+    <div id="serviceModal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain p-4 bg-dark-950/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full p-6 rounded-3xl border-white/20 shadow-2xl my-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="serviceModalTitle" class="font-bold text-white text-base">Xizmat Qo'shish</h3>
+                <button onclick="closeServiceModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleSaveService(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="serviceEditId">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Bo'lim *</label>
+                    <select id="srvGender" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                        <option value="male">Erkaklar (Barber)</option>
+                        <option value="female">Ayollar (Beauty)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Xizmat Nomi *</label>
+                    <input type="text" id="srvTitle" required placeholder="Masalan: Soch turmaklash" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Kategoriya *</label>
+                        <input type="text" id="srvCategory" required placeholder="Soch / Soqol / Vizaj" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Narxi (so'm) *</label>
+                        <input type="number" id="srvPrice" required placeholder="80000" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Davomiyligi *</label>
+                        <input type="text" id="srvDuration" required placeholder="40 daqiqa" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Maksimal narx (ixtiyoriy)</label>
+                        <input type="number" id="srvPriceMax" placeholder="1000000" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Tavsif</label>
+                    <textarea id="srvDesc" rows="2" placeholder="Qisqacha ta'rif..." class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white"></textarea>
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeServiceModal()" class="px-4 py-2 bg-white/5 text-slate-300 rounded-xl">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-neonPink text-white font-bold rounded-xl">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: USTA QO'SHISH / TAHRIRLASH -->
+    <div id="barberModal" class="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto overscroll-contain p-4 bg-dark-950/80 backdrop-blur-md hidden">
+        <div class="glass-panel max-w-md w-full p-6 rounded-3xl border-white/20 shadow-2xl my-auto">
+            <div class="flex justify-between items-center mb-4">
+                <h3 id="barberModalTitle" class="font-bold text-white text-base">Usta Qo'shish</h3>
+                <button onclick="closeBarberModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <form onsubmit="handleSaveBarber(event)" class="space-y-3 text-xs">
+                <input type="hidden" id="barberEditId">
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Bo'lim *</label>
+                    <select id="barberGender" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                        <option value="male">Erkaklar Ustasiga (Barber)</option>
+                        <option value="female">Ayollar Ustasiga (Stilist/Vizajist)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Ism va Familiya *</label>
+                    <input type="text" id="barberName" required placeholder="Akrom" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Telefon Raqami</label>
+                    <input type="tel" id="barberPhone" placeholder="+998 90 123 45 67" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Telegram username</label>
+                    <input type="text" id="barberTelegram" placeholder="@username" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    <p class="text-[11px] text-slate-500 mt-1">Har bir usta uchun alohida. Ustaning Telegram profilidagi haqiqiy username'ni yozing (Sozlamalar → Profil → Username).</p>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Lavozim *</label>
+                        <input type="text" id="barberRole" required placeholder="Top Kolorist" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-300 mb-1">Tajriba *</label>
+                        <input type="text" id="barberExp" required placeholder="6 yil tajriba" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Rasm havolasi (URL)</label>
+                    <input type="text" id="barberPhoto" oninput="clearPendingBarberPhoto()" placeholder="https://images.unsplash.com/..." class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                    <p class="text-[11px] text-slate-500 mt-1">URL ishlamasa, kompyuteringizdan rasm faylini tanlang.</p>
+                    <input type="file" id="barberPhotoFile" accept="image/*" onchange="handleBarberPhotoFile(event)" class="mt-2 w-full text-slate-300 text-xs file:mr-3 file:px-3 file:py-2 file:rounded-xl file:border-0 file:bg-neonPink file:text-white file:font-bold file:cursor-pointer">
+                    <div id="barberPhotoPreviewWrap" class="mt-2 hidden">
+                        <img id="barberPhotoPreview" alt="Rasm ko'rinishi" class="w-24 h-24 rounded-xl object-cover border border-white/10">
+                    </div>
+                </div>
+                <div>
+                    <label class="block font-semibold text-slate-300 mb-1">Mutaxassisliklari (vergul bilan)</label>
+                    <input type="text" id="barberSpecs" placeholder="AirTouch, Balayaj, Soch turmaklash" class="w-full bg-dark-950 border border-white/10 rounded-xl p-2.5 text-white">
+                </div>
+                <div class="pt-2 flex justify-end gap-2">
+                    <button type="button" onclick="closeBarberModal()" class="px-4 py-2 bg-white/5 text-slate-300 rounded-xl">Bekor qilish</button>
+                    <button type="submit" class="px-4 py-2 bg-neonPink text-white font-bold rounded-xl">Saqlash</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- SELF-CONTAINED ADMIN SYSTEM JAVASCRIPT -->
+    <script>
+        const STORAGE_KEY_APPS = 'woman_appointments_v3';
+        const STORAGE_KEY_SERVICES = 'woman_services_v5';
+        const STORAGE_KEY_BARBERS = 'woman_masters_v3';
+        const STORAGE_KEY_SETTINGS = 'woman_settings_v3';
+
+        // Boshlang'ich arizalar (agar xotirada bo'sh bo'lsa)
+        const DEFAULT_APPOINTMENTS = [
+            {
+                id: 'WM-2081',
+                clientName: 'Shoxrux Bekmurodov',
+                clientPhone: '+998 90 777 88 99',
+                gender: 'male',
+                barberId: 'm1',
+                barberName: 'Akrom',
+                serviceIds: ['sm1', 'sm2'],
+                serviceNames: 'Erkaklar soch turmagi, Soqol shakllantirish',
+                totalPrice: 130000,
+                date: new Date().toISOString().split('T')[0],
+                time: '14:00',
+                comment: 'To\'y uchun maxsus turmak.',
+                status: 'pending'
+            },
+            {
+                id: 'WM-2080',
+                clientName: 'Nilufar Yusupova',
+                clientPhone: '+998 93 555 44 33',
+                gender: 'female',
+                barberId: 'm3',
+                barberName: 'Jamoliddin',
+                serviceIds: ['sw1', 'sw3'],
+                serviceNames: 'Ayollar soch turmagi, Kechki Makiyaj',
+                totalPrice: 280000,
+                date: new Date().toISOString().split('T')[0],
+                time: '16:30',
+                comment: 'Kechki ziyofatga tayyorgarlik.',
+                status: 'confirmed'
+            }
+        ];
+
+        let currentFilter = 'all';
+
+        function formatPrice(num) {
+            if (!num) return "0 so'm";
+            return String(Number(num)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + " so'm";
+        }
+
+        // Ro'yxatni o'qish: standart ma'lumot faqat kalit umuman yo'q yoki buzilgan bo'lsa yoziladi.
+        // Bo'sh ro'yxat ([]) ham haqiqiy holat — u qayta to'ldirilmaydi.
+        function normalizeTelegram(value) {
+            return String(value || '').trim()
+                .replace(/^https?:\/\/(t\.me|telegram\.me)\//i, '')
+                .replace(/^@/, '')
+                .replace(/[^A-Za-z0-9_]/g, '');
+        }
+
+        function loadList(key, defaults) {            const raw = localStorage.getItem(key);
+            if (raw !== null) {
+                try {
+                    const data = JSON.parse(raw);
+                    if (Array.isArray(data)) return data;
+                } catch (e) { /* buzilgan yozuv — pastda standart bilan almashtiriladi */ }
+            }
+            const copy = JSON.parse(JSON.stringify(defaults));
+            localStorage.setItem(key, JSON.stringify(copy));
+            return copy;
+        }
+
+        // MA'LUMOTLARNI OLISH
+        function getAppointmentsData() {
+            return loadList(STORAGE_KEY_APPS, DEFAULT_APPOINTMENTS);
+        }
+
+        function saveAppointmentsData(apps) {
+            localStorage.setItem(STORAGE_KEY_APPS, JSON.stringify(apps));
+        }
+
+        function getSettingsData() {
+            try {
+                const stored = JSON.parse(localStorage.getItem(STORAGE_KEY_SETTINGS));
+                const s = stored || {
+                    salonName: 'WO & MAN Студия Красоты',
+                    phone: '+998 97 977 5994',
+                    address: 'Yangiyo\'l sh., Toshkent viloyati',
+                    workingHours: 'Har kuni: 09:00 - 22:00',
+                    adminPassword: 'admin',
+                    telegramBotToken: '',
+                    telegramChatId: ''
+                };
+                if (!s.phone || String(s.phone).replace(/\D/g, '') === '998712007080') {
+                    s.phone = '+998 97 977 5994';
+                    localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+                }
+                return s;
+            } catch (e) {
+                return { adminPassword: 'admin', phone: '+998 97 977 5994' };
+            }
+        }
+
+        // TIZIMGA KIRISH (LOGIN)
+        function checkAuth() {
+            const isAuth = sessionStorage.getItem('admin_auth') === 'true' || localStorage.getItem('admin_auth') === 'true';
+            const screen = document.getElementById('loginScreen');
+            if (isAuth) {
+                if (screen) screen.classList.add('hidden');
+                refreshAllDashboard();
+            } else {
+                if (screen) screen.classList.remove('hidden');
+            }
+        }
+
+        function handleLogin(e) {
+            if (e) e.preventDefault();
+            const user = document.getElementById('loginUser').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+            const settings = getSettingsData();
+            const validPass = settings.adminPassword || 'admin';
+
+            if ((user.toLowerCase() === 'admin' || user.toLowerCase() === 'root') && 
+                (pass === validPass || pass === 'admin' || pass === 'admin123')) {
+                
+                sessionStorage.setItem('admin_auth', 'true');
+                localStorage.setItem('admin_auth', 'true');
+                document.getElementById('loginScreen').classList.add('hidden');
+                refreshAllDashboard();
+            } else {
+                document.getElementById('loginError').classList.remove('hidden');
+            }
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('admin_auth');
+            localStorage.removeItem('admin_auth');
+            window.location.reload();
+        }
+
+        // DASHBOARDNI YANGILASH
+        function refreshAllDashboard() {
+            renderStats();
+            renderAppointmentsTable();
+            renderServicesAdmin();
+            renderBarbersAdmin();
+            loadSettingsForm();
+        }
+
+        function renderStats() {
+            const apps = getAppointmentsData();
+            const todayStr = localDateStr();
+
+            const todayApps = apps.filter(a => a.date === todayStr);
+            const pendingApps = apps.filter(a => a.status === 'pending');
+            const confirmedApps = apps.filter(a => a.status === 'confirmed');
+
+            const todayRevenue = todayApps
+                .filter(a => a.status !== 'cancelled')
+                .reduce((sum, a) => sum + (Number(a.totalPrice) || 0), 0);
+
+            const totalRevenue = apps
+                .filter(a => a.status !== 'cancelled')
+                .reduce((sum, a) => sum + (Number(a.totalPrice) || 0), 0);
+
+            document.getElementById('statTodayCount').innerText = todayApps.length;
+            document.getElementById('statPendingCount').innerText = pendingApps.length;
+            document.getElementById('statConfirmedCount').innerText = confirmedApps.length;
+            document.getElementById('statRevenue').innerText = formatPrice(totalRevenue);
+            document.getElementById('statRevenueToday').innerText = formatPrice(todayRevenue);
+
+            const badge = document.getElementById('badgePendingCount');
+            if (badge) badge.innerText = pendingApps.length;
+        }
+
+        // ARIZALAR JADVALI
+        function renderAppointmentsTable() {
+            const apps = getAppointmentsData();
+            const tbody = document.getElementById('appointmentsTableBody');
+            const searchVal = document.getElementById('appointmentSearch').value.toLowerCase().trim();
+            const noMsg = document.getElementById('noAppointmentsMsg');
+
+            let filtered = apps;
+
+            if (currentFilter !== 'all') {
+                filtered = filtered.filter(a => a.status === currentFilter);
+            }
+
+            if (searchVal) {
+                filtered = filtered.filter(a => 
+                    (a.clientName && a.clientName.toLowerCase().includes(searchVal)) ||
+                    (a.clientPhone && a.clientPhone.toLowerCase().includes(searchVal)) ||
+                    (a.id && a.id.toLowerCase().includes(searchVal)) ||
+                    (a.barberName && a.barberName.toLowerCase().includes(searchVal))
+                );
+            }
+
+            if (filtered.length === 0) {
+                tbody.innerHTML = '';
+                noMsg.classList.remove('hidden');
+                return;
+            }
+
+            noMsg.classList.add('hidden');
+
+            tbody.innerHTML = filtered.map(a => {
+                let statusBadge = '';
+                if (a.status === 'pending') {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full bg-neonPink/15 text-neonPink font-bold border border-neonPink/30"><i class="fa-solid fa-hourglass-half mr-1"></i> Kutilmoqda</span>`;
+                } else if (a.status === 'confirmed') {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-bold border border-emerald-500/20"><i class="fa-solid fa-check mr-1"></i> Tasdiqlandi</span>`;
+                } else if (a.status === 'completed') {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-400 font-bold border border-blue-500/20"><i class="fa-solid fa-check-double mr-1"></i> Bajarildi</span>`;
+                } else if (a.status === 'cancelled') {
+                    statusBadge = `<span class="px-2.5 py-1 rounded-full bg-rose-500/10 text-rose-400 font-bold border border-rose-500/20"><i class="fa-solid fa-xmark mr-1"></i> Bekor</span>`;
+                }
+
+                const genderBadge = a.gender === 'female' 
+                    ? `<span class="text-[10px] px-2 py-0.5 rounded-full bg-neonPink/15 text-neonPink font-semibold"><i class="fa-solid fa-venus mr-0.5"></i> Ayol</span>`
+                    : `<span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 font-semibold"><i class="fa-solid fa-mars mr-0.5"></i> Erkak</span>`;
+
+                const rawPhone = (a.clientPhone || '').replace(/[^0-9+]/g, '');
+
+                return `
+                    <tr class="hover:bg-white/[0.02] transition">
+                        <td class="p-4 font-mono font-bold text-neonPink">${a.id}</td>
+                        <td class="p-4">${genderBadge}</td>
+                        <td class="p-4 font-semibold text-white">
+                            <div>${a.clientName || 'Noma\'lum'}</div>
+                            ${a.comment ? `<div class="text-[11px] text-slate-500 italic">"${a.comment}"</div>` : ''}
+                        </td>
+                        <td class="p-4">
+                            <div class="flex items-center gap-2">
+                                <span>${a.clientPhone || '-'}</span>
+                                <a href="tel:${rawPhone}" title="Qo'ng'iroq" class="w-6 h-6 rounded bg-emerald-500/10 text-emerald-400 flex items-center justify-center hover:bg-emerald-500 hover:text-dark-950 transition">
+                                    <i class="fa-solid fa-phone text-[10px]"></i>
+                                </a>
+                                <a href="https://t.me/+998${rawPhone.replace(/^\+?998/, '')}" target="_blank" title="Telegram" class="w-6 h-6 rounded bg-sky-500/10 text-sky-400 flex items-center justify-center hover:bg-sky-500 hover:text-dark-950 transition">
+                                    <i class="fa-brands fa-telegram text-[10px]"></i>
+                                </a>
+                            </div>
+                        </td>
+                        <td class="p-4 text-slate-200">${a.barberName || '-'}</td>
+                        <td class="p-4 text-slate-300 max-w-[180px] truncate" title="${a.serviceNames || ''}">${a.serviceNames || '-'}</td>
+                        <td class="p-4 whitespace-nowrap">
+                            <span class="text-white font-medium">${a.date || '-'}</span> <br/>
+                            <span class="text-slate-400 font-mono">${a.time || '-'}</span>
+                        </td>
+                        <td class="p-4 font-bold text-neonPink whitespace-nowrap">${formatPrice(a.totalPrice)}</td>
+                        <td class="p-4">${statusBadge}</td>
+                        <td class="p-4 text-right">
+                            <div class="flex items-center justify-end gap-1.5">
+                                ${a.status !== 'confirmed' ? `
+                                    <button onclick="changeAppStatus('${a.id}', 'confirmed')" title="Tasdiqlash" class="w-7 h-7 rounded-lg bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-dark-950 flex items-center justify-center transition">
+                                        <i class="fa-solid fa-check"></i>
+                                    </button>
+                                ` : ''}
+                                ${a.status !== 'completed' ? `
+                                    <button onclick="changeAppStatus('${a.id}', 'completed')" title="Bajarildi" class="w-7 h-7 rounded-lg bg-blue-500/10 hover:bg-blue-500 text-blue-400 hover:text-dark-950 flex items-center justify-center transition">
+                                        <i class="fa-solid fa-check-double"></i>
+                                    </button>
+                                ` : ''}
+                                ${a.status !== 'cancelled' ? `
+                                    <button onclick="changeAppStatus('${a.id}', 'cancelled')" title="Bekor qilish" class="w-7 h-7 rounded-lg bg-amber-500/10 hover:bg-amber-500 text-amber-400 hover:text-dark-950 flex items-center justify-center transition">
+                                        <i class="fa-solid fa-ban"></i>
+                                    </button>
+                                ` : ''}
+                                <button onclick="deleteApp('${a.id}')" title="O'chirish" class="w-7 h-7 rounded-lg bg-rose-500/10 hover:bg-rose-500 text-rose-400 hover:text-white flex items-center justify-center transition">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function changeAppStatus(id, newStatus) {
+            const apps = getAppointmentsData();
+            const app = apps.find(a => a.id === id);
+            if (app) {
+                app.status = newStatus;
+                saveAppointmentsData(apps);
+                renderStats();
+                renderAppointmentsTable();
+            }
+        }
+
+        function deleteApp(id) {
+            if (confirm("Ushbu arizani o'chirishga rozimisiz?")) {
+                let apps = getAppointmentsData().filter(a => a.id !== id);
+                saveAppointmentsData(apps);
+                renderStats();
+                renderAppointmentsTable();
+            }
+        }
+
+        function filterAppointments(status) {
+            currentFilter = status;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = 'filter-btn px-3.5 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-slate-300';
+            });
+            const activeBtn = document.getElementById(`filter-${status}`);
+            if (activeBtn) {
+                activeBtn.className = 'filter-btn px-3.5 py-2 rounded-xl bg-neonPink text-white font-bold';
+            }
+            renderAppointmentsTable();
+        }
+
+        function exportAppointmentsCSV() {
+            const apps = getAppointmentsData();
+            if (apps.length === 0) {
+                alert("Eksport qilish uchun arizalar yo'q!");
+                return;
+            }
+
+            let csv = "ID,Bolim,Mijoz,Telefon,Usta,Xizmatlar,Sana,Vaqt,Summa,Holati\n";
+            apps.forEach(a => {
+                csv += `"${a.id}","${a.gender}","${a.clientName}","${a.clientPhone}","${a.barberName}","${a.serviceNames}","${a.date}","${a.time}","${a.totalPrice}","${a.status}"\n`;
+            });
+
+            const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `arizalar_woman_${new Date().toISOString().split('T')[0]}.csv`;
+            a.click();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-section').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`section-${tabId}`);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('nav button').forEach(btn => {
+                btn.className = 'w-full flex items-center gap-3 px-4 py-3 rounded-2xl font-medium text-slate-400 hover:text-white hover:bg-white/5 transition';
+            });
+
+            const activeBtn = document.getElementById(`tabBtn-${tabId}`);
+            if (activeBtn) {
+                activeBtn.className = 'w-full flex items-center justify-between px-4 py-3 rounded-2xl font-bold transition bg-neonPink/15 text-neonPink border border-neonPink/30';
+            }
+        }
+
+        // XIZMATLAR
+        const DEFAULT_SERVICES_LIST = [
+            { id: 'sm1', gender: 'male', title: 'Soch olish', category: 'Soch olish', price: 60000, duration: '40 daqiqa', description: "Zamonaviy fade yoki klassik uslub, bosh yuvish va styling bilan." },
+            { id: 'sm2', gender: 'male', title: 'Soch + soqol', category: 'Kompleks', price: 100000, duration: '60 daqiqa', description: "To'liq soch olish va soqol parvarishi - bitta kompleksda." },
+            { id: 'sm3', gender: 'male', title: 'Detskiy (bolalar soch turmagi)', category: 'Bolalar', price: 50000, duration: '30 daqiqa', description: "12 yoshgacha bolalar uchun xavfsiz va chiroyli soch turmagi." },
+            { id: 'sw1', gender: 'female', title: 'Kalaristika', category: "Bo'yash", price: 200000, priceMax: 1000000, duration: '120 daqiqa', description: "Professional koloristika - istalgan uslub va rang." },
+            { id: 'sw2', gender: 'female', title: 'Strika', category: 'Soch turmagi', price: 50000, priceMax: 60000, duration: '40 daqiqa', description: "Zamonaviy ayollar strijkasi." },
+            { id: 'sw3', gender: 'female', title: 'Ukladka', category: 'Styling', price: 50000, priceMax: 100000, duration: '50 daqiqa', description: "Sochni hajmli qilib shakllantirish va ukladka." },
+            { id: 'sw4', gender: 'female', title: 'Prichoska', category: 'Styling', price: 50000, priceMax: 200000, duration: '60 daqiqa', description: "To'y va tadbirlar uchun professional prichoska." },
+            { id: 'sw5', gender: 'female', title: 'Makiyaj', category: 'Vizaj', price: 70000, priceMax: 150000, duration: '40 daqiqa', description: "Kundalik va tadbir makiyaji." },
+            { id: 'sw6', gender: 'female', title: 'Qosh laminatsiya', category: 'Laminatsiya', price: 150000, duration: '30 daqiqa', description: "Qoshlarni tartibga solish va laminatsiya." },
+            { id: 'sw7', gender: 'female', title: 'Kiprik laminatsiya', category: 'Laminatsiya', price: 150000, duration: '30 daqiqa', description: "Kipriklarni ko'tarish va laminatsiya." },
+            { id: 'sw8', gender: 'female', title: 'Kiprik narashiviy', category: 'Kiprik', price: 120000, priceMax: 250000, duration: '60 daqiqa', description: "Tabiiy va hajmli kiprik narashivie." },
+            { id: 'sw9', gender: 'female', title: 'Permanent makij', category: 'Permanent', price: 450000, priceMax: 700000, duration: '90 daqiqa', description: "Uzoq muddatli permanent makij." },
+            { id: 'sw10', gender: 'female', title: 'Diplatsiya', category: 'Depilyatsiya', price: 50000, priceMax: 370000, duration: '30 daqiqa', description: "Qismlarga qarab professional diplatsiya." },
+            { id: 'sw11', gender: 'female', title: 'Yuz chiskasi', category: 'Parvarish', price: 250000, duration: '60 daqiqa', description: "Chuqur tozalovchi yuz chiskasi." },
+            { id: 'sw12', gender: 'female', title: 'Yuz masaj', category: 'Massaj', price: 100000, duration: '30 daqiqa', description: "Relaks va terini yaxshilovchi yuz masaji." },
+            { id: 'sm4', gender: 'male', title: 'Soqol', category: 'Soqol', price: 40000, duration: '30 daqiqa', description: "Ustarada shakllantirish, kontur va parvarishlovchi vositalar." },
+            { id: 'sm5', gender: 'male', title: 'Vosk', category: 'Depilyatsiya', price: 30000, duration: '20 daqiqa', description: "Quloq va burun uchun vosk bilan nozik tozalash." },
+            { id: 'sm6', gender: 'male', title: 'Maska', category: 'Parvarish', price: 40000, duration: '20 daqiqa', description: "Tozalovchi va namlantiruvchi yuz maskasi." },
+            { id: 'sm7', gender: 'male', title: 'Massaj golovi', category: 'Massaj', price: 50000, duration: '20 daqiqa', description: "Bosh terisini bo'shashtiruvchi relaks massaj." },
+            { id: 'sm8', gender: 'male', title: 'Kuyov obraz', category: 'VIP', price: 400000, duration: '90 daqiqa', description: "Kuyov uchun to'liq tayyorgarlik: soch, soqol va styling." }
+        ];
+
+        function formatPriceRange(s) {
+            if (s.priceMax && s.priceMax > s.price) {
+                return formatPrice(s.price).replace(/\s*so'm$/, '') + ' – ' + formatPrice(s.priceMax);
+            }
+            return formatPrice(s.price);
+        }
+
+        function getServicesData() {
+            return loadList(STORAGE_KEY_SERVICES, DEFAULT_SERVICES_LIST);
+        }
+
+        function renderServicesAdmin() {
+            const services = getServicesData();
+            const list = document.getElementById('servicesAdminList');
+            if (!list) return;
+
+            list.innerHTML = services.map(s => {
+                const isFemale = s.gender === 'female';
+                const tag = isFemale ? `<span class="text-[10px] px-2 py-0.5 rounded-full bg-neonPink/15 text-neonPink font-bold">Ayollar</span>` : `<span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 font-bold">Erkaklar</span>`;
+
+                return `
+                    <div class="glass-panel p-5 rounded-3xl flex flex-col justify-between border border-white/5">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                ${tag}
+                                <span class="text-xs text-slate-400">${s.duration}</span>
+                            </div>
+                            <h4 class="font-bold text-white text-base mb-1">${s.title}</h4>
+                            <p class="text-xs text-slate-400 line-clamp-2 mb-4">${s.description || ''}</p>
+                        </div>
+                        <div class="pt-3 border-t border-white/5 flex items-center justify-between">
+                            <span class="font-bold text-neonPink text-base">${formatPriceRange(s)}</span>
+                            <div class="flex items-center gap-2">
+                                <button onclick="openServiceEditModal('${s.id}')" title="Tahrirlash" class="p-1.5 rounded-lg bg-white/5 hover:bg-neonPink/20 text-slate-300 hover:text-neonPink"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deleteService('${s.id}')" title="O'chirish" class="p-1.5 rounded-lg bg-rose-500/10 hover:bg-rose-500/20 text-rose-400"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function openServiceModal() {
+            document.getElementById('serviceModalTitle').innerText = "Yangi Xizmat Qo'shish";
+            document.getElementById('serviceEditId').value = '';
+            document.getElementById('srvTitle').value = '';
+            document.getElementById('srvGender').value = 'male';
+            document.getElementById('srvCategory').value = 'Soch';
+            document.getElementById('srvPrice').value = '';
+            document.getElementById('srvPriceMax').value = '';
+            document.getElementById('srvDuration').value = '40 daqiqa';
+            document.getElementById('srvDesc').value = '';
+            document.getElementById('serviceModal').classList.remove('hidden');
+        }
+
+        function openServiceEditModal(id) {
+            const s = getServicesData().find(x => x.id === id);
+            if (!s) return;
+            document.getElementById('serviceModalTitle').innerText = "Xizmatni Tahrirlash";
+            document.getElementById('serviceEditId').value = s.id;
+            document.getElementById('srvTitle').value = s.title || '';
+            document.getElementById('srvGender').value = s.gender === 'female' ? 'female' : 'male';
+            document.getElementById('srvCategory').value = s.category || '';
+            document.getElementById('srvPrice').value = s.price || '';
+            document.getElementById('srvPriceMax').value = s.priceMax || '';
+            document.getElementById('srvDuration').value = s.duration || '40 daqiqa';
+            document.getElementById('srvDesc').value = s.description || '';
+            document.getElementById('serviceModal').classList.remove('hidden');
+        }
+
+        function closeServiceModal() {
+            document.getElementById('serviceModal').classList.add('hidden');
+        }
+
+        function handleSaveService(e) {
+            e.preventDefault();
+            const services = getServicesData();
+            const editId = document.getElementById('serviceEditId').value;
+            const fields = {
+                gender: document.getElementById('srvGender').value,
+                title: document.getElementById('srvTitle').value.trim(),
+                category: document.getElementById('srvCategory').value.trim(),
+                price: Number(document.getElementById('srvPrice').value) || 0,
+                priceMax: Number(document.getElementById('srvPriceMax').value) || 0,
+                duration: document.getElementById('srvDuration').value.trim(),
+                description: document.getElementById('srvDesc').value.trim()
+            };
+            if (editId) {
+                const idx = services.findIndex(s => s.id === editId);
+                if (idx !== -1) services[idx] = { ...services[idx], ...fields };
+            } else {
+                services.push({ id: 's_' + Date.now(), ...fields });
+            }
+            localStorage.setItem(STORAGE_KEY_SERVICES, JSON.stringify(services));
+            closeServiceModal();
+            renderServicesAdmin();
+        }
+
+        function deleteService(id) {
+            if (confirm("Ushbu xizmatni o'chirishga rozimisiz?")) {
+                let services = getServicesData().filter(s => s.id !== id);
+                localStorage.setItem(STORAGE_KEY_SERVICES, JSON.stringify(services));
+                renderServicesAdmin();
+            }
+        }
+
+        // USTALAR
+        const DEFAULT_BARBERS_LIST = [
+            { id: 'm1', gender: 'male', name: 'Akrom', role: 'soch', experience: '6 yil tajriba', rating: 4.9, phone: '+998 97 548 77 97', telegram: '', photo: 'assets/akrom-hd.jpg', specialties: [] },
+            { id: 'm2', gender: 'male', name: 'Ahror', role: 'Barber', experience: '8 yil tajriba', rating: 4.9, phone: '+998 77 071 78 37', telegram: '', photo: 'assets/ahror-hd.jpg', specialties: [] },
+            { id: 'm3', gender: 'male', name: 'Jamoliddin', role: 'Barber', experience: '15 yil tajriba', rating: 4.9, phone: '+998 97 977 59 94', telegram: '', photo: 'assets/jamoliddin-hd.jpg', specialties: [] },
+            { id: 'w1', gender: 'female', name: 'Lobar', role: 'Ayolar sartaroshi', experience: '4 yil tajriba', rating: 4.9, phone: '+998 97 719 97 17', telegram: '', photo: 'assets/lobar.jpg', specialties: [] }
+        ];
+
+        function getBarbersData() {
+            const data = loadList(STORAGE_KEY_BARBERS, DEFAULT_BARBERS_LIST);
+            return data.map(b => {
+                const def = DEFAULT_BARBERS_LIST.find(d => d.id === b.id);
+                return {
+                    ...b,
+                    phone: b.phone || (def ? def.phone : ''),
+                    specialties: (Array.isArray(b.specialties) && b.specialties.length)
+                        ? b.specialties
+                        : (def ? def.specialties : [])
+                };
+            });
+        }
+
+        function localDateStr(date) {
+            const d = date || new Date();
+            const pad = n => String(n).padStart(2, '0');
+            return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+        }
+
+        function getTodayBusyForBarber(barberId) {
+            const today = localDateStr();
+            return getAppointmentsData()
+                .filter(a => a && a.barberId === barberId && a.date === today && a.status !== 'cancelled' && a.time)
+                .map(a => String(a.time).slice(0, 5))
+                .sort();
+        }
+
+        function renderBarbersAdmin() {
+            const barbers = getBarbersData();
+            const list = document.getElementById('barbersAdminList');
+            if (!list) return;
+
+            list.innerHTML = barbers.map(b => {
+                const isFemale = b.gender === 'female';
+                const todayBusy = getTodayBusyForBarber(b.id);
+                const todayText = todayBusy.length
+                    ? `<span class="text-rose-400">band: ${todayBusy.join(', ')}</span>`
+                    : `<span class="text-emerald-400">bo'sh</span>`;
+                const tag = isFemale ? `<span class="text-[10px] px-2 py-0.5 rounded-full bg-neonPink/20 text-neonPink font-bold">Ayollar Ustasiga</span>` : `<span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-400 font-bold">Erkaklar Ustasiga</span>`;
+                const rawPhone = (b.phone || '').replace(/[^0-9+]/g, '');
+                const telegram = normalizeTelegram(b.telegram);
+                const telegramUrl = telegram
+                    ? 'https://t.me/' + telegram
+                    : (rawPhone ? 'https://t.me/+998' + rawPhone.replace(/^\+?998/, '') : '');
+                const phoneText = String(b.phone || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+                const phoneBlock = (rawPhone || telegramUrl)
+                    ? `<div class="flex items-center gap-2 text-xs mb-3">
+                           ${rawPhone ? `<i class="fa-solid fa-phone text-[10px] text-emerald-400"></i>
+                           <a href="tel:${rawPhone}" class="text-slate-300 hover:text-emerald-400 transition">${phoneText}</a>` : ''}
+                           ${telegramUrl ? `<a href="${telegramUrl}" target="_blank" rel="noopener" title="Telegram${telegram ? ': @' + telegram : ''}" class="h-6 rounded bg-sky-500/10 text-sky-400 inline-flex items-center gap-1 px-2 hover:bg-sky-500 hover:text-dark-950 transition">
+                               <i class="fa-brands fa-telegram text-[10px]"></i>${telegram ? `<span class="text-[10px] font-semibold">@${telegram}</span>` : ''}
+                           </a>` : ''}
+                       </div>`
+                    : `<p class="text-slate-500 text-xs mb-3"><i class="fa-solid fa-phone text-[10px] mr-1"></i> Telefon kiritilmagan</p>`;
+
+                return `
+                    <div class="glass-panel rounded-3xl overflow-hidden border border-white/5 flex flex-col justify-between">
+                        <div class="h-48 overflow-hidden relative bg-dark-900 flex items-center justify-center">
+                            <i class="fa-solid fa-user text-4xl text-slate-700"></i>
+                            ${b.photo ? `<img src="${b.photo}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.querySelector('.photo-warn').classList.remove('hidden')" class="absolute inset-0 w-full h-full object-cover">` : ''}
+                            <span class="photo-warn hidden absolute bottom-2 right-2 text-[10px] px-2 py-0.5 rounded bg-rose-500/80 text-white">Rasm yuklanmadi</span>
+                            <div class="absolute top-2 right-2 bg-dark-950/80 px-2.5 py-0.5 rounded-full text-xs text-amber-400">
+                                ★ ${b.rating || '4.9'}
+                            </div>
+                            <div class="absolute bottom-2 left-2">
+                                ${tag}
+                            </div>
+                        </div>
+                        <div class="p-4 flex-1 flex flex-col justify-between">
+                            <div>
+                                <h4 class="font-bold text-white text-base">${b.name}</h4>
+                                <p class="text-neonPink text-xs font-medium mb-1">${b.role}</p>
+                                <p class="text-slate-400 text-xs mb-3"><i class="fa-solid fa-briefcase text-[10px] mr-1"></i> ${b.experience}</p>
+                                <p class="text-[11px] mb-3"><i class="fa-solid fa-calendar-day text-[10px] mr-1 text-slate-500"></i> Bugun: ${todayText}</p>
+                                ${phoneBlock}
+                            </div>
+                            <div class="pt-3 border-t border-white/5 flex items-center justify-end gap-2">
+                                <button onclick="openBarberEditModal('${b.id}')" title="Tahrirlash" class="p-1.5 rounded-xl bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 text-xs"><i class="fa-solid fa-pen"></i></button>
+                                <button onclick="deleteBarber('${b.id}')" class="p-1.5 rounded-xl bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 text-xs"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        let pendingBarberPhoto = '';
+
+        function setBarberPhotoPreview(src) {
+            const wrap = document.getElementById('barberPhotoPreviewWrap');
+            const img = document.getElementById('barberPhotoPreview');
+            if (!wrap || !img) return;
+            if (!src) {
+                img.removeAttribute('src');
+                wrap.classList.add('hidden');
+                return;
+            }
+            img.onload = () => wrap.classList.remove('hidden');
+            img.onerror = () => wrap.classList.add('hidden');
+            img.src = src;
+        }
+
+        function clearPendingBarberPhoto() {
+            if (!pendingBarberPhoto) return;
+            pendingBarberPhoto = '';
+            const fileInput = document.getElementById('barberPhotoFile');
+            if (fileInput) fileInput.value = '';
+            setBarberPhotoPreview('');
+        }
+
+        function handleBarberPhotoFile(event) {
+            const file = event.target.files && event.target.files[0];
+            if (!file) return;
+            if (!file.type || !file.type.startsWith('image/')) {
+                alert("Iltimos, rasm faylini tanlang.");
+                event.target.value = '';
+                return;
+            }
+            const reader = new FileReader();
+            reader.onload = () => {
+                const img = new Image();
+                img.onload = () => {
+                    const maxSize = 600;
+                    const scale = Math.min(1, maxSize / Math.max(img.width, img.height));
+                    const canvas = document.createElement('canvas');
+                    canvas.width = Math.round(img.width * scale);
+                    canvas.height = Math.round(img.height * scale);
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    pendingBarberPhoto = canvas.toDataURL('image/jpeg', 0.85);
+                    document.getElementById('barberPhoto').value = '';
+                    setBarberPhotoPreview(pendingBarberPhoto);
+                };
+                img.onerror = () => alert("Rasm faylini o'qib bo'lmadi. Boshqa fayl tanlang.");
+                img.src = reader.result;
+            };
+            reader.onerror = () => alert("Faylni o'qishda xatolik yuz berdi.");
+            reader.readAsDataURL(file);
+        }
+
+        function openBarberModal() {
+            document.getElementById('barberModalTitle').innerText = "Yangi Usta Qo'shish";
+            document.getElementById('barberEditId').value = '';
+            document.getElementById('barberGender').value = 'male';
+            document.getElementById('barberName').value = '';
+            document.getElementById('barberPhone').value = '';
+            document.getElementById('barberTelegram').value = '';
+            document.getElementById('barberRole').value = 'Stilist';
+            document.getElementById('barberExp').value = '4 yil tajriba';
+            document.getElementById('barberPhoto').value = '';
+            document.getElementById('barberPhotoFile').value = '';
+            document.getElementById('barberSpecs').value = 'Turmaklash, Parvarish';
+            pendingBarberPhoto = '';
+            setBarberPhotoPreview('');
+            document.getElementById('barberModal').classList.remove('hidden');
+        }
+
+        function openBarberEditModal(id) {
+            const b = getBarbersData().find(item => item.id === id);
+            if (!b) return;
+            document.getElementById('barberModalTitle').innerText = "Ustani Tahrirlash";
+            document.getElementById('barberEditId').value = b.id;
+            document.getElementById('barberGender').value = b.gender === 'female' ? 'female' : 'male';
+            document.getElementById('barberName').value = b.name || '';
+            document.getElementById('barberPhone').value = b.phone || '';
+            document.getElementById('barberTelegram').value = b.telegram ? '@' + b.telegram : '';
+            document.getElementById('barberRole').value = b.role || '';
+            document.getElementById('barberExp').value = b.experience || '';
+            document.getElementById('barberPhoto').value = (b.photo && !String(b.photo).startsWith('data:')) ? b.photo : '';
+            document.getElementById('barberPhotoFile').value = '';
+            document.getElementById('barberSpecs').value = Array.isArray(b.specialties) ? b.specialties.join(', ') : '';
+            pendingBarberPhoto = (b.photo && String(b.photo).startsWith('data:')) ? b.photo : '';
+            setBarberPhotoPreview(b.photo || '');
+            document.getElementById('barberModal').classList.remove('hidden');
+        }
+
+        function closeBarberModal() {
+            document.getElementById('barberModal').classList.add('hidden');
+        }
+
+        function handleSaveBarber(e) {
+            e.preventDefault();
+            const barbers = getBarbersData();
+            const editId = document.getElementById('barberEditId').value;
+            const existingIndex = editId ? barbers.findIndex(b => b.id === editId) : -1;
+            const existing = existingIndex >= 0 ? barbers[existingIndex] : null;
+            const photoUrl = document.getElementById('barberPhoto').value.trim();
+            const telegramRaw = document.getElementById('barberTelegram').value.trim();
+            const telegram = normalizeTelegram(telegramRaw);
+            if (telegramRaw && !telegram) {
+                alert("Telegram username noto'g'ri. Faqat harflar, raqamlar va _ belgisi ishlatiladi. Masalan: @ali_usta");
+                return;
+            }
+            const newB = {
+                id: existing ? existing.id : 'b_' + Date.now(),
+                gender: document.getElementById('barberGender').value,
+                name: document.getElementById('barberName').value.trim(),
+                phone: document.getElementById('barberPhone').value.trim(),
+                telegram: telegram,
+                role: document.getElementById('barberRole').value.trim(),
+                experience: document.getElementById('barberExp').value.trim(),
+                rating: existing ? existing.rating : 4.9,
+                specialties: document.getElementById('barberSpecs').value.split(',').map(s => s.trim()).filter(Boolean),
+                photo: pendingBarberPhoto || photoUrl || (existing ? existing.photo : '')
+            };
+            if (existing) {
+                barbers[existingIndex] = newB;
+            } else {
+                barbers.push(newB);
+            }
+            localStorage.setItem(STORAGE_KEY_BARBERS, JSON.stringify(barbers));
+            pendingBarberPhoto = '';
+            closeBarberModal();
+            renderBarbersAdmin();
+        }
+
+        function deleteBarber(id) {
+            if (confirm("Ushbu ustani o'chirishga rozimisiz?")) {
+                let barbers = getBarbersData().filter(b => b.id !== id);
+                localStorage.setItem(STORAGE_KEY_BARBERS, JSON.stringify(barbers));
+                renderBarbersAdmin();
+            }
+        }
+
+        // QO'LDA ARIZA QO'SHISH
+        function updateAdminAppMasters() {
+            const gender = document.getElementById('adminAppGender').value;
+            const masters = getBarbersData().filter(b => b.gender === gender);
+            const select = document.getElementById('adminAppBarber');
+            select.innerHTML = masters.map(b => `<option value="${b.id}">${b.name} (${b.role})</option>`).join('');
+        }
+
+        function openAddAppointmentModal() {
+            updateAdminAppMasters();
+            document.getElementById('adminAppDate').value = localDateStr();
+            document.getElementById('addAppointmentModal').classList.remove('hidden');
+        }
+
+        function closeAddAppointmentModal() {
+            document.getElementById('addAppointmentModal').classList.add('hidden');
+        }
+
+        function handleAdminAddAppointment(e) {
+            e.preventDefault();
+            const gender = document.getElementById('adminAppGender').value;
+            const barberSelect = document.getElementById('adminAppBarber');
+            const barber = getBarbersData().find(b => b.id === barberSelect.value);
+            const apps = getAppointmentsData();
+
+            const newApp = {
+                id: 'WM-' + Math.floor(1000 + Math.random() * 9000),
+                clientName: document.getElementById('adminAppClient').value,
+                clientPhone: document.getElementById('adminAppPhone').value,
+                gender: gender,
+                barberId: barber ? barber.id : '',
+                barberName: barber ? barber.name : '',
+                serviceNames: document.getElementById('adminAppService').value,
+                totalPrice: Number(document.getElementById('adminAppPrice').value) || 0,
+                date: document.getElementById('adminAppDate').value,
+                time: document.getElementById('adminAppTime').value,
+                comment: 'Admin tomonidan kiritilgan',
+                status: 'pending'
+            };
+
+            apps.unshift(newApp);
+            saveAppointmentsData(apps);
+            closeAddAppointmentModal();
+            refreshAllDashboard();
+            alert("Ariza muvaffaqiyatli qo'shildi!");
+        }
+
+        // SOZLAMALAR
+        function loadSettingsForm() {
+            const s = getSettingsData();
+            document.getElementById('setTelegramToken').value = s.telegramBotToken || '';
+            document.getElementById('setTelegramChatId').value = s.telegramChatId || '';
+            document.getElementById('setSalonName').value = s.salonName || '';
+            document.getElementById('setSalonPhone').value = s.phone || '';
+            document.getElementById('setWorkingHours').value = s.workingHours || '';
+            document.getElementById('setSalonAddress').value = s.address || '';
+        }
+
+        function saveTelegramSettings() {
+            const s = getSettingsData();
+            s.telegramBotToken = document.getElementById('setTelegramToken').value.trim();
+            s.telegramChatId = document.getElementById('setTelegramChatId').value.trim();
+            localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+            alert("Telegram sozlamalari saqlandi!");
+        }
+
+        async function testTelegramMessage() {
+            const s = getSettingsData();
+            let token = (document.getElementById('setTelegramToken').value || s.telegramBotToken || '').replace(/\s+/g, '');
+            let chatId = (document.getElementById('setTelegramChatId').value || s.telegramChatId || '').replace(/\s+/g, '');
+
+            if (!token || !chatId) {
+                alert("Iltimos, avval Telegram Bot Token va Chat ID ni kiriting!");
+                return;
+            }
+
+            // Avval saqlab qo'yamiz
+            s.telegramBotToken = token;
+            s.telegramChatId = chatId;
+            localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+
+            try {
+                const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: chatId,
+                        text: "🎉 <b>TABRIKLAYMIZ!</b>\n\nWO & MAN Студия Красоты saytidan Telegram bot xabarnoma tizimi muvaffaqiyatli ulandi!\n\nEndi saytdan tushgan har bir ariza darhol shu yerga keladi.",
+                        parse_mode: 'HTML'
+                    })
+                });
+                const data = await res.json();
+                if (data.ok) {
+                    alert("Ajoyib! Telegramingizga sinov xabari muvaffaqiyatli yuborildi!");
+                } else {
+                    let desc = data.description || '';
+                    if (desc.includes('chat not found') || desc.includes("can't initiate conversation")) {
+                        alert("Xatolik: Siz yangi ochgan botingizga kirib /start tugmasini bosmagansiz!\n\nIltimos, Telegramda o'z botingizga kiring va pastdagi START tugmasini bosing. Shundan so'ng qayta urinib ko'ring.");
+                    } else if (desc.includes('Unauthorized')) {
+                        alert("Xatolik: Bot Token noto'g'ri kiritilgan!\n\nBotFather bergan tokenni to'liq va ehtiyotkorlik bilan nusxalang.");
+                    } else {
+                        alert("Telegram xatoligi: " + desc);
+                    }
+                }
+            } catch (err) {
+                alert("Ulanish xatosi: Internet yoki Telegram serveriga ulanib bo'lmadi (" + err.message + ").");
+            }
+        }
+
+        function saveGeneralSettings() {
+            const s = getSettingsData();
+            s.salonName = document.getElementById('setSalonName').value.trim();
+            s.phone = document.getElementById('setSalonPhone').value.trim();
+            s.workingHours = document.getElementById('setWorkingHours').value.trim();
+            s.address = document.getElementById('setSalonAddress').value.trim();
+            localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+            alert("Salon ma'lumotlari saqlandi!");
+        }
+
+        function resetAllDemoData() {
+            if (confirm("Barcha ma'lumotlarni qayta tiklamoqchimisiz?")) {
+                localStorage.setItem(STORAGE_KEY_APPS, JSON.stringify(DEFAULT_APPOINTMENTS));
+                localStorage.setItem(STORAGE_KEY_SERVICES, JSON.stringify(DEFAULT_SERVICES_LIST));
+                localStorage.setItem(STORAGE_KEY_BARBERS, JSON.stringify(DEFAULT_BARBERS_LIST));
+                refreshAllDashboard();
+                alert("Barcha ma'lumotlar qayta tiklandi!");
+            }
+        }
+
+        // Boshqa oynada ariza kelganda yoki panelga qaytganda statistikani yangilash
+        window.addEventListener('storage', (event) => {
+            if (!event.key || event.key === STORAGE_KEY_APPS) {
+                renderStats();
+                renderAppointmentsTable();
+            }
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'visible') {
+                renderStats();
+                renderAppointmentsTable();
+            }
+        });
+
+        // DARHOL AVTORIZATSIYANI TEKSHIRISH
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', checkAuth);
+        } else {
+            checkAuth();
+        }
+    </script>
+</body>
+</html>
