@@ -1,4 +1,4 @@
-const CACHE_NAME = 'woman-shell-a83cdaa9';
+const CACHE_NAME = 'woman-shell-v5';
 const PRECACHE = [
     "./",
     "./index.html",
@@ -24,6 +24,7 @@ const PRECACHE = [
     "./assets/qr.png",
     "./assets/shahlo.jpg",
     "./assets/ukladka.jpg",
+    "./assets/umida.jpg",
     "./assets/vendor/fontawesome/css/all.min.css",
     "./assets/vendor/fontawesome/webfonts/fa-brands-400.ttf",
     "./assets/vendor/fontawesome/webfonts/fa-brands-400.woff2",

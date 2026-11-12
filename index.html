@@ -1585,7 +1585,7 @@
                 rating: 4.9,
                 phone: '',
                 telegram: '',
-                photo: 'assets/madina.jpg',
+                photo: 'assets/umida.jpg',
                 specialties: ['Vizajist', 'Parikmaxer']
             }
         ];
@@ -1618,7 +1618,7 @@
             if (/^[a-z][a-z0-9+.-]*:/i.test(url) || url.startsWith('//')) return '';
             const clean = url.replace(/^\.\//, '');
             const mapped = PHOTO_ALIASES[clean] || clean;
-            return /^assets\//.test(mapped) ? mapped + '?v=5' : mapped;
+            return /^assets\//.test(mapped) ? mapped + '?v=7' : mapped;
         }
 
         function localDateStr(date) {
