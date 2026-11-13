@@ -389,8 +389,8 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-300 mb-1">Ish Vaqtlari</label>
-                                <input type="text" id="setWorkingHours" placeholder="Har kuni: 09:00 - 22:00" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
-                                <p class="text-[10px] text-slate-500 mt-1">Format: <span class="text-slate-400">Har kuni: 09:00 - 22:00</span>. Navbat vaqtlari shu oraliqdan olinadi.</p>
+                                <input type="text" id="setWorkingHours" placeholder="Har kuni: 09:00 - 21:00" class="w-full bg-dark-950 border border-white/10 rounded-xl px-4 py-2.5 text-xs text-white focus:border-neonPink focus:outline-none">
+                                <p class="text-[10px] text-slate-500 mt-1">Format: <span class="text-slate-400">Har kuni: 09:00 - 21:00</span>. Navbat vaqtlari shu oraliqdan olinadi.</p>
                             </div>
                         </div>
 
@@ -673,13 +673,17 @@
                     salonName: 'WO & MAN Студия Красоты',
                     phone: '+998 97 977 5994',
                     address: 'Yangiyo\'l sh., Toshkent viloyati',
-                    workingHours: 'Har kuni: 09:00 - 22:00',
+                    workingHours: 'Har kuni: 09:00 - 21:00',
                     adminPassword: 'admin',
                     telegramBotToken: '',
                     telegramChatId: ''
                 };
                 if (!s.phone || String(s.phone).replace(/\D/g, '') === '998712007080') {
                     s.phone = '+998 97 977 5994';
+                    localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
+                }
+                if (stored && String(s.workingHours || '').trim() === 'Har kuni: 09:00 - 22:00') {
+                    s.workingHours = 'Har kuni: 09:00 - 21:00';
                     localStorage.setItem(STORAGE_KEY_SETTINGS, JSON.stringify(s));
                 }
                 return s;

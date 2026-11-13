@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WO &amp; MAN Woman Barbershop Yangiyo'l | Sartaroshxona va Go'zallik Saloni</title>
-    <meta name="description" content="Woman sartaroshxona va barbershop — Yangiyo'l, Toshkent viloyati. Soch olish, soqol, bo'yash, manikyur va vizaj. Har kuni 09:00–22:00. Onlayn navbat oling: +998 97 977 59 94.">
+    <meta name="description" content="Woman sartaroshxona va barbershop — Yangiyo'l, Toshkent viloyati. Soch olish, soqol, bo'yash, manikyur va vizaj. Har kuni 09:00–21:00. Onlayn navbat oling: +998 97 977 59 94.">
     <meta name="keywords" content="woman, wo man, wo&men, barbershop, sartaroshxona, Yangiyo'l, Toshkent, go'zallik saloni, soch olish, soqol, bo'yash, manikyur, vizaj">
     <meta name="google-site-verification" content="rW6qIBq2xREofbFhOskfFXsiwY6eex1e0FSkOFqMuvE" />
     <link rel="canonical" href="https://alimovibroxim785-svg.github.io/gw/">
@@ -143,7 +143,7 @@
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             "opens": "09:00",
-            "closes": "22:00"
+            "closes": "21:00"
         },
         "sameAs": ["https://www.instagram.com/wo_man_yangiyol"]
     }
@@ -167,7 +167,7 @@
         <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
             <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
                 <span><i class="fa-solid fa-location-dot text-neonPink mr-1.5"></i> <span id="siteTopAddressText" data-i18n="top.address">Yangiyo'l sh., Toshkent viloyati</span></span>
-                <span><i class="fa-solid fa-clock text-neonPink mr-1.5"></i> <span id="siteTopHoursText" data-i18n="top.hours">Har kuni: 09:00 - 22:00 (Dam olishsiz)</span></span>
+                <span><i class="fa-solid fa-clock text-neonPink mr-1.5"></i> <span id="siteTopHoursText" data-i18n="top.hours">Har kuni: 09:00 - 21:00 (Dam olishsiz)</span></span>
             </div>
             <div class="flex items-center space-x-3 sm:space-x-4">
                 <div id="langSwitch" class="flex items-center gap-1" role="group" aria-label="Language">
@@ -934,7 +934,7 @@
             uz: {
                 'meta.title': "WO & MAN Woman Barbershop | Yangiyo'l sartaroshxonasi",
                 'top.address': "Yangiyo'l sh., Toshkent viloyati",
-                'top.hours': "Har kuni: 09:00 - 22:00 (Dam olishsiz)",
+                'top.hours': "Har kuni: 09:00 - 21:00 (Dam olishsiz)",
                 'promo.text': "Dushanba–seshanba barcha xizmatlarga 10% chegirma",
                 'nav.home': "Bosh sahifa",
                 'nav.services': "Xizmatlar & Narxlar",
@@ -1080,7 +1080,7 @@
             ru: {
                 'meta.title': "WO & MAN Woman Barbershop | Сартарошхона, Янгиюль",
                 'top.address': "г. Янгиюль, Ташкентская область",
-                'top.hours': "Ежедневно: 09:00 - 22:00 (без выходных)",
+                'top.hours': "Ежедневно: 09:00 - 21:00 (без выходных)",
                 'promo.text': "Понедельник–вторник скидка 10% на все услуги",
                 'nav.home': "Главная",
                 'nav.services': "Услуги и цены",
@@ -1246,7 +1246,7 @@
             en: {
                 'meta.title': "WO & MAN Woman Barbershop | Yangiyul, Tashkent",
                 'top.address': "Yangiyul, Tashkent Region",
-                'top.hours': "Daily: 09:00 - 22:00 (open every day)",
+                'top.hours': "Daily: 09:00 - 21:00 (open every day)",
                 'promo.text': "Monday–Tuesday: 10% off all services",
                 'nav.home': "Home",
                 'nav.services': "Services & Pricing",
@@ -1770,7 +1770,7 @@
             const start = toHour(times[0]);
             const close = toHour(times[1]);
             if (start == null || close == null || close <= start || start < 0 || close > 24) {
-                return { startHour: 9, endHour: 21 };
+                return { startHour: 9, endHour: 20 };
             }
             return { startHour: start, endHour: close - 1 };
         }
@@ -2246,6 +2246,18 @@
             });
         }
 
+        function migrateLegacyWorkingHours() {
+            try {
+                const raw = localStorage.getItem('woman_settings_v3');
+                if (!raw) return;
+                const settings = JSON.parse(raw);
+                if (settings && String(settings.workingHours || '').trim() === 'Har kuni: 09:00 - 22:00') {
+                    settings.workingHours = 'Har kuni: 09:00 - 21:00';
+                    localStorage.setItem('woman_settings_v3', JSON.stringify(settings));
+                }
+            } catch (e) {}
+        }
+
         function applySiteSettings() {
             let settings = {};
             try {
@@ -2310,6 +2322,7 @@
         }
 
         function initApp() {
+            migrateLegacyWorkingHours();
             applyStaticLanguage();
             applySiteSettings();
             renderServicesGrid();
