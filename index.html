@@ -1756,6 +1756,25 @@
             return !!getBusyTimes(masterId, date)[String(time).slice(0, 2)];
         }
 
+        function getWorkingHourRange() {
+            let settings = {};
+            try {
+                settings = JSON.parse(localStorage.getItem('woman_settings_v3')) || {};
+            } catch (e) {}
+            const times = String(settings.workingHours || '').match(/\d{1,2}[:.]\d{2}/g) || [];
+            const toHour = value => {
+                const m = String(value || '').match(/\d{1,2}/);
+                const h = m ? parseInt(m[0], 10) : NaN;
+                return Number.isFinite(h) ? h : null;
+            };
+            const start = toHour(times[0]);
+            const close = toHour(times[1]);
+            if (start == null || close == null || close <= start || start < 0 || close > 24) {
+                return { startHour: 9, endHour: 21 };
+            }
+            return { startHour: start, endHour: close - 1 };
+        }
+
         function renderTimeSlots() {
             const timeSelect = document.getElementById('bookingTime');
             const dateInput = document.getElementById('bookingDate');
@@ -1773,8 +1792,7 @@
 
             const date = dateInput ? dateInput.value : '';
             const busy = getBusyTimes(master.id, date);
-            const startHour = 9;
-            const endHour = 21;
+            const { startHour, endHour } = getWorkingHourRange();
             const previous = timeSelect.value;
             const now = new Date();
             const isToday = date === localDateStr(now);
@@ -2749,6 +2767,7 @@
             }
             if (!event.key || event.key === 'woman_settings_v3') {
                 applySiteSettings();
+                renderTimeSlots();
             }
         });
     </script>
