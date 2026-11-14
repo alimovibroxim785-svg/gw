@@ -1606,7 +1606,7 @@
                 gender: 'female',
                 role: 'Ayolar sartaroshi',
                 badge: 'Bosh stilist',
-                experience: '4 yil tajriba',
+                experience: '8 yil tajriba',
                 rating: 4.7,
                 phone: '+998 97 719 97 17',
                 telegram: '',
@@ -1619,7 +1619,7 @@
                 gender: 'female',
                 role: 'Kolarist',
                 badge: 'Bosh kolarist',
-                experience: '5 yil tajriba',
+                experience: '10 yil tajriba',
                 rating: 4.9,
                 phone: '',
                 telegram: '',
@@ -2247,15 +2247,35 @@
             });
         }
 
-        function migrateLegacyWorkingHours() {
+        function migrateLegacyData() {
             try {
                 const raw = localStorage.getItem('woman_settings_v3');
-                if (!raw) return;
-                const settings = JSON.parse(raw);
-                if (settings && String(settings.workingHours || '').trim() === 'Har kuni: 09:00 - 22:00') {
-                    settings.workingHours = 'Har kuni: 09:00 - 21:00';
-                    localStorage.setItem('woman_settings_v3', JSON.stringify(settings));
+                if (raw) {
+                    const settings = JSON.parse(raw);
+                    if (settings && String(settings.workingHours || '').trim() === 'Har kuni: 09:00 - 22:00') {
+                        settings.workingHours = 'Har kuni: 09:00 - 21:00';
+                        localStorage.setItem('woman_settings_v3', JSON.stringify(settings));
+                    }
                 }
+            } catch (e) {}
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_MASTERS);
+                if (!raw) return;
+                const masters = JSON.parse(raw);
+                if (!Array.isArray(masters)) return;
+                let changed = false;
+                masters.forEach(m => {
+                    if (!m) return;
+                    if (m.id === 'w1' && String(m.experience || '').trim() === '4 yil tajriba') {
+                        m.experience = '8 yil tajriba';
+                        changed = true;
+                    }
+                    if (m.id === 'w2' && String(m.experience || '').trim() === '5 yil tajriba') {
+                        m.experience = '10 yil tajriba';
+                        changed = true;
+                    }
+                });
+                if (changed) localStorage.setItem(STORAGE_KEY_MASTERS, JSON.stringify(masters));
             } catch (e) {}
         }
 
@@ -2323,7 +2343,7 @@
         }
 
         function initApp() {
-            migrateLegacyWorkingHours();
+            migrateLegacyData();
             applyStaticLanguage();
             applySiteSettings();
             renderServicesGrid();
