@@ -386,24 +386,6 @@
                 <!-- Xizmat kartalari renderServicesGrid() orqali to'ldiriladi -->
             </div>
 
-            <!-- AYOLLAR NARX JADVALI -->
-            <div id="womenPriceList" class="hidden">
-                    <div class="glass-card rounded-3xl p-6 sm:p-10 border border-neonPink/20 shadow-2xl relative overflow-hidden">
-                        <div class="absolute -top-24 -right-24 w-64 h-64 rounded-full bg-neonPink/10 blur-3xl pointer-events-none"></div>
-                        <div class="text-center mb-8 relative">
-                            <span class="inline-flex items-center gap-2 text-neonPink text-xs font-bold uppercase tracking-widest mb-2">
-                                <i class="fa-solid fa-venus"></i> <span data-i18n="gender.female">Ayollar</span>
-                            </span>
-                            <h3 class="brand-font text-2xl sm:text-3xl font-black text-white">AYOLLAR XIZMATLARI VA NARXLAR</h3>
-                            <div class="w-16 h-1 bg-gradient-to-r from-neonPink to-white mx-auto mt-3"></div>
-                        </div>
-                        <div id="womenPriceRows" class="grid md:grid-cols-2 gap-x-12 gap-y-0 max-w-4xl mx-auto relative">
-                            <!-- Narx qatorlari renderWomenPriceList() orqali to'ldiriladi -->
-                        </div>
-                        <p class="text-center text-slate-500 text-xs mt-8 relative">* Narx soch uzunligi va ishning qiyinligiga qarab belgilanadi. Aniq narx uchun ustaga yozing.</p>
-                    </div>
-            </div>
-
         </div>
     </section>
 
@@ -2167,16 +2149,17 @@
             SITE_SERVICES = getSiteServices();
             const grid = document.getElementById('servicesGrid');
             if (!grid) return;
-            const males = SITE_SERVICES.filter(s => s.gender === 'male');
-            grid.innerHTML = males.map(s => `
-                <div data-gender="male" class="service-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between hover:border-neonPink/50 transition group shadow-xl">
+            grid.innerHTML = SITE_SERVICES.map(s => {
+                const isFemale = s.gender === 'female';
+                return `
+                <div data-gender="${isFemale ? 'female' : 'male'}" class="service-card glass-card rounded-3xl overflow-hidden flex flex-col justify-between hover:border-neonPink/50 transition group shadow-xl">
                     <div class="service-media relative h-48 overflow-hidden bg-gradient-to-br from-dark-800 to-dark-950">
                         ${s.image
                             ? `<img src="${escapeHtml(s.image)}" alt="${escapeHtml(serviceTitle(s))}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" onerror="this.remove()">`
-                            : `<div class="absolute inset-0 flex items-center justify-center"><i class="fa-solid fa-scissors text-5xl text-slate-700"></i></div>`}
+                            : `<div class="absolute inset-0 flex items-center justify-center"><i class="fa-solid ${isFemale ? 'fa-venus' : 'fa-scissors'} text-5xl text-slate-700"></i></div>`}
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-transparent to-transparent pointer-events-none"></div>
-                        <span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-600/90 text-white font-bold backdrop-blur-md pointer-events-none">
-                            <i class="fa-solid fa-mars mr-1"></i> ${escapeHtml(t('gender.male'))}
+                        <span class="absolute top-3 left-3 text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-full ${isFemale ? 'bg-neonPink/90' : 'bg-blue-600/90'} text-white font-bold backdrop-blur-md pointer-events-none">
+                            <i class="fa-solid ${isFemale ? 'fa-venus' : 'fa-mars'} mr-1"></i> ${escapeHtml(t(isFemale ? 'gender.female' : 'gender.male'))}
                         </span>
                         <span class="absolute top-3 right-3 text-xs text-white/90 bg-dark-950/80 backdrop-blur-md px-2.5 py-1 rounded-full font-semibold pointer-events-none">
                             <i class="fa-solid fa-clock text-neonPink mr-1"></i> ${escapeHtml(fmtDuration(parseInt(s.duration, 10) || 0))}
@@ -2192,27 +2175,14 @@
                                 <span class="text-[10px] text-slate-500 block">${escapeHtml(t('common.price'))}</span>
                                 <span class="brand-font text-lg font-extrabold text-neonPink">${servicePriceRange(s)}</span>
                             </div>
-                            <button data-service-id="${escapeHtml(s.id)}" onclick="selectServiceAndBook(this.dataset.serviceId, 'male')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-neonPink hover:text-white text-slate-200 text-xs font-bold border border-white/10 transition flex items-center gap-1">
+                            <button data-service-id="${escapeHtml(s.id)}" onclick="selectServiceAndBook(this.dataset.serviceId, '${isFemale ? 'female' : 'male'}')" class="px-3.5 py-2 rounded-xl bg-white/5 hover:bg-neonPink hover:text-white text-slate-200 text-xs font-bold border border-white/10 transition flex items-center gap-1">
                                 ${escapeHtml(t('common.select'))} <i class="fa-solid fa-arrow-right text-[10px]"></i>
                             </button>
                         </div>
                     </div>
                 </div>
-            `).join('');
-            renderWomenPriceList();
-        }
-
-        function renderWomenPriceList() {
-            const rows = document.getElementById('womenPriceRows');
-            if (!rows) return;
-            const females = SITE_SERVICES.filter(s => s.gender === 'female');
-            rows.innerHTML = females.map(s => `
-                <div class="flex items-baseline gap-3 py-3.5 border-b border-white/5 group">
-                    <span class="text-white font-semibold text-sm group-hover:text-neonPink transition">${escapeHtml(serviceTitle(s))}</span>
-                    <span class="flex-1 -translate-y-1 border-b border-dotted border-white/20"></span>
-                    <span class="text-neonPink font-bold text-sm whitespace-nowrap">${servicePriceRange(s)}</span>
-                </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
         let currentBookingGender = 'male';
@@ -2376,15 +2346,6 @@
             }
 
             const cards = document.querySelectorAll('.service-card');
-            const grid = document.getElementById('servicesGrid');
-            const womenList = document.getElementById('womenPriceList');
-            if (gender === 'female') {
-                if (grid) grid.classList.add('hidden');
-                if (womenList) womenList.classList.remove('hidden');
-                return;
-            }
-            if (grid) grid.classList.remove('hidden');
-            if (womenList) womenList.classList.add('hidden');
             cards.forEach(card => {
                 if (gender === 'all' || card.getAttribute('data-gender') === gender) {
                     card.style.display = 'flex';
