@@ -1,4 +1,4 @@
-const CACHE_NAME = 'woman-shell-v6';
+const CACHE_NAME = 'woman-shell-v7';
 const PRECACHE = [
     "./",
     "./index.html",
@@ -58,7 +58,15 @@ const PRECACHE = [
     "./assets/web/photo-1560066984-138dadb4c035-1920.jpg",
     "./assets/web/photo-1599351431202-1e0f0137899a-800.jpg",
     "./assets/web/photo-1622286342621-4bd786c2447c-600.jpg",
-    "./assets/web/photo-1622286342621-4bd786c2447c-800.jpg"
+    "./assets/web/photo-1622286342621-4bd786c2447c-800.jpg",
+    "./assets/women/makiyaj.jpg",
+    "./assets/women/qosh-laminatsiya.jpg",
+    "./assets/women/kiprik-laminatsiya.jpg",
+    "./assets/women/kiprik-narashiviy.jpg",
+    "./assets/women/permanent-makij.jpg",
+    "./assets/women/diplatsiya.jpg",
+    "./assets/women/yuz-chiskasi.jpg",
+    "./assets/women/yuz-masaj.jpg"
 ];
 
 self.addEventListener('install', (event) => {

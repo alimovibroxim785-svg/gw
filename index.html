@@ -1977,7 +1977,7 @@
                 priceMax: 150000,
                 duration: '40 daqiqa',
                 description: "Kundalik va tadbir makiyaji.",
-                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+                image: "assets/women/makiyaj.jpg"
             },
             {
                 id: 'sw6',
@@ -1987,7 +1987,7 @@
                 price: 150000,
                 duration: '30 daqiqa',
                 description: "Qoshlarni tartibga solish va laminatsiya.",
-                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+                image: "assets/women/qosh-laminatsiya.jpg"
             },
             {
                 id: 'sw7',
@@ -1997,7 +1997,7 @@
                 price: 150000,
                 duration: '30 daqiqa',
                 description: "Kipriklarni ko'tarish va laminatsiya.",
-                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+                image: "assets/women/kiprik-laminatsiya.jpg"
             },
             {
                 id: 'sw8',
@@ -2008,7 +2008,7 @@
                 priceMax: 250000,
                 duration: '60 daqiqa',
                 description: "Tabiiy va hajmli kiprik narashivie.",
-                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+                image: "assets/women/kiprik-narashiviy.jpg"
             },
             {
                 id: 'sw9',
@@ -2019,7 +2019,7 @@
                 priceMax: 700000,
                 duration: '90 daqiqa',
                 description: "Uzoq muddatli permanent makij.",
-                image: "assets/web/photo-1487412720507-e7ab37603c6f-800.jpg"
+                image: "assets/women/permanent-makij.jpg"
             },
             {
                 id: 'sw10',
@@ -2030,7 +2030,7 @@
                 priceMax: 370000,
                 duration: '30 daqiqa',
                 description: "Qismlarga qarab professional diplatsiya.",
-                image: "assets/vosk.jpg"
+                image: "assets/women/diplatsiya.jpg"
             },
             {
                 id: 'sw11',
@@ -2040,7 +2040,7 @@
                 price: 250000,
                 duration: '60 daqiqa',
                 description: "Chuqur tozalovchi yuz chiskasi.",
-                image: "assets/maska.jpg"
+                image: "assets/women/yuz-chiskasi.jpg"
             },
             {
                 id: 'sw12',
@@ -2050,7 +2050,7 @@
                 price: 100000,
                 duration: '30 daqiqa',
                 description: "Relaks va terini yaxshilovchi yuz masaji.",
-                image: "assets/massaj.jpg"
+                image: "assets/women/yuz-masaj.jpg"
             },
             {
                 id: 'sm4',
@@ -2225,6 +2225,31 @@
                     if (settings && String(settings.workingHours || '').trim() === 'Har kuni: 09:00 - 22:00') {
                         settings.workingHours = 'Har kuni: 09:00 - 21:00';
                         localStorage.setItem('woman_settings_v3', JSON.stringify(settings));
+                    }
+                }
+            } catch (e) {}
+            try {
+                const raw = localStorage.getItem(STORAGE_KEY_SERVICES);
+                if (raw) {
+                    const services = JSON.parse(raw);
+                    if (Array.isArray(services)) {
+                        const legacyImages = [
+                            'assets/web/photo-1487412720507-e7ab37603c6f-800.jpg',
+                            'assets/vosk.jpg',
+                            'assets/maska.jpg',
+                            'assets/massaj.jpg'
+                        ];
+                        let changed = false;
+                        services.forEach(s => {
+                            if (!s || s.gender !== 'female') return;
+                            const def = APP_SERVICES.find(d => d.id === s.id);
+                            if (!def || !def.image) return;
+                            if (legacyImages.includes(String(s.image || '').trim())) {
+                                s.image = def.image;
+                                changed = true;
+                            }
+                        });
+                        if (changed) localStorage.setItem(STORAGE_KEY_SERVICES, JSON.stringify(services));
                     }
                 }
             } catch (e) {}
