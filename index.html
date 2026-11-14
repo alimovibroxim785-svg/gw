@@ -2134,7 +2134,7 @@
             if (Array.isArray(stored) && stored.length > 0) {
                 return stored.map((s, index) => {
                     const def = APP_SERVICES.find(d => d.id === s.id);
-                    return normalizeService(def ? { ...def, ...s } : s, index);
+                    return normalizeService(def ? { ...def, ...s, image: def.image } : s, index);
                 });
             }
             return APP_SERVICES.map(normalizeService);
