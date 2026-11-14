@@ -1717,6 +1717,7 @@
                             ...master,
                             phone: master.phone || def.phone,
                             badge: master.badge || def.badge,
+                            rating: def.rating,
                             specialties: (Array.isArray(master.specialties) && master.specialties.length)
                                 ? master.specialties
                                 : def.specialties
