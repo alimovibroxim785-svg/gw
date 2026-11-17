@@ -1,0 +1,1876 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>bozor market — onlayn bozor</title>
+<meta name="description" content="bozor market — qulay onlayn bozor. Gadjetlar, audio, uy buyumlari, go'zallik va sport mahsulotlari. Bepul yetkazish, muddatli to'lov.">
+<meta name="theme-color" content="#7000FF">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%237000FF'/%3E%3Cpath d='M18 24h28l-2 24H20Z' fill='none' stroke='white' stroke-width='4' stroke-linejoin='round'/%3E%3Cpath d='M25 24v-4a7 7 0 0 1 14 0v4' fill='none' stroke='white' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --purple:#7000FF;
+    --purple-dark:#5A00CC;
+    --purple-soft:#F3EDFF;
+    --purple-soft-2:#E9DEFF;
+    --ink:#1F1F24;
+    --ink-2:#3D3D46;
+    --muted:#8A8A95;
+    --line:#ECECF2;
+    --bg:#F7F7FA;
+    --card:#FFFFFF;
+    --pink:#FF3B6B;
+    --green:#00A046;
+    --green-soft:#E8F8EE;
+    --yellow:#FFB800;
+    --radius:12px;
+    --shadow:0 10px 30px rgba(20,10,60,.10);
+    --font:"Segoe UI",Roboto,"Helvetica Neue",Arial,system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  [hidden]{display:none!important}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font);
+    color:var(--ink);
+    background:#fff;
+    line-height:1.45;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  body.locked{overflow:hidden}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+  a{color:inherit;text-decoration:none}
+  input,select,textarea{font-family:inherit;font-size:14px;color:var(--ink)}
+  .wrap{width:min(1240px,calc(100% - 40px));margin:0 auto}
+  .ic{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+  .ic svg{width:22px;height:22px}
+  :focus-visible{outline:2px solid var(--purple);outline-offset:2px;border-radius:6px}
+  ::selection{background:var(--purple-soft-2)}
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    height:44px;padding:0 20px;border-radius:10px;
+    background:var(--purple);color:#fff;font-size:14px;font-weight:600;
+    transition:background .18s,transform .18s;
+  }
+  .btn:hover{background:var(--purple-dark)}
+  .btn:active{transform:scale(.98)}
+  .btn .ic svg{width:18px;height:18px}
+  .btn.ghost{background:var(--purple-soft);color:var(--purple)}
+  .btn.ghost:hover{background:var(--purple-soft-2)}
+  .btn.line{background:#fff;color:var(--ink);border:1px solid var(--line)}
+  .btn.line:hover{border-color:#D6D6E0;background:#FAFAFC}
+
+  /* ---------- promo strip ---------- */
+  .promo-strip{
+    background:linear-gradient(90deg,#5A00CC,#8A2BFF 55%,#B475FF);
+    color:#fff;font-size:12px;letter-spacing:.2px;
+  }
+  .promo-strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;height:34px}
+  .promo-strip .ps-left{display:flex;align-items:center;gap:8px;font-weight:500}
+  .promo-strip .ic svg{width:15px;height:15px}
+  .promo-strip b{font-weight:700}
+  .promo-strip .ps-right{opacity:.85;font-size:11.5px}
+
+  /* ---------- header ---------- */
+  .site-head{
+    position:sticky;top:0;z-index:70;background:#fff;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .head-top{display:flex;align-items:center;gap:18px;padding:12px 0}
+  .brand{display:flex;align-items:center;gap:10px;flex-shrink:0}
+  .brand-mark{
+    width:38px;height:38px;border-radius:11px;
+    background:linear-gradient(145deg,#7B18FF,#5A00CC);
+    color:#fff;display:grid;place-items:center;
+    box-shadow:0 6px 14px rgba(112,0,255,.28);
+  }
+  .brand-mark .ic svg{width:21px;height:21px}
+  .brand-word{font-size:21px;font-weight:800;letter-spacing:-.6px;color:var(--purple)}
+  .brand-word em{font-style:normal;font-weight:600;color:#6F6F7B;letter-spacing:-.3px}
+  .loc{
+    display:inline-flex;align-items:center;gap:5px;
+    font-size:12.5px;color:var(--ink-2);padding:6px 8px;border-radius:8px;
+    flex-shrink:0;
+  }
+  .loc:hover{background:var(--bg)}
+  .loc .ic svg{width:16px;height:16px;color:var(--purple)}
+  .loc .chev svg{width:14px;height:14px;color:var(--muted)}
+  .search{
+    flex:1;display:flex;align-items:center;gap:8px;
+    height:44px;padding:0 3px 0 13px;border-radius:10px;
+    background:#F4F4F8;border:1px solid transparent;
+    transition:border-color .18s,background .18s;
+    min-width:0;
+  }
+  .search:focus-within{border-color:var(--purple);background:#fff}
+  .search .ic svg{width:19px;height:19px;color:var(--muted)}
+  .search input{
+    flex:1;min-width:0;border:0;background:transparent;outline:0;
+    font-size:13.5px;color:var(--ink);
+  }
+  .search input::placeholder{color:#9A9AA5}
+  .search-btn{
+    width:38px;height:38px;border-radius:8px;background:var(--purple);color:#fff;
+    display:grid;place-items:center;flex-shrink:0;transition:background .18s;
+  }
+  .search-btn:hover{background:var(--purple-dark)}
+  .search-btn .ic svg{width:18px;height:18px}
+  .head-acts{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .h-act{
+    position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:6px 10px;border-radius:10px;font-size:10.5px;color:#4A4A55;
+    min-width:54px;transition:background .18s,color .18s;
+  }
+  .h-act:hover{background:var(--bg);color:var(--purple)}
+  .h-act .ic svg{width:21px;height:21px}
+  .h-act.cart-act{color:var(--purple)}
+  .dot{
+    position:absolute;top:2px;right:8px;
+    min-width:17px;height:17px;padding:0 4px;border-radius:9px;
+    background:var(--pink);color:#fff;font-size:10px;font-weight:700;font-style:normal;
+    display:grid;place-items:center;border:2px solid #fff;
+  }
+  .dot[hidden]{display:none}
+  .head-cats{border-top:1px solid var(--line)}
+  .head-cats-in{display:flex;align-items:center;gap:18px;height:48px}
+  .catalog-btn{
+    display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 16px;
+    border-radius:9px;background:var(--purple);color:#fff;font-size:13px;font-weight:600;
+    flex-shrink:0;
+  }
+  .catalog-btn:hover{background:var(--purple-dark)}
+  .catalog-btn .ic svg{width:16px;height:16px}
+  .cat-links{display:flex;align-items:center;gap:22px;font-size:13px;color:#44444F;overflow:hidden;flex:1}
+  .cat-links a{white-space:nowrap;padding:4px 0;transition:color .15s}
+  .cat-links a:hover{color:var(--purple)}
+  .head-promo{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);white-space:nowrap}
+  .head-promo .ic svg{width:16px;height:16px;color:var(--green)}
+
+  /* ---------- hero ---------- */
+  .hero{display:grid;grid-template-columns:minmax(0,1fr) 286px;gap:12px;margin-top:20px}
+  .carousel{
+    position:relative;height:312px;border-radius:16px;overflow:hidden;
+    background:var(--purple);
+  }
+  .slide{
+    position:absolute;inset:0;opacity:0;visibility:hidden;
+    transition:opacity .5s ease;
+    display:flex;align-items:center;
+    padding:34px 44px;color:#fff;
+  }
+  .slide.on{opacity:1;visibility:visible;z-index:1}
+  .slide-a{background:linear-gradient(115deg,#5C00D6 0%,#8B2CFF 60%,#B26CFF 100%)}
+  .slide-b{background:linear-gradient(115deg,#E8165E 0%,#FF5F8F 58%,#FF9B7A 100%)}
+  .slide-c{background:linear-gradient(115deg,#1D1B33 0%,#3B2A78 55%,#7047D9 100%)}
+  .slide-copy{max-width:56%;position:relative;z-index:2}
+  .slide-tag{
+    display:inline-flex;align-items:center;gap:6px;
+    height:26px;padding:0 10px;border-radius:99px;
+    background:rgba(255,255,255,.17);border:1px solid rgba(255,255,255,.28);
+    font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;
+    backdrop-filter:blur(4px);
+  }
+  .slide h1{font-size:32px;line-height:1.08;letter-spacing:-.8px;margin:14px 0 10px;font-weight:800}
+  .slide p{font-size:13px;opacity:.88;max-width:330px;margin-bottom:18px}
+  .slide-cta{
+    display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 18px;
+    border-radius:9px;background:#fff;color:var(--purple);
+    font-size:13px;font-weight:700;
+  }
+  .slide-cta:hover{background:#F5EEFF}
+  .slide-cta .ic svg{width:15px;height:15px}
+  .slide-media{
+    position:absolute;right:34px;top:50%;transform:translateY(-50%) rotate(-4deg);
+    width:230px;height:230px;padding:10px;border-radius:20px;
+    background:#fff;box-shadow:0 24px 44px rgba(10,0,40,.30);
+    z-index:1;
+  }
+  .slide-media img{width:100%;height:100%;object-fit:cover;border-radius:14px}
+  .c-arrow{
+    position:absolute;top:50%;transform:translateY(-50%);z-index:3;
+    width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.9);
+    color:var(--ink);display:grid;place-items:center;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);opacity:.9;
+  }
+  .c-arrow:hover{background:#fff}
+  .c-arrow .ic svg{width:17px;height:17px}
+  .c-arrow.prev{left:12px}
+  .c-arrow.next{right:12px}
+  .dots{position:absolute;left:46px;bottom:18px;z-index:3;display:flex;gap:6px}
+  .dots button{width:6px;height:6px;border-radius:99px;background:rgba(255,255,255,.45);transition:width .25s,background .25s}
+  .dots button.on{width:20px;background:#fff}
+  .hero-side{display:grid;grid-template-rows:1fr 1fr;gap:12px}
+  .side-card{
+    border-radius:14px;padding:16px 18px;display:flex;flex-direction:column;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .side-card .ic{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;margin-bottom:8px}
+  .side-card .ic svg{width:18px;height:18px}
+  .side-card b{font-size:12px;font-weight:600;opacity:.8}
+  .side-card strong{font-size:19px;letter-spacing:-.3px;font-weight:800;line-height:1.15;margin:2px 0}
+  .side-card span{font-size:11.5px;opacity:.72}
+  .side-purple{background:linear-gradient(150deg,#F0E6FF,#E0CCFF);color:#3C0D80}
+  .side-purple .ic{background:#fff;color:var(--purple)}
+  .side-green{background:linear-gradient(150deg,#E9F9EF,#D5F3E1);color:#0B5B31}
+  .side-green .ic{background:#fff;color:var(--green)}
+
+  /* ---------- category circles ---------- */
+  .cat-circles{display:flex;gap:8px;justify-content:space-between;margin:26px auto 8px;overflow-x:auto;scrollbar-width:none;padding:4px 2px}
+  .cat-circles::-webkit-scrollbar{display:none}
+  .circle-item{
+    display:flex;flex-direction:column;align-items:center;gap:7px;min-width:72px;
+    font-size:11.5px;color:#44444F;text-align:center;padding:4px 2px;border-radius:10px;
+  }
+  .circle-item .ci{
+    width:58px;height:58px;border-radius:50%;background:#F4F4F8;
+    display:grid;place-items:center;color:var(--purple);
+    transition:background .18s,transform .18s;
+  }
+  .circle-item .ci svg{width:24px;height:24px}
+  .circle-item:hover .ci{background:var(--purple-soft-2);transform:translateY(-2px)}
+  .circle-item.on .ci{background:var(--purple);color:#fff;box-shadow:0 8px 18px rgba(112,0,255,.25)}
+  .circle-item.on{font-weight:600;color:var(--purple)}
+
+  /* ---------- catalog ---------- */
+  .catalog{margin-top:30px;scroll-margin-top:128px}
+  .sec-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .sec-head h2{font-size:24px;letter-spacing:-.6px;font-weight:800}
+  .sec-tools{display:flex;align-items:center;gap:14px;margin-left:auto}
+  .result-count{font-size:12px;color:var(--muted)}
+  .sort-select{
+    height:36px;padding:0 32px 0 12px;border-radius:8px;border:1px solid var(--line);
+    background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A8A95' stroke-width='2' stroke-linecap='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 10px center;
+    font-size:12.5px;appearance:none;-webkit-appearance:none;outline:0;
+  }
+  .sort-select:focus{border-color:var(--purple)}
+  .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:16px 0 14px;padding-bottom:2px}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    height:34px;padding:0 14px;border-radius:9px;background:#F4F4F8;
+    font-size:12.5px;font-weight:500;color:#44444F;white-space:nowrap;
+    transition:background .16s,color .16s;
+  }
+  .chip:hover{background:#ECECF3}
+  .chip.on{background:var(--purple);color:#fff}
+  .chip .cnum{opacity:.55;margin-left:5px;font-size:11px}
+  .chip.on .cnum{opacity:.75}
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  .pcard{
+    background:#fff;border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:box-shadow .2s,border-color .2s,transform .2s;
+  }
+  .pcard:hover{border-color:#DDDDE6;box-shadow:var(--shadow);transform:translateY(-2px)}
+  .pcard-media{position:relative;aspect-ratio:1/1;background:#fff;overflow:hidden;cursor:pointer}
+  .pcard-media img{width:100%;height:100%;object-fit:cover;transition:transform .45s}
+  .pcard:hover .pcard-media img{transform:scale(1.04)}
+  .off{
+    position:absolute;left:8px;top:8px;z-index:2;
+    background:var(--pink);color:#fff;font-size:11px;font-weight:700;
+    padding:3px 7px;border-radius:6px;letter-spacing:.1px;
+  }
+  .fav{
+    position:absolute;right:8px;top:8px;z-index:2;
+    width:31px;height:31px;border-radius:50%;background:rgba(255,255,255,.94);
+    display:grid;place-items:center;color:#8D8D99;
+    box-shadow:0 2px 8px rgba(0,0,0,.10);transition:color .16s,transform .16s;
+  }
+  .fav:hover{color:var(--pink);transform:scale(1.06)}
+  .fav svg{width:16px;height:16px}
+  .fav.on{color:var(--pink)}
+  .pcard-body{padding:10px 12px 12px;display:flex;flex-direction:column;flex:1}
+  .pcard-body h3{
+    font-size:13px;font-weight:500;line-height:1.35;color:var(--ink);
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+    min-height:35px;cursor:pointer;
+  }
+  .pcard-body h3:hover{color:var(--purple)}
+  .rate{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:11px;color:var(--muted)}
+  .rate svg{width:12px;height:12px;flex-shrink:0;fill:var(--yellow);stroke:none}
+  .rate b{color:var(--ink-2);font-weight:600}
+  .price-row{display:flex;align-items:flex-end;gap:8px;margin-top:7px}
+  .price{display:flex;flex-direction:column;min-width:0}
+  .price b{font-size:15.5px;font-weight:700;letter-spacing:-.2px;white-space:nowrap}
+  .price s{font-size:11px;color:#A2A2AC;text-decoration:line-through;margin-top:1px}
+  .add{
+    margin-left:auto;width:33px;height:33px;border-radius:9px;
+    background:var(--purple);color:#fff;display:grid;place-items:center;flex-shrink:0;
+    transition:background .16s,transform .16s;
+  }
+  .add:hover{background:var(--purple-dark)}
+  .add:active{transform:scale(.92)}
+  .add svg{width:17px;height:17px}
+  .add.added{background:var(--green)}
+  .inst{font-size:10.5px;color:var(--muted);margin-top:7px;display:flex;align-items:center;gap:5px}
+  .inst b{color:var(--purple);font-weight:600}
+  .deliv{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--green);margin-top:4px}
+  .deliv svg{width:12px;height:12px;flex-shrink:0}
+  .empty{
+    grid-column:1/-1;background:#FAFAFC;border:1px dashed #DDDDE6;border-radius:14px;
+    padding:46px 20px;display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;
+  }
+  .empty .e-ic{width:52px;height:52px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--purple);box-shadow:0 4px 12px rgba(0,0,0,.06)}
+  .empty .e-ic svg{width:22px;height:22px}
+  .empty b{font-size:15px}
+  .empty span{font-size:12.5px;color:var(--muted);max-width:320px}
+  .empty .btn{margin-top:8px}
+
+  /* ---------- AI strip ---------- */
+  .ai-strip{margin-top:38px}
+  .ai-card{
+    position:relative;overflow:hidden;
+    display:flex;align-items:center;gap:18px;
+    background:linear-gradient(110deg,#5A00CC,#7B18FF 55%,#9C55FF);
+    border-radius:16px;padding:22px 26px;color:#fff;
+  }
+  .ai-card::before,.ai-card::after{
+    content:"";position:absolute;border-radius:50%;background:rgba(255,255,255,.09);
+  }
+  .ai-card::before{width:190px;height:190px;right:-40px;top:-70px}
+  .ai-card::after{width:120px;height:120px;right:130px;bottom:-70px}
+  .ai-card .ai-ic{
+    width:48px;height:48px;border-radius:13px;background:rgba(255,255,255,.16);
+    display:grid;place-items:center;flex-shrink:0;
+  }
+  .ai-card .ai-ic svg{width:24px;height:24px}
+  .ai-card h3{font-size:17px;font-weight:700;letter-spacing:-.2px}
+  .ai-card p{font-size:12.5px;opacity:.82;margin-top:2px;max-width:560px}
+  .ai-card .btn{background:#fff;color:var(--purple);margin-left:auto;flex-shrink:0;position:relative;z-index:1}
+  .ai-card .btn:hover{background:#F3EAFF}
+
+  /* ---------- perks ---------- */
+  .perks{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:22px auto 0}
+  .perk{
+    display:flex;align-items:center;gap:12px;background:#F9F9FC;
+    border-radius:12px;padding:14px 16px;
+  }
+  .perk .p-ic{width:38px;height:38px;border-radius:10px;background:#fff;display:grid;place-items:center;color:var(--purple);flex-shrink:0;box-shadow:0 2px 8px rgba(30,10,80,.06)}
+  .perk .p-ic svg{width:19px;height:19px}
+  .perk b{display:block;font-size:12.5px;font-weight:600}
+  .perk span{font-size:11px;color:var(--muted)}
+
+  /* ---------- footer ---------- */
+  .foot{
+    margin-top:36px;background:#FAFAFC;border-top:1px solid var(--line);
+    padding:34px 0 26px;
+  }
+  .foot-grid{display:grid;grid-template-columns:1.7fr 1fr 1fr 1fr;gap:28px}
+  .foot-brand .brand-word{font-size:19px}
+  .foot-brand p{font-size:12px;color:var(--muted);margin:10px 0 14px;max-width:280px;line-height:1.55}
+  .pay-row{display:flex;gap:6px;flex-wrap:wrap}
+  .pay-chip{
+    height:25px;padding:0 9px;border-radius:6px;background:#fff;border:1px solid var(--line);
+    display:inline-flex;align-items:center;font-size:10.5px;font-weight:600;color:#55555F;
+  }
+  .foot h4{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:#9A9AA5;margin-bottom:12px;font-weight:600}
+  .foot-col a{display:block;font-size:12.5px;color:#55555F;padding:4px 0}
+  .foot-col a:hover{color:var(--purple)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:28px;padding-top:16px;font-size:11.5px;color:#9A9AA5}
+
+  /* ---------- bottom nav ---------- */
+  .bottom-nav{
+    display:none;position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:#fff;border-top:1px solid var(--line);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .bottom-nav .bn-in{display:grid;grid-template-columns:repeat(5,1fr);height:58px}
+  .bn-item{
+    position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
+    font-size:9.5px;color:#7C7C88;font-weight:500;
+  }
+  .bn-item .ic svg{width:21px;height:21px}
+  .bn-item.on{color:var(--purple);font-weight:600}
+  .bn-item .dot{top:4px;right:calc(50% - 19px);border-color:#fff}
+
+  /* ---------- scrim / drawer ---------- */
+  .scrim{
+    position:fixed;inset:0;z-index:90;background:rgba(16,10,35,.44);
+    opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;
+  }
+  .scrim.show{opacity:1;visibility:visible}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;z-index:100;width:min(432px,100%);
+    background:#fff;display:flex;flex-direction:column;
+    transform:translateX(103%);transition:transform .3s cubic-bezier(.22,.8,.3,1);
+    box-shadow:-18px 0 50px rgba(16,10,35,.16);
+    border-radius:16px 0 0 16px;overflow:hidden;
+  }
+  .drawer.open{transform:none}
+  .drawer-head{
+    display:flex;align-items:center;gap:10px;padding:16px 20px;
+    border-bottom:1px solid var(--line);flex-shrink:0;
+  }
+  .drawer-head h3{font-size:17px;font-weight:700;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+  .drawer-head h3 .ic svg{width:20px;height:20px;color:var(--purple)}
+  .icon-btn{
+    width:36px;height:36px;border-radius:9px;background:var(--bg);
+    display:grid;place-items:center;color:var(--ink-2);
+  }
+  .icon-btn:hover{background:#EEEEF4}
+  .icon-btn svg{width:18px;height:18px}
+  .drawer-head .icon-btn{margin-left:auto}
+  .drawer-body{flex:1;overflow-y:auto;padding:8px 20px}
+  .drawer-foot{
+    border-top:1px solid var(--line);padding:14px 20px calc(16px + env(safe-area-inset-bottom));
+    background:#fff;flex-shrink:0;
+  }
+  .citem{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #F3F3F7}
+  .citem:last-child{border-bottom:0}
+  .citem img{width:64px;height:64px;border-radius:9px;object-fit:cover;background:var(--bg);flex-shrink:0}
+  .citem-main{flex:1;min-width:0;display:flex;flex-direction:column}
+  .citem-main b{font-size:12.5px;font-weight:600;line-height:1.3}
+  .citem-main .ci-price{font-size:13px;font-weight:700;margin-top:3px}
+  .citem-main .ci-old{font-size:10.5px;color:#A2A2AC;text-decoration:line-through}
+  .citem-foot{display:flex;align-items:center;gap:8px;margin-top:8px}
+  .stepper{display:flex;align-items:center;gap:2px;background:#F4F4F8;border-radius:8px;padding:2px}
+  .stepper button{width:26px;height:26px;border-radius:6px;display:grid;place-items:center;color:var(--ink-2)}
+  .stepper button:hover{background:#fff;color:var(--purple)}
+  .stepper span{min-width:24px;text-align:center;font-size:12px;font-weight:600}
+  .stepper button svg{width:13px;height:13px}
+  .ci-del{margin-left:auto;color:#9A9AA5;width:30px;height:30px;border-radius:7px;display:grid;place-items:center}
+  .ci-del:hover{background:#FFF0F3;color:var(--pink)}
+  .ci-del svg{width:15px;height:15px}
+  .cart-empty{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center;padding:64px 16px}
+  .cart-empty .ce-ic{width:64px;height:64px;border-radius:50%;background:var(--purple-soft);display:grid;place-items:center;color:var(--purple)}
+  .cart-empty .ce-ic svg{width:28px;height:28px}
+  .cart-empty b{font-size:15px;margin-top:4px}
+  .cart-empty span{font-size:12.5px;color:var(--muted);max-width:260px}
+  .cart-empty .btn{margin-top:10px;height:38px;font-size:13px}
+  .promo-row{display:flex;gap:8px;margin-bottom:10px}
+  .promo-row input{
+    flex:1;height:38px;padding:0 12px;border:1px solid var(--line);border-radius:8px;background:#fff;outline:0;font-size:12.5px;
+  }
+  .promo-row input:focus{border-color:var(--purple)}
+  .promo-row button{height:38px;padding:0 14px;border-radius:8px;background:var(--purple-soft);color:var(--purple);font-size:12.5px;font-weight:600}
+  .promo-row button:hover{background:var(--purple-soft-2)}
+  .promo-ok{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--green);margin-bottom:10px}
+  .promo-ok svg{width:13px;height:13px}
+  .sum-row{display:flex;justify-content:space-between;gap:10px;font-size:12.5px;color:var(--ink-2);padding:3px 0}
+  .sum-row .free{color:var(--green);font-weight:600}
+  .sum-row.discount{color:var(--pink);font-weight:600}
+  .sum-total{display:flex;justify-content:space-between;align-items:baseline;margin:8px 0 12px;padding-top:9px;border-top:1px dashed #E4E4EC}
+  .sum-total b{font-size:19px;font-weight:800;letter-spacing:-.4px}
+  .sum-total span{font-size:12.5px;color:var(--muted)}
+  .checkout-btn{width:100%;height:48px;font-size:14px;border-radius:10px}
+  .checkout-btn:disabled{background:#D8D8E2;cursor:not-allowed}
+
+  /* checkout form */
+  .co-head{display:flex;align-items:center;gap:8px;margin:14px 0 16px}
+  .co-head h4{font-size:16px;font-weight:700}
+  .co-form{display:flex;flex-direction:column;gap:12px}
+  .field label{display:block;font-size:11.5px;color:var(--muted);margin-bottom:5px}
+  .field input,.field textarea{
+    width:100%;height:42px;border:1px solid var(--line);border-radius:8px;
+    padding:0 12px;background:#FAFAFC;outline:0;
+  }
+  .field textarea{height:64px;padding:10px 12px;resize:none}
+  .field input:focus,.field textarea:focus{border-color:var(--purple);background:#fff}
+  .pay-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .pay-opt{
+    border:1px solid var(--line);border-radius:9px;padding:9px 6px;text-align:center;
+    font-size:11px;font-weight:600;color:#55555F;background:#fff;cursor:pointer;
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+  }
+  .pay-opt input{display:none}
+  .pay-opt .ic svg{width:17px;height:17px;color:var(--muted)}
+  .pay-opt:has(input:checked){border-color:var(--purple);background:var(--purple-soft);color:var(--purple)}
+  .pay-opt:has(input:checked) .ic svg{color:var(--purple)}
+  .co-total{display:flex;justify-content:space-between;font-size:14px;font-weight:700;margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}
+
+  /* ---------- modals ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:110;display:grid;place-items:center;padding:18px;
+    opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s;
+  }
+  .modal.open{opacity:1;visibility:visible}
+  .modal-back{position:absolute;inset:0;background:rgba(16,10,35,.5)}
+  .modal-card{
+    position:relative;width:min(880px,100%);max-height:92vh;overflow:auto;
+    background:#fff;border-radius:16px;box-shadow:0 30px 80px rgba(10,5,30,.3);
+    transform:translateY(14px) scale(.99);transition:transform .22s;
+  }
+  .modal.open .modal-card{transform:none}
+  .modal-close{
+    position:absolute;top:12px;right:12px;z-index:3;width:36px;height:36px;
+    border-radius:50%;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);
+    display:grid;place-items:center;color:var(--ink-2);
+  }
+  .modal-close:hover{background:#F5F5F9}
+  .modal-close svg{width:17px;height:17px}
+
+  .pm-card{display:grid;grid-template-columns:1fr 1fr}
+  .pm-media{position:relative;background:#FAFAFC;border-radius:16px 0 0 16px;overflow:hidden;min-height:420px}
+  .pm-media img{width:100%;height:100%;object-fit:contain;padding:12px;position:absolute;inset:0;background:#fff}
+  .pm-media .off{left:14px;top:14px;font-size:12px;padding:4px 9px}
+  .pm-body{padding:28px 28px 24px;display:flex;flex-direction:column}
+  .pm-cat{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--purple);margin-bottom:6px}
+  .pm-body h2{font-size:23px;line-height:1.2;letter-spacing:-.4px;font-weight:800;padding-right:30px}
+  .pm-rate{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);margin-top:7px}
+  .pm-rate svg{width:13px;height:13px;flex-shrink:0;fill:var(--yellow);stroke:none}
+  .pm-rate b{color:var(--ink-2);font-weight:600}
+  .pm-price{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;margin-top:16px}
+  .pm-price b{font-size:26px;font-weight:800;letter-spacing:-.6px}
+  .pm-price s{font-size:13px;color:#A2A2AC;text-decoration:line-through}
+  .pm-price .off{position:static;font-size:11px}
+  .pm-inst{
+    background:var(--purple-soft);border-radius:9px;padding:10px 12px;margin-top:12px;
+    font-size:12px;color:#4B1B91;display:flex;align-items:center;gap:8px;
+  }
+  .pm-inst b{color:var(--purple);font-weight:700}
+  .pm-inst svg{width:16px;height:16px;flex-shrink:0;color:var(--purple)}
+  .pm-deliv{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2);margin-top:12px}
+  .pm-deliv svg{width:16px;height:16px;flex-shrink:0;color:var(--green)}
+  .pm-deliv span{color:var(--muted)}
+  .pm-desc{font-size:12.5px;color:#55555F;line-height:1.55;margin-top:14px}
+  .pm-specs{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:7px}
+  .pm-specs li{display:flex;gap:7px;font-size:12px;color:#44444F}
+  .pm-specs svg{width:14px;height:14px;flex-shrink:0;color:var(--green)}
+  .pm-actions{display:flex;gap:8px;margin-top:auto;padding-top:18px}
+  .pm-actions .btn{flex:1;height:46px}
+  .pm-actions .btn svg{width:17px;height:17px;flex-shrink:0}
+  .pm-actions .fav-btn{
+    width:46px;height:46px;border-radius:10px;border:1px solid var(--line);
+    display:grid;place-items:center;color:#8D8D99;background:#fff;
+  }
+  .pm-actions .fav-btn.on{color:var(--pink);border-color:#FFD3DF;background:#FFF5F8}
+  .pm-actions .fav-btn svg{width:20px;height:20px}
+
+  /* AI modal */
+  .ai-modal-card{width:min(520px,100%)}
+  .qm-head{display:flex;align-items:center;gap:11px;padding:20px 22px 14px}
+  .qm-badge{
+    width:42px;height:42px;border-radius:11px;background:var(--purple-soft);
+    display:grid;place-items:center;color:var(--purple);flex-shrink:0;
+  }
+  .qm-badge svg{width:21px;height:21px}
+  .qm-head b{display:block;font-size:15px}
+  .qm-head span{font-size:11.5px;color:var(--muted)}
+  .qm-close{margin-left:auto}
+  .qm-body{padding:0 22px 22px}
+  .qm-progress{display:flex;gap:5px;margin-bottom:18px}
+  .qm-progress i{flex:1;height:4px;border-radius:99px;background:#EEEEF4;transition:background .25s}
+  .qm-progress i.on{background:var(--purple)}
+  .quiz-step .q-kicker{font-size:11px;font-weight:700;color:var(--purple);letter-spacing:.6px;text-transform:uppercase}
+  .quiz-step h3{font-size:19px;font-weight:800;letter-spacing:-.3px;margin:5px 0 14px}
+  .q-opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .q-opt{
+    display:flex;align-items:center;gap:10px;text-align:left;
+    border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:#fff;
+    transition:border-color .16s,background .16s;
+  }
+  .q-opt:hover{border-color:var(--purple);background:var(--purple-soft)}
+  .q-opt .q-letter{
+    width:24px;height:24px;border-radius:7px;background:#F4F4F8;color:#77777F;
+    display:grid;place-items:center;font-size:11px;font-weight:700;flex-shrink:0;
+  }
+  .q-opt:hover .q-letter{background:var(--purple);color:#fff}
+  .q-opt b{display:block;font-size:12.5px;font-weight:600}
+  .q-opt span{display:block;font-size:10.5px;color:var(--muted)}
+  .q-back{font-size:11.5px;color:var(--muted);margin-top:13px;padding:4px 0}
+  .q-back:hover{color:var(--purple)}
+  .qr-tag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:700;color:var(--purple);text-transform:uppercase;letter-spacing:.6px}
+  .qr-tag svg{width:13px;height:13px;flex-shrink:0}
+  .quiz-result h3{font-size:19px;font-weight:800;margin:5px 0 12px;letter-spacing:-.3px}
+  .qr-list{display:flex;flex-direction:column;gap:8px}
+  .qr-item{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+  .qr-item img{width:52px;height:52px;border-radius:8px;object-fit:cover;background:var(--bg)}
+  .qr-item .qm-name{font-size:12px;font-weight:600;line-height:1.3}
+  .qr-item .qm-price{font-size:12.5px;font-weight:700;margin-top:2px}
+  .qr-item .add{width:32px;height:32px}
+  .qr-note{font-size:11px;color:var(--muted);margin-top:10px}
+  .qr-actions{display:flex;gap:8px;margin-top:14px}
+  .qr-actions .btn{flex:1;height:42px;font-size:13px}
+  .qr-actions .btn.line{flex:0 0 auto;padding:0 14px}
+
+  /* success */
+  .success-card{width:min(410px,100%);text-align:center;padding:30px 26px 26px}
+  .sc-ic{
+    width:64px;height:64px;border-radius:50%;background:var(--green-soft);
+    display:grid;place-items:center;color:var(--green);margin:0 auto 14px;
+  }
+  .sc-ic svg{width:30px;height:30px}
+  .success-card h3{font-size:20px;font-weight:800;letter-spacing:-.3px}
+  .success-card p{font-size:12.5px;color:var(--muted);margin-top:5px}
+  .order-chip{
+    display:inline-block;margin:14px 0 18px;background:var(--bg);border-radius:8px;
+    padding:7px 12px;font-size:12px;color:#55555F;
+  }
+  .order-chip b{color:var(--ink)}
+  .success-card .btn{width:100%}
+
+  /* toast */
+  .toast{
+    position:fixed;left:50%;bottom:24px;z-index:200;transform:translate(-50%,20px);
+    background:#201833;color:#fff;border-radius:10px;padding:11px 16px;
+    font-size:12.5px;font-weight:500;display:flex;align-items:center;gap:8px;
+    box-shadow:0 12px 30px rgba(20,10,50,.28);
+    opacity:0;visibility:hidden;transition:all .25s;max-width:calc(100vw - 24px);
+  }
+  .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+  .toast svg{width:16px;height:16px;color:#7BE3A3;flex-shrink:0}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1120px){
+    .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .head-acts .h-act span{display:none}
+    .h-act{min-width:44px;padding:6px 8px}
+    .hero{grid-template-columns:minmax(0,1fr) 250px}
+    .slide h1{font-size:28px}
+    .slide-media{width:200px;height:200px;right:26px}
+    .slide-copy{max-width:58%}
+  }
+  @media (max-width:960px){
+    .loc{display:none}
+    .cat-links{display:none}
+    .head-promo{display:none}
+    .head-cats-in{justify-content:flex-start}
+    .hero{grid-template-columns:minmax(0,1fr) 228px}
+    .slide{padding:28px 34px}
+    .slide h1{font-size:25px}
+    .slide-media{width:172px;height:172px;right:20px}
+    .ai-card{padding:20px}
+  }
+  @media (max-width:860px){
+    .wrap{width:calc(100% - 28px)}
+    .hero-side{display:none}
+    .hero{grid-template-columns:1fr;margin-top:12px}
+    .carousel{height:250px}
+    .slide{padding:24px 26px}
+    .slide-copy{max-width:56%}
+    .slide h1{font-size:24px;margin:10px 0 8px}
+    .slide p{font-size:12px;margin-bottom:14px;max-width:260px}
+    .slide-media{width:150px;height:150px;right:14px;padding:8px}
+    .slide-media img{border-radius:11px}
+    .c-arrow{display:none}
+    .dots{left:28px;bottom:14px}
+    .cat-circles{justify-content:flex-start;gap:4px;margin-top:18px}
+    .circle-item{min-width:66px}
+    .circle-item .ci{width:52px;height:52px}
+    .circle-item .ci svg{width:22px;height:22px}
+    .perks{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:24px}
+    .ai-card{flex-wrap:wrap}
+    .ai-card .btn{margin-left:0;width:100%}
+    .ai-card p{max-width:none}
+  }
+  @media (max-width:760px){
+    body{padding-bottom:60px}
+    .promo-strip .ps-right{display:none}
+    .promo-strip .wrap{height:30px;justify-content:center}
+    .promo-strip{font-size:11px}
+    .head-top{
+      display:grid;grid-template-columns:1fr auto;gap:9px 10px;padding:10px 0 11px;
+    }
+    .brand{grid-column:1;grid-row:1}
+    .brand-mark{width:34px;height:34px;border-radius:10px}
+    .brand-mark .ic svg{width:19px;height:19px}
+    .brand-word{font-size:19px}
+    .head-acts{grid-column:2;grid-row:1;gap:2px}
+    .h-act{min-width:38px;padding:5px 7px}
+    .h-act .ic svg{width:20px;height:20px}
+    .h-act.ai-act{display:none}
+    .search{grid-column:1/-1;grid-row:2;height:40px;border-radius:9px}
+    .search-btn{width:34px;height:34px}
+    .head-cats{display:none}
+    .site-head{box-shadow:0 4px 14px rgba(20,10,50,.05)}
+    .catalog{margin-top:24px;scroll-margin-top:128px}
+    .sec-head h2{font-size:20px}
+    .sec-tools{margin-left:0;width:100%;justify-content:space-between}
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+    .pcard-body{padding:9px 10px 11px}
+    .pcard-body h3{font-size:12px;min-height:32px}
+    .price b{font-size:14px}
+    .price s{font-size:10px}
+    .add{width:31px;height:31px}
+    .inst{font-size:9.5px}
+    .deliv{font-size:9.5px}
+    .off{font-size:10px;padding:2px 6px;left:6px;top:6px}
+    .fav{width:29px;height:29px;right:6px;top:6px}
+    .ai-strip{margin-top:26px}
+    .ai-card{border-radius:13px;padding:18px;gap:12px}
+    .ai-card .ai-ic{width:42px;height:42px}
+    .ai-card h3{font-size:15px}
+    .ai-card p{font-size:11.5px}
+    .perks{gap:8px;margin-top:16px}
+    .perk{padding:11px 12px;gap:9px}
+    .perk .p-ic{width:34px;height:34px}
+    .foot{padding:26px 0 24px;margin-top:26px}
+    .foot-grid{grid-template-columns:1fr 1fr;gap:20px}
+    .foot-brand{grid-column:1/-1}
+    .foot-bottom{flex-direction:column;gap:6px}
+    .bottom-nav{display:block}
+    .drawer{border-radius:0;width:100%}
+    .drawer-head{padding:14px 16px}
+    .drawer-body{padding:4px 16px}
+    .drawer-foot{padding:12px 16px calc(14px + env(safe-area-inset-bottom))}
+    .pm-card{grid-template-columns:1fr}
+    .pm-media{min-height:0;aspect-ratio:1/1;border-radius:16px 16px 0 0}
+    .pm-body{padding:20px 18px 18px}
+    .pm-body h2{font-size:20px}
+    .pm-price b{font-size:23px}
+    .modal{padding:0}
+    .modal-card{max-height:100vh;border-radius:16px;margin:8px;width:calc(100% - 16px)}
+    .ai-modal-card{margin:auto 10px}
+    .toast{bottom:76px}
+    .q-opts{grid-template-columns:1fr}
+    .checkout-btn{height:46px}
+    .promo-strip .ps-left span.hide-s{display:none}
+  }
+  @media (max-width:430px){
+    .slide-media{width:118px;height:118px;right:10px}
+    .slide-copy{max-width:58%}
+    .slide h1{font-size:20px}
+    .slide p{font-size:11px;max-width:210px}
+    .slide-tag{height:23px;font-size:9.5px}
+    .slide-cta{height:35px;font-size:11.5px;padding:0 13px}
+    .dots{left:24px;bottom:12px}
+    .price b{font-size:13px}
+    .pcard-body h3{font-size:11.5px}
+    .perk b{font-size:11.5px}
+    .perk span{font-size:10px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body id="top">
+
+<div class="promo-strip">
+  <div class="wrap">
+    <div class="ps-left">
+      <i class="ic" data-icon="truck"></i>
+      <span>Toshkentda <b>1 kunda bepul yetkazish</b><span class="hide-s"> · Promo kod: <b>BOZOR10</b> — birinchi xaridga −10%</span></span>
+    </div>
+    <div class="ps-right">Har kuni 9:00 — 21:00</div>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap head-top">
+    <a class="brand" href="#top" aria-label="bozor market — bosh sahifa">
+      <span class="brand-mark"><i class="ic" data-icon="bag"></i></span>
+      <span class="brand-word">bozor <em>market</em></span>
+    </a>
+    <button class="loc" type="button" aria-label="Shaharni tanlash">
+      <i class="ic" data-icon="pin"></i>
+      <span>Toshkent</span>
+      <i class="ic chev" data-icon="chev"></i>
+    </button>
+    <form class="search" id="searchForm" role="search">
+      <i class="ic" data-icon="search"></i>
+      <input id="searchInput" type="search" placeholder="Mahsulot, kategoriya yoki brendni qidiring" autocomplete="off" aria-label="Qidiruv">
+      <button class="search-btn" type="submit" aria-label="Qidirish"><i class="ic" data-icon="search"></i></button>
+    </form>
+    <div class="head-acts">
+      <button class="h-act ai-act" type="button" id="aiHeadBtn">
+        <i class="ic" data-icon="sparkle"></i><span>AI tanlov</span>
+      </button>
+      <button class="h-act" type="button" id="favHeadBtn">
+        <i class="ic" data-icon="heart"></i><span>Sevimlilar</span>
+        <i class="dot" id="favCount" hidden>0</i>
+      </button>
+      <button class="h-act cart-act" type="button" id="cartBtn">
+        <i class="ic" data-icon="cart"></i><span>Savat</span>
+        <i class="dot" id="cartCount" hidden>0</i>
+      </button>
+    </div>
+  </div>
+  <div class="head-cats">
+    <div class="wrap head-cats-in">
+      <button class="catalog-btn" type="button" id="catalogBtn"><i class="ic" data-icon="grid"></i> Katalog</button>
+      <nav class="cat-links" aria-label="Kategoriyalar">
+        <a href="#katalog" data-cat="elektronika">Elektronika</a>
+        <a href="#katalog" data-cat="audio">Audio</a>
+        <a href="#katalog" data-cat="uy">Uy</a>
+        <a href="#katalog" data-cat="sport">Sport</a>
+        <a href="#katalog" data-cat="oyin">O'yin</a>
+        <a href="#katalog" data-cat="gozallik">Go'zallik</a>
+        <a href="#katalog" data-cat="aksessuar">Aksessuar</a>
+      </nav>
+      <span class="head-promo"><i class="ic" data-icon="truck"></i> Bepul yetkazish</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap hero" aria-label="Aksiyalar">
+    <div class="carousel" id="carousel">
+      <article class="slide slide-a on">
+        <div class="slide-copy">
+          <span class="slide-tag">Yozgi sale</span>
+          <h1>Yangi texnika<br>−25% gacha</h1>
+          <p>Vision 13, Pulse Watch va boshqa top gadjetlar. Ombor tugaguncha.</p>
+          <button class="slide-cta" type="button" data-cat="elektronika">Xarid qilish <i class="ic" data-icon="right"></i></button>
+        </div>
+        <div class="slide-media"><img src="assets/products/phone.jpg" alt="Vision 13 smartfoni"></div>
+      </article>
+      <article class="slide slide-b">
+        <div class="slide-copy">
+          <span class="slide-tag">Musiqa kayfiyati</span>
+          <h1>Audio va<br>quloqchinlar</h1>
+          <p>Kuchli bas, shovqin bosish va 40 soatgacha batareya.</p>
+          <button class="slide-cta" type="button" data-cat="audio">Katalogni ko'rish <i class="ic" data-icon="right"></i></button>
+        </div>
+        <div class="slide-media"><img src="assets/products/headphones.jpg" alt="Bassline 2 quloqchini"></div>
+      </article>
+      <article class="slide slide-c">
+        <div class="slide-copy">
+          <span class="slide-tag">O'zingiz uchun</span>
+          <h1>Go'zallik va<br>aksessuarlar</h1>
+          <p>Bloom atiri, UrbanPack ryukzagi va kundalik sevimli buyumlar.</p>
+          <button class="slide-cta" type="button" data-cat="gozallik">Tanlash <i class="ic" data-icon="right"></i></button>
+        </div>
+        <div class="slide-media"><img src="assets/products/perfume.jpg" alt="Bloom atiri"></div>
+      </article>
+      <button class="c-arrow prev" type="button" id="slidePrev" aria-label="Oldingi slayd"><i class="ic" data-icon="left"></i></button>
+      <button class="c-arrow next" type="button" id="slideNext" aria-label="Keyingi slayd"><i class="ic" data-icon="right"></i></button>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+    </div>
+    <aside class="hero-side" aria-label="Aksiyalar">
+      <div class="side-card side-purple">
+        <span class="ic" data-icon="gift"></span>
+        <b>Promo kod</b>
+        <strong>BOZOR10</strong>
+        <span>Birinchi xaridga −10%</span>
+      </div>
+      <div class="side-card side-green">
+        <span class="ic" data-icon="truck"></span>
+        <b>Bepul yetkazish</b>
+        <strong>1 kunda</strong>
+        <span>Toshkent bo'ylab</span>
+      </div>
+    </aside>
+  </section>
+
+  <section class="wrap cat-circles" id="catCircles" aria-label="Kategoriyalar"></section>
+
+  <section class="wrap catalog" id="katalog">
+    <div class="sec-head">
+      <h2 id="gridTitle">Ommabop mahsulotlar</h2>
+      <div class="sec-tools">
+        <span class="result-count" id="resultCount">12 ta mahsulot</span>
+        <select class="sort-select" id="sortSelect" aria-label="Saralash">
+          <option value="popular">Ommabop</option>
+          <option value="cheap">Avval arzon</option>
+          <option value="expensive">Avval qimmat</option>
+          <option value="rating">Reyting bo'yicha</option>
+        </select>
+      </div>
+    </div>
+    <div class="chips" id="categoryChips"></div>
+    <div class="grid" id="productGrid"></div>
+  </section>
+
+  <section class="wrap ai-strip">
+    <div class="ai-card">
+      <span class="ai-ic"><i class="ic" data-icon="sparkle"></i></span>
+      <div>
+        <h3>Qaysi mahsulotni tanlashni bilmayapsizmi?</h3>
+        <p>AI yordamchi 3 ta savol asosida sizga mos mahsulotni taklif qiladi — byudjet va ehtiyojga qarab.</p>
+      </div>
+      <button class="btn" type="button" data-open-quiz>AI tanlovni boshlash</button>
+    </div>
+  </section>
+
+  <section class="wrap perks" aria-label="Xizmatlar">
+    <div class="perk">
+      <span class="p-ic"><i class="ic" data-icon="truck"></i></span>
+      <div><b>Bepul yetkazish</b><span>1–2 kunda yetkazamiz</span></div>
+    </div>
+    <div class="perk">
+      <span class="p-ic"><i class="ic" data-icon="refresh"></i></span>
+      <div><b>10 kun qaytarish</b><span>Yoqmasa — qaytaring</span></div>
+    </div>
+    <div class="perk">
+      <span class="p-ic"><i class="ic" data-icon="shield"></i></span>
+      <div><b>Original mahsulot</b><span>100% sifat kafolati</span></div>
+    </div>
+    <div class="perk">
+      <span class="p-ic"><i class="ic" data-icon="card"></i></span>
+      <div><b>Xavfsiz to'lov</b><span>Payme, Click yoki naqd</span></div>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top">
+          <span class="brand-mark"><i class="ic" data-icon="bag"></i></span>
+          <span class="brand-word">bozor <em>market</em></span>
+        </a>
+        <p>Qulay onlayn bozor: gadjetlar, audio, uy buyumlari, go'zallik va sport. Tez yetkazish va muddatli to'lov.</p>
+        <div class="pay-row">
+          <span class="pay-chip">Payme</span>
+          <span class="pay-chip">Click</span>
+          <span class="pay-chip">Naqd</span>
+          <span class="pay-chip">Uzcard</span>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Xaridorlarga</h4>
+        <a href="#katalog">Yetkazish</a>
+        <a href="#katalog">Qaytarish</a>
+        <a href="#katalog">To'lov usullari</a>
+        <a href="#katalog">Ko'p so'raladigan savollar</a>
+      </div>
+      <div class="foot-col">
+        <h4>Sotuvchilarga</h4>
+        <a href="#katalog">Sotuvchi bo'lish</a>
+        <a href="#katalog">Shaxsiy kabinet</a>
+        <a href="#katalog">Hamkorlik</a>
+      </div>
+      <div class="foot-col">
+        <h4>Kompaniya</h4>
+        <a href="#top">Biz haqimizda</a>
+        <a href="#top">Aloqa</a>
+        <a href="#top">Vakansiyalar</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 bozor market. Demo loyiha.</span>
+      <span>info@bozor.uz · +998 90 000 00 00</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="bottom-nav" aria-label="Mobil navigatsiya">
+  <div class="bn-in">
+    <button class="bn-item on" type="button" data-bn="home">
+      <i class="ic" data-icon="home"></i><span>Asosiy</span>
+    </button>
+    <button class="bn-item" type="button" data-bn="catalog">
+      <i class="ic" data-icon="grid"></i><span>Katalog</span>
+    </button>
+    <button class="bn-item" type="button" data-bn="ai">
+      <i class="ic" data-icon="sparkle"></i><span>AI tanlov</span>
+    </button>
+    <button class="bn-item" type="button" data-bn="fav">
+      <i class="ic" data-icon="heart"></i><span>Sevimlilar</span>
+      <i class="dot" id="favCountBn" hidden>0</i>
+    </button>
+    <button class="bn-item" type="button" data-bn="cart">
+      <i class="ic" data-icon="cart"></i><span>Savat</span>
+      <i class="dot" id="cartCountBn" hidden>0</i>
+    </button>
+  </div>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+
+<aside class="drawer" id="cartDrawer" aria-label="Savat" aria-hidden="true">
+  <div class="drawer-head">
+    <h3><i class="ic" data-icon="cart"></i> Savat</h3>
+    <button class="icon-btn" type="button" id="cartClose" aria-label="Yopish"><i class="ic" data-icon="x"></i></button>
+  </div>
+  <div class="drawer-body">
+    <div id="cartView">
+      <div id="cartBody"></div>
+    </div>
+    <div id="checkoutView" style="display:none">
+      <div class="co-head">
+        <button class="icon-btn" type="button" id="coBack" aria-label="Orqaga"><i class="ic" data-icon="left"></i></button>
+        <h4>Buyurtmani rasmiylashtirish</h4>
+      </div>
+      <form class="co-form" id="checkoutForm" novalidate>
+        <div class="field">
+          <label for="coName">Ismingiz</label>
+          <input id="coName" name="name" placeholder="Ism va familiya" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="coPhone">Telefon raqam</label>
+          <input id="coPhone" name="phone" type="tel" placeholder="+998 90 123 45 67" autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="coAddress">Manzil</label>
+          <input id="coAddress" name="address" placeholder="Toshkent, Chilonzor 5-uy" autocomplete="street-address" required>
+        </div>
+        <div class="field">
+          <label>To'lov usuli</label>
+          <div class="pay-opts">
+            <label class="pay-opt"><input type="radio" name="pay" value="Naqd" checked><i class="ic" data-icon="card"></i>Naqd</label>
+            <label class="pay-opt"><input type="radio" name="pay" value="Payme"><i class="ic" data-icon="card"></i>Payme</label>
+            <label class="pay-opt"><input type="radio" name="pay" value="Click"><i class="ic" data-icon="card"></i>Click</label>
+          </div>
+        </div>
+        <div class="field">
+          <label for="coNote">Izoh (ixtiyoriy)</label>
+          <textarea id="coNote" name="note" placeholder="Kuryer uchun izoh"></textarea>
+        </div>
+        <div class="co-total"><span>To'lanadi</span><b id="checkoutTotal">0 so'm</b></div>
+        <button class="btn checkout-btn" type="submit">Buyurtmani tasdiqlash</button>
+      </form>
+    </div>
+  </div>
+  <div class="drawer-foot" id="cartFoot">
+    <div class="promo-row" id="promoRow">
+      <input id="promoInput" placeholder="Promo kod" autocomplete="off" aria-label="Promo kod">
+      <button type="button" id="promoBtn">Qo'llash</button>
+    </div>
+    <div class="promo-ok" id="promoOk" hidden><i class="ic" data-icon="check"></i> <span>BOZOR10 qo'llandi — −10%</span></div>
+    <div class="sum-row"><span>Mahsulotlar</span><b id="cartSubtotal">0 so'm</b></div>
+    <div class="sum-row discount" id="discountRow" hidden><span>Chegirma</span><b id="cartDiscount">0 so'm</b></div>
+    <div class="sum-row"><span>Yetkazish</span><b class="free">Bepul</b></div>
+    <div class="sum-total"><b id="cartTotal">0 so'm</b><span>jami</span></div>
+    <button class="btn checkout-btn" type="button" id="checkoutBtn">Buyurtma berish</button>
+  </div>
+</aside>
+
+<div class="modal" id="productModal" role="dialog" aria-modal="true" aria-label="Mahsulot">
+  <div class="modal-back" data-pclose></div>
+  <div class="modal-card pm-card">
+    <button class="modal-close" type="button" data-pclose aria-label="Yopish"><i class="ic" data-icon="x"></i></button>
+    <div class="pm-media">
+      <span class="off" id="pmOff">−0%</span>
+      <img id="pmImg" src="" alt="">
+    </div>
+    <div class="pm-body" id="pmBody"></div>
+  </div>
+</div>
+
+<div class="modal" id="aiModal" role="dialog" aria-modal="true" aria-label="AI tanlov">
+  <div class="modal-back" data-aclose></div>
+  <div class="modal-card ai-modal-card">
+    <div class="qm-head">
+      <span class="qm-badge"><i class="ic" data-icon="sparkle"></i></span>
+      <div><b>AI yordamchi</b><span>3 savolda mos mahsulotni tanlaymiz</span></div>
+      <button class="icon-btn qm-close" type="button" data-aclose aria-label="Yopish"><i class="ic" data-icon="x"></i></button>
+    </div>
+    <div class="qm-body">
+      <div class="qm-progress" id="quizProgress"><i></i><i></i><i></i></div>
+      <div id="quizBox"></div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="successModal" role="dialog" aria-modal="true" aria-label="Buyurtma qabul qilindi">
+  <div class="modal-back"></div>
+  <div class="modal-card success-card">
+    <div class="sc-ic"><i class="ic" data-icon="check"></i></div>
+    <h3>Buyurtma qabul qilindi!</h3>
+    <p>Operatorimiz tez orada qo'ng'iroq qilib, buyurtmani tasdiqlaydi.</p>
+    <div class="order-chip">Buyurtma raqami: <b id="successNum">BM-000000</b></div>
+    <button class="btn" type="button" id="successClose">Xaridni davom ettirish</button>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+"use strict";
+
+/* ---------------- icons ---------------- */
+const S = (inner, fill) => '<svg viewBox="0 0 24 24" fill="' + (fill ? "currentColor" : "none") + '" stroke="' + (fill ? "none" : "currentColor") + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + inner + '</svg>';
+const ICON = {
+  search: S('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.2-3.2"/>'),
+  pin: S('<path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>'),
+  chev: S('<path d="m6 9 6 6 6-6"/>'),
+  heart: S('<path d="M12 20.3 4.9 13.4a4.8 4.8 0 0 1 0-6.8 4.8 4.8 0 0 1 6.8 0l.3.3.3-.3a4.8 4.8 0 0 1 6.8 0 4.8 4.8 0 0 1 0 6.8Z"/>'),
+  heartFill: S('<path d="M12 20.3 4.9 13.4a4.8 4.8 0 0 1 0-6.8 4.8 4.8 0 0 1 6.8 0l.3.3.3-.3a4.8 4.8 0 0 1 6.8 0 4.8 4.8 0 0 1 0 6.8Z"/>', true),
+  cart: S('<circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/><path d="M3 4h2l2.5 11h10.4L20 8H6"/>'),
+  grid: S('<rect x="4" y="4" width="6" height="6" rx="1.4"/><rect x="14" y="4" width="6" height="6" rx="1.4"/><rect x="4" y="14" width="6" height="6" rx="1.4"/><rect x="14" y="14" width="6" height="6" rx="1.4"/>'),
+  star: S('<path d="m12 3.6 2.5 5.1 5.6.8-4 3.9.9 5.6-5-2.6-5 2.6.9-5.6-4-3.9 5.6-.8Z"/>', true),
+  truck: S('<path d="M3 6h10v9H3z"/><path d="M13 9h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/>'),
+  shield: S('<path d="M12 3 5 6v5c0 4.4 3 8.2 7 9.5 4-1.3 7-5.1 7-9.5V6Z"/><path d="m9 11.5 2 2 4-4"/>'),
+  refresh: S('<path d="M20 11a8 8 0 1 0-2.3 6.3"/><path d="M20 5v6h-6"/>'),
+  card: S('<rect x="3" y="5" width="18" height="14" rx="2.4"/><path d="M3 10h18"/>'),
+  sparkle: S('<path d="M12 3.5 13.8 9l5.5 1.8-5.5 1.8L12 18l-1.8-5.4L4.7 10.8 10.2 9Z"/><path d="M18.5 16.5v3M17 18h3"/>'),
+  phone: S('<rect x="7" y="3" width="10" height="18" rx="2.2"/><path d="M11 18h2"/>'),
+  headphones: S('<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.6"/><rect x="17" y="14" width="4" height="6" rx="1.6"/>'),
+  home: S('<path d="m4 10.5 8-6.5 8 6.5V20h-5.5v-5h-5v5H4Z"/>'),
+  dumbbell: S('<path d="M6 8v8M3 10v4M18 8v8M21 10v4M6 12h12"/>'),
+  gamepad: S('<rect x="3" y="7" width="18" height="10" rx="4"/><path d="M8 12h3M9.5 10.5v3"/><circle cx="16" cy="11" r=".9" fill="currentColor" stroke="none"/><circle cx="18" cy="13.3" r=".9" fill="currentColor" stroke="none"/>'),
+  bag: S('<path d="M5 8h14l-1 12H6Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/>'),
+  gift: S('<rect x="4" y="9" width="16" height="11" rx="1.6"/><path d="M3 9h18v4H3zM12 9v11M12 9c-2 0-4-1-4-3a2 2 0 0 1 4 0c0 2 0 3 0 3Zm0 0c2 0 4-1 4-3a2 2 0 0 0-4 0c0 2 0 3 0 3Z"/>'),
+  trash: S('<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>'),
+  plus: S('<path d="M12 5v14M5 12h14"/>'),
+  minus: S('<path d="M5 12h14"/>'),
+  x: S('<path d="M6 6l12 12M18 6 6 18"/>'),
+  check: S('<path d="m5 12.5 4.2 4.2L19 7"/>'),
+  left: S('<path d="m14.5 6-6 6 6 6"/>'),
+  right: S('<path d="m9.5 6 6 6-6 6"/>'),
+  clock: S('<circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 1.8"/>')
+};
+
+function paintIcons(root) {
+  (root || document).querySelectorAll(".ic[data-icon]").forEach((el) => {
+    const icon = ICON[el.dataset.icon];
+    if (icon) el.innerHTML = icon;
+  });
+}
+
+/* ---------------- data ---------------- */
+const PRODUCTS = [
+  {
+    id: "phone", name: "Vision 13", cat: "elektronika", catLabel: "Elektronika",
+    price: 8900000, old: 10700000, rating: 4.9, reviews: 312,
+    img: "assets/products/phone.jpg",
+    short: "Yorqin ekranli flagman smartfon",
+    desc: "Vision 13 — kun bo'yi ishlaydigan batareya, 120 Hz AMOLED ekran va AI kamera. O'yin, ish va surat uchun bitta qurilma.",
+    specs: ["6.7\" AMOLED, 120 Hz", "256 GB xotira, 12 GB RAM", "50 MP kamera, 5000 mAh"],
+    kw: "telefon smartfon phone smartphone", tags: ["gadget", "premium", "self", "useful"]
+  },
+  {
+    id: "headphones", name: "Bassline 2", cat: "audio", catLabel: "Audio",
+    price: 1190000, old: 1490000, rating: 4.8, reviews: 268,
+    img: "assets/products/headphones.jpg",
+    short: "Shovqin bosuvchi simsiz quloqchin",
+    desc: "Bassline 2 — kuchli bas, yumshoq yostiqchalar va 40 soatgacha ishlash. Musiqa, podkast yoki o'yin uchun zo'r tanlov.",
+    specs: ["Aktiv shovqin bosish", "40 soat batareya", "Bluetooth 5.3, USB-C"],
+    kw: "quloqchin naushnik headphone headphones", tags: ["audio", "music", "gift", "teen"]
+  },
+  {
+    id: "sneakers", name: "StreetRun 90", cat: "sport", catLabel: "Sport",
+    price: 890000, old: 1120000, rating: 4.7, reviews: 197,
+    img: "assets/products/sneakers.jpg",
+    short: "Yengil va chidamli krossovka",
+    desc: "StreetRun 90 — shahar yugurishi va kunlik kiyish uchun. Yengil tagcharm, nafas oluvchi to'r va yorqin dizayn.",
+    specs: ["Yengil EVA tagcharm", "Nafas oluvchi to'r mato", "36–45 o'lchamlar"],
+    kw: "krossovka poyabzal shoes sneaker sneakers", tags: ["sport", "style", "self", "gift", "teen"]
+  },
+  {
+    id: "coffee", name: "Barista One", cat: "uy", catLabel: "Uy",
+    price: 2450000, old: 2990000, rating: 4.7, reviews: 154,
+    img: "assets/products/coffee.jpg",
+    short: "Uy uchun espresso apparati",
+    desc: "Barista One — 20 barda haqiqiy kofe. Bosimli ekstraksiya va bug' bilan sut ko'pirtirish. Uy kafesi uchun ideal sovg'a.",
+    specs: ["15 bar bosim", "Sut ko'pirtirgich", "1.2 l suv idishi"],
+    kw: "kofe kofemashen coffee kofeapparat", tags: ["home", "gift", "useful", "premium"]
+  },
+  {
+    id: "watch", name: "Pulse Watch", cat: "elektronika", catLabel: "Elektronika",
+    price: 1390000, old: 1690000, rating: 4.8, reviews: 221,
+    img: "assets/products/watch.jpg",
+    short: "Sport va salomatlik uchun aqlli soat",
+    desc: "Pulse Watch — yurak urishi, uyqu, qadam va 20+ sport rejimi. Yorqin ekran va 10 kunlik batareya.",
+    specs: ["AMOLED doimiy ekran", "SpO2 va yurak sensorlari", "10 kun batareya, 5 ATM"],
+    kw: "soat smart watch aqlli soat", tags: ["gadget", "sport", "style", "self", "gift"]
+  },
+  {
+    id: "speaker", name: "BoomBox Go", cat: "audio", catLabel: "Audio",
+    price: 750000, old: 950000, rating: 4.6, reviews: 189,
+    img: "assets/products/speaker.jpg",
+    short: "Kuchli portativ kolonka",
+    desc: "BoomBox Go — cho'ntakka sig'adigan, lekin xonani to'ldiradigan ovoz. Suvga chidamli, 16 soat ishlaydi.",
+    specs: ["360° ovoz", "IPX7 suv himoyasi", "16 soat batareya"],
+    kw: "kolonka dinamik speaker audio", tags: ["audio", "music", "gift", "budget", "teen", "self", "useful"]
+  },
+  {
+    id: "controller", name: "PlayPad X", cat: "oyin", catLabel: "O'yin",
+    price: 620000, old: 790000, rating: 4.7, reviews: 176,
+    img: "assets/products/controller.jpg",
+    short: "Simsiz o'yin joystiki",
+    desc: "PlayPad X — kam kechikish, yorqin RGB yorug'lik va qulay tutqich. Telefon, kompyuter va konsolga ulanadi.",
+    specs: ["Bluetooth + USB-C", "20 soat batareya", "Telefon ushlagichi sovg'a"],
+    kw: "joystik gamepad controller pult o'yin", tags: ["game", "teen", "fun", "gift", "budget"]
+  },
+  {
+    id: "drone", name: "SkyMini", cat: "elektronika", catLabel: "Elektronika",
+    price: 3900000, old: 4600000, rating: 4.8, reviews: 132,
+    img: "assets/products/drone.jpg",
+    short: "Buklanadigan 4K dron",
+    desc: "SkyMini — cho'ntakka sig'adigan dron. 4K kamera, barqaror uchish va 25 daqiqalik parvoz. Sayohat uchun ajoyib.",
+    specs: ["4K kamera, 3 o'qli gimbal", "25 daqiqa parvoz", "Buklanadigan korpus, 249 g"],
+    kw: "dron drone kvadrokopter quadcopter samolyot", tags: ["gadget", "premium", "fun", "photo", "gift"]
+  },
+  {
+    id: "earbuds", name: "AirBuds Pro", cat: "audio", catLabel: "Audio",
+    price: 540000, old: 690000, rating: 4.6, reviews: 403,
+    img: "assets/products/earbuds.jpg",
+    short: "Aktiv shovqin bosishli TWS quloqchinlar",
+    desc: "AirBuds Pro — cho'ntakda olib yurish uchun qulay simsiz quloqchinlar. Aktiv shovqin bosish, 30 soatgacha batareya va tez quvvatlash.",
+    specs: ["Aktiv shovqin bosish (ANC)", "30 soatgacha batareya", "USB-C tez quvvatlash"],
+    kw: "quloqchin naushnik earbuds airpods tws", tags: ["audio", "music", "gift", "budget", "self", "teen"]
+  },
+  {
+    id: "powerbank", name: "PowerCore 20K", cat: "elektronika", catLabel: "Elektronika",
+    price: 320000, old: 420000, rating: 4.7, reviews: 512,
+    img: "assets/products/powerbank.jpg",
+    short: "20 000 mAh quvvat banki",
+    desc: "PowerCore 20K — telefoningizni 4 martagacha to'liq quvvatlaydi. Raqamli indikator va 22.5 W tez quvvatlash.",
+    specs: ["20 000 mAh sig'im", "22.5 W tez quvvatlash", "USB-C + USB-A"],
+    kw: "quvvat banki powerbank zaryadlash charger", tags: ["gadget", "useful", "budget", "self", "travel"]
+  },
+  {
+    id: "backpack", name: "UrbanPack", cat: "aksessuar", catLabel: "Aksessuar",
+    price: 480000, old: 620000, rating: 4.5, reviews: 88,
+    img: "assets/products/backpack.jpg",
+    short: "Shahar uchun suv o'tkazmaydigan ryukzak",
+    desc: "UrbanPack — 20 litr hajm, noutbuk uchun alohida bo'lim va suv o'tkazmaydigan mato. Universitet, ish va sayohat uchun.",
+    specs: ["20 l hajm", "Suv o'tkazmaydigan mato", "15.6\" noutbuk bo'limi"],
+    kw: "ryukzak sumka backpack", tags: ["style", "useful", "travel", "teen", "self", "gift"]
+  },
+  {
+    id: "perfume", name: "Bloom Eau de Parfum", cat: "gozallik", catLabel: "Go'zallik",
+    price: 650000, old: 850000, rating: 4.9, reviews: 267,
+    img: "assets/products/perfume.jpg",
+    short: "Gulli-mevali atir, 50 ml",
+    desc: "Bloom — yengil gulli va mevali aromat, kundalik foydalanish uchun. 8 soatgacha barqaror va ozgina iz qoldiradi.",
+    specs: ["50 ml hajm", "Gulli-mevali aromat", "8 soatgacha barqaror"],
+    kw: "atir parfyum perfume", tags: ["beauty", "gift", "style", "premium", "self"]
+  }
+];
+
+const CATEGORIES = [
+  { id: "all", label: "Hammasi", icon: "grid" },
+  { id: "elektronika", label: "Elektronika", icon: "phone" },
+  { id: "audio", label: "Audio", icon: "headphones" },
+  { id: "uy", label: "Uy", icon: "home" },
+  { id: "sport", label: "Sport", icon: "dumbbell" },
+  { id: "oyin", label: "O'yin", icon: "gamepad" },
+  { id: "gozallik", label: "Go'zallik", icon: "sparkle" },
+  { id: "aksessuar", label: "Aksessuar", icon: "bag" }
+];
+
+const QUIZ = [
+  {
+    q: "Kim uchun tanlaymiz?",
+    options: [
+      { t: "O'zim uchun", s: "O'zimga sovg'a", v: "self" },
+      { t: "Do'stimga", s: "Sovg'a kerak", v: "gift" },
+      { t: "Uy uchun", s: "Foydali narsa", v: "home" },
+      { t: "Bola / uka-uka", s: "O'yin-kulgi", v: "teen" }
+    ]
+  },
+  {
+    q: "Byudjet qancha?",
+    options: [
+      { t: "1 mln gacha", s: "Talabalar uchun", v: 1000000 },
+      { t: "1–3 mln", s: "Optimal", v: 3000000 },
+      { t: "3–8 mln", s: "Yaxshiroq variant", v: 8000000 },
+      { t: "Muhim emas", s: "Eng yaxshisini ko'r", v: Infinity }
+    ]
+  },
+  {
+    q: "Nima muhim?",
+    options: [
+      { t: "Foydali", s: "Har kuni ishlataman", v: "useful" },
+      { t: "Chiroyli", s: "Ko'zga yoqadi", v: "style" },
+      { t: "Qiziqarli", s: "Yangi tajriba", v: "fun" },
+      { t: "Sovg'a", s: "Kimnidir xursand qilaman", v: "gift" }
+    ]
+  }
+];
+
+const STORAGE = { cart: "market_cart_v1", fav: "market_fav_v1", orders: "market_orders_v1" };
+const PROMO_CODE = "BOZOR10";
+
+/* ---------------- state ---------------- */
+const $ = (sel, root) => (root || document).querySelector(sel);
+const $$ = (sel, root) => Array.from((root || document).querySelectorAll(sel));
+const money = (n) => new Intl.NumberFormat("ru-RU").format(n) + " so'm";
+const monthly = (p) => Math.ceil(p / 12 / 1000) * 1000;
+const offPct = (p) => Math.round((1 - p.price / p.old) * 100);
+const findProduct = (id) => PRODUCTS.find((p) => p.id === id) || null;
+
+function load(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) { return fallback; }
+}
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+}
+
+const state = { category: "all", query: "", sort: "popular", favOnly: false };
+let cart = load(STORAGE.cart, {});
+let favs = load(STORAGE.fav, []).filter((id) => findProduct(id));
+Object.keys(cart).forEach((id) => { if (!findProduct(id)) delete cart[id]; });
+let promoOn = false;
+let quiz = { step: 0, answers: [] };
+
+/* ---------------- catalog ---------------- */
+function filteredProducts() {
+  let list = PRODUCTS.slice();
+  if (state.favOnly) list = list.filter((p) => favs.includes(p.id));
+  if (state.category !== "all") list = list.filter((p) => p.cat === state.category);
+  if (state.query) {
+    const q = state.query.toLowerCase();
+    list = list.filter((p) => (p.name + " " + p.catLabel + " " + p.short + " " + (p.kw || "")).toLowerCase().includes(q));
+  }
+  if (state.sort === "cheap") list.sort((a, b) => a.price - b.price);
+  else if (state.sort === "expensive") list.sort((a, b) => b.price - a.price);
+  else if (state.sort === "rating") list.sort((a, b) => b.rating - a.rating);
+  else list.sort((a, b) => b.reviews - a.reviews);
+  return list;
+}
+
+function productCard(p) {
+  const on = favs.includes(p.id);
+  return (
+    '<article class="pcard">' +
+      '<div class="pcard-media">' +
+        '<span class="off">−' + offPct(p) + '%</span>' +
+        '<button class="fav' + (on ? " on" : "") + '" type="button" data-fav="' + p.id + '" aria-label="Sevimlilarga qo\'shish">' + (on ? ICON.heartFill : ICON.heart) + '</button>' +
+        '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy" data-open="' + p.id + '">' +
+      '</div>' +
+      '<div class="pcard-body">' +
+        '<h3 data-open="' + p.id + '">' + p.name + '</h3>' +
+        '<div class="rate">' + ICON.star + '<b>' + p.rating.toFixed(1) + '</b><span>(' + p.reviews + ')</span></div>' +
+        '<div class="price-row"><div class="price"><b>' + money(p.price) + '</b><s>' + money(p.old) + '</s></div>' +
+          '<button class="add" type="button" data-add="' + p.id + '" aria-label="Savatga qo\'shish">' + ICON.cart + '</button></div>' +
+        '<div class="inst">12 oyiga <b>' + money(monthly(p.price)) + '</b></div>' +
+        '<div class="deliv">' + ICON.truck + ' Ertaga yetkaziladi</div>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
+function renderProducts() {
+  const list = filteredProducts();
+  const grid = $("#productGrid");
+  if (!list.length) {
+    let title = "Hech narsa topilmadi";
+    let sub = "Boshqa so'z bilan qidiring yoki kategoriyani o'zgartiring.";
+    if (state.favOnly) { title = "Sevimlilar bo'sh"; sub = "Mahsulot kartasidagi yurak belgisini bosib sevimlilarga qo'shing."; }
+    grid.innerHTML =
+      '<div class="empty"><span class="e-ic">' + (state.favOnly ? ICON.heart : ICON.search) + '</span>' +
+      '<b>' + title + '</b><span>' + sub + '</span>' +
+      '<button class="btn ghost" type="button" data-reset>Katalogga o\'tish</button></div>';
+  } else {
+    grid.innerHTML = list.map(productCard).join("");
+  }
+  $("#resultCount").textContent = list.length + " ta mahsulot";
+  const titleEl = $("#gridTitle");
+  if (state.favOnly) titleEl.textContent = "Sevimlilar";
+  else if (state.category !== "all") {
+    const cat = CATEGORIES.find((c) => c.id === state.category);
+    titleEl.textContent = cat ? cat.label + " mahsulotlari" : "Mahsulotlar";
+  }
+  else if (state.query) titleEl.textContent = "Qidiruv natijalari";
+  else titleEl.textContent = "Ommabop mahsulotlar";
+  paintIcons(grid);
+}
+
+function renderCategories() {
+  $("#catCircles").innerHTML = CATEGORIES.map((c) =>
+    '<button class="circle-item' + (state.category === c.id && !state.favOnly ? " on" : "") + '" type="button" data-cat="' + c.id + '">' +
+      '<span class="ci">' + (ICON[c.icon] || ICON.grid) + '</span><span>' + c.label + '</span>' +
+    '</button>'
+  ).join("");
+
+  $("#categoryChips").innerHTML = CATEGORIES.map((c) => {
+    const n = c.id === "all" ? PRODUCTS.length : PRODUCTS.filter((p) => p.cat === c.id).length;
+    return '<button class="chip' + (state.category === c.id && !state.favOnly ? " on" : "") + '" type="button" data-cat="' + c.id + '">' +
+      c.label + '<span class="cnum">' + n + '</span></button>';
+  }).join("");
+  paintIcons($("#catCircles"));
+}
+
+function setCategory(cat) {
+  state.category = cat;
+  state.favOnly = false;
+  state.query = "";
+  $("#searchInput").value = "";
+  renderCategories();
+  renderProducts();
+  scrollToCatalog();
+}
+
+function scrollToCatalog() {
+  $("#katalog").scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/* ---------------- favorites ---------------- */
+function toggleFav(id) {
+  const i = favs.indexOf(id);
+  if (i > -1) favs.splice(i, 1); else favs.push(id);
+  save(STORAGE.fav, favs);
+  updateFavCounts();
+  renderProducts();
+  const modalFav = $(".pm-actions [data-fav]");
+  if (modalFav && modalFav.dataset.fav === id) {
+    const on = favs.includes(id);
+    modalFav.classList.toggle("on", on);
+    modalFav.innerHTML = on ? ICON.heartFill : ICON.heart;
+  }
+  toast(favs.includes(id) ? "Sevimlilarga qo'shildi" : "Sevimlilardan olib tashlandi");
+}
+
+function updateFavCounts() {
+  const n = favs.length;
+  ["#favCount", "#favCountBn"].forEach((sel) => {
+    const el = $(sel);
+    if (!el) return;
+    el.textContent = n;
+    el.hidden = n === 0;
+  });
+}
+
+function toggleFavOnly() {
+  state.favOnly = !state.favOnly;
+  if (state.favOnly) { state.category = "all"; state.query = ""; $("#searchInput").value = ""; }
+  renderCategories();
+  renderProducts();
+  scrollToCatalog();
+  setBottomActive(state.favOnly ? "fav" : "home");
+}
+
+/* ---------------- cart ---------------- */
+function cartCount() { return Object.values(cart).reduce((a, b) => a + b, 0); }
+function cartItems() { return Object.keys(cart).map((id) => ({ p: findProduct(id), qty: cart[id] })).filter((x) => x.p); }
+function cartSubtotal() { return cartItems().reduce((sum, x) => sum + x.p.price * x.qty, 0); }
+function cartDiscount() { return promoOn ? Math.round(cartSubtotal() * 0.1) : 0; }
+function cartTotal() { return cartSubtotal() - cartDiscount(); }
+
+function addToCart(id, qty) {
+  if (!findProduct(id)) return;
+  cart[id] = (cart[id] || 0) + (qty || 1);
+  save(STORAGE.cart, cart);
+  updateCartBadges();
+  renderCart();
+  const btn = document.querySelector('[data-add="' + id + '"]');
+  if (btn) {
+    btn.classList.add("added");
+    btn.innerHTML = ICON.check;
+    setTimeout(() => { btn.classList.remove("added"); btn.innerHTML = ICON.cart; }, 900);
+  }
+  toast("Savatga qo'shildi");
+}
+
+function setQty(id, qty) {
+  if (qty <= 0) delete cart[id]; else cart[id] = qty;
+  save(STORAGE.cart, cart);
+  updateCartBadges();
+  renderCart();
+}
+
+function updateCartBadges() {
+  const n = cartCount();
+  ["#cartCount", "#cartCountBn"].forEach((sel) => {
+    const el = $(sel);
+    if (!el) return;
+    el.textContent = n;
+    el.hidden = n === 0;
+  });
+  const checkoutBtn = $("#checkoutBtn");
+  if (checkoutBtn) checkoutBtn.disabled = n === 0;
+}
+
+function renderCart() {
+  const items = cartItems();
+  const body = $("#cartBody");
+  if (!items.length) {
+    body.innerHTML =
+      '<div class="cart-empty"><span class="ce-ic">' + ICON.cart + '</span>' +
+      '<b>Savat bo\'sh</b><span>Katalogdan mahsulot tanlang yoki AI yordamchidan foydalaning.</span>' +
+      '<button class="btn ghost" type="button" data-gocart>Katalogga o\'tish</button></div>';
+  } else {
+    body.innerHTML = items.map((x) =>
+      '<div class="citem" data-id="' + x.p.id + '">' +
+        '<img src="' + x.p.img + '" alt="' + x.p.name + '">' +
+        '<div class="citem-main">' +
+          '<b>' + x.p.name + '</b>' +
+          '<div class="ci-price">' + money(x.p.price) + '</div>' +
+          '<div class="ci-old">' + money(x.p.old) + '</div>' +
+          '<div class="citem-foot">' +
+            '<div class="stepper">' +
+              '<button type="button" data-dec="' + x.p.id + '" aria-label="Kamaytirish">' + ICON.minus + '</button>' +
+              '<span>' + x.qty + '</span>' +
+              '<button type="button" data-inc="' + x.p.id + '" aria-label="Ko\'paytirish">' + ICON.plus + '</button>' +
+            '</div>' +
+            '<button class="ci-del" type="button" data-del="' + x.p.id + '" aria-label="Olib tashlash">' + ICON.trash + '</button>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    ).join("");
+  }
+  paintIcons(body);
+
+  $("#cartSubtotal").textContent = money(cartSubtotal());
+  $("#cartTotal").textContent = money(cartTotal());
+  $("#checkoutTotal").textContent = money(cartTotal());
+  const dRow = $("#discountRow");
+  dRow.hidden = !promoOn || !items.length;
+  $("#cartDiscount").textContent = "−" + money(cartDiscount());
+  $("#promoOk").hidden = !promoOn;
+  $("#promoRow").style.display = promoOn ? "none" : "flex";
+  updateCartBadges();
+}
+
+function applyPromo() {
+  const value = $("#promoInput").value.trim().toUpperCase();
+  if (!value) return;
+  if (value === PROMO_CODE) {
+    promoOn = true;
+    $("#promoInput").value = "";
+    renderCart();
+    toast("Promo kod qo'llandi: −10%");
+  } else {
+    toast("Promo kod topilmadi");
+  }
+}
+
+/* ---------------- overlays ---------------- */
+function anyOpen() {
+  return $("#cartDrawer").classList.contains("open") ||
+         $("#productModal").classList.contains("open") ||
+         $("#aiModal").classList.contains("open") ||
+         $("#successModal").classList.contains("open");
+}
+function syncScrim() {
+  $("#scrim").classList.toggle("show", anyOpen());
+  document.body.classList.toggle("locked", anyOpen());
+}
+function openCart() {
+  clearTimeout(toastTimer);
+  $("#toast").classList.remove("show");
+  $("#cartView").style.display = "block";
+  $("#checkoutView").style.display = "none";
+  $("#cartFoot").style.display = "block";
+  $("#cartDrawer").classList.add("open");
+  $("#cartDrawer").setAttribute("aria-hidden", "false");
+  syncScrim();
+}
+function closeCart() {
+  $("#cartDrawer").classList.remove("open");
+  $("#cartDrawer").setAttribute("aria-hidden", "true");
+  syncScrim();
+}
+function openProduct(id) {
+  const p = findProduct(id);
+  if (!p) return;
+  $("#pmImg").src = p.img;
+  $("#pmImg").alt = p.name;
+  $("#pmOff").textContent = "−" + offPct(p) + "%";
+  const on = favs.includes(p.id);
+  $("#pmBody").innerHTML =
+    '<div class="pm-cat">' + p.catLabel + '</div>' +
+    '<h2>' + p.name + '</h2>' +
+    '<div class="pm-rate">' + ICON.star + '<b>' + p.rating.toFixed(1) + '</b><span>· ' + p.reviews + ' ta sharh</span></div>' +
+    '<div class="pm-price"><b>' + money(p.price) + '</b><s>' + money(p.old) + '</s><span class="off">−' + offPct(p) + '%</span></div>' +
+    '<div class="pm-inst">' + ICON.card + '<span>12 oyiga <b>' + money(monthly(p.price)) + '</b> dan to\'lang</span></div>' +
+    '<div class="pm-deliv">' + ICON.truck + '<span>Ertaga yetkaziladi · Bepul</span></div>' +
+    '<p class="pm-desc">' + p.desc + '</p>' +
+    '<ul class="pm-specs">' + p.specs.map((s) => '<li>' + ICON.check + '<span>' + s + '</span></li>').join("") + '</ul>' +
+    '<div class="pm-actions">' +
+      '<button class="btn" type="button" data-add="' + p.id + '">' + ICON.cart + ' Savatga qo\'shish</button>' +
+      '<button class="fav-btn' + (on ? " on" : "") + '" type="button" data-fav="' + p.id + '" aria-label="Sevimlilar">' + (on ? ICON.heartFill : ICON.heart) + '</button>' +
+    '</div>';
+  paintIcons($("#pmBody"));
+  $("#productModal").classList.add("open");
+  syncScrim();
+}
+function closeProduct() {
+  $("#productModal").classList.remove("open");
+  syncScrim();
+}
+function openAi() {
+  quiz = { step: 0, answers: [] };
+  renderQuiz();
+  $("#aiModal").classList.add("open");
+  syncScrim();
+}
+function closeAi() {
+  $("#aiModal").classList.remove("open");
+  syncScrim();
+}
+function closeSuccess() {
+  $("#successModal").classList.remove("open");
+  syncScrim();
+}
+
+/* ---------------- quiz ---------------- */
+function quizPicks() {
+  const tags = quiz.answers.filter((v) => typeof v === "string");
+  const budget = quiz.answers[1] || Infinity;
+  let pool = PRODUCTS.filter((p) => p.price <= budget);
+  let note = "";
+  if (!pool.length) {
+    pool = PRODUCTS.slice();
+    note = "Bu byudjetda aniq variant yo'q — eng arzonlarini ko'rsatdim.";
+  }
+  const scored = pool.map((p) => {
+    let score = 0;
+    tags.forEach((t) => { if (p.tags.includes(t)) score += 10; });
+    score += p.rating;
+    return { p, score };
+  }).sort((a, b) => b.score - a.score || b.p.reviews - a.p.reviews);
+  return { picks: scored.slice(0, 2).map((x) => x.p), note };
+}
+
+function renderQuiz() {
+  const box = $("#quizBox");
+  const bars = $$("#quizProgress i");
+  bars.forEach((b, i) => b.classList.toggle("on", i < Math.min(quiz.step + 1, 3)));
+
+  if (quiz.step < QUIZ.length) {
+    const q = QUIZ[quiz.step];
+    const letters = ["A", "B", "C", "D"];
+    box.innerHTML =
+      '<div class="quiz-step">' +
+        '<span class="q-kicker">Savol ' + (quiz.step + 1) + ' / 3</span>' +
+        '<h3>' + q.q + '</h3>' +
+        '<div class="q-opts">' +
+          q.options.map((o, i) =>
+            '<button class="q-opt" type="button" data-opt="' + i + '">' +
+              '<span class="q-letter">' + letters[i] + '</span>' +
+              '<span><b>' + o.t + '</b><span>' + o.s + '</span></span>' +
+            '</button>'
+          ).join("") +
+        '</div>' +
+        (quiz.step > 0 ? '<button class="q-back" type="button" data-qback>← Orqaga</button>' : '') +
+      '</div>';
+    return;
+  }
+
+  const result = quizPicks();
+  box.innerHTML =
+    '<div class="quiz-result">' +
+      '<span class="qr-tag">' + ICON.sparkle + ' AI tanladi</span>' +
+      '<h3>Sizga mos ' + result.picks.length + ' ta variant</h3>' +
+      '<div class="qr-list">' +
+        result.picks.map((p) =>
+          '<div class="qr-item">' +
+            '<img src="' + p.img + '" alt="' + p.name + '">' +
+            '<div><div class="qm-name">' + p.name + '</div><div class="qm-price">' + money(p.price) + '</div></div>' +
+            '<button class="add" type="button" data-add="' + p.id + '" aria-label="Savatga">' + ICON.cart + '</button>' +
+          '</div>'
+        ).join("") +
+      '</div>' +
+      (result.note ? '<div class="qr-note">' + result.note + '</div>' : '') +
+      '<div class="qr-actions">' +
+        '<button class="btn line" type="button" data-qrestart>Qaytadan</button>' +
+        '<button class="btn" type="button" data-add-both>Ikkalasini savatga qo\'shish</button>' +
+      '</div>' +
+    '</div>';
+}
+
+function answerQuiz(index) {
+  const q = QUIZ[quiz.step];
+  if (!q) return;
+  quiz.answers[quiz.step] = q.options[index].v;
+  quiz.step += 1;
+  renderQuiz();
+}
+
+/* ---------------- carousel ---------------- */
+let slideIndex = 0;
+let slideTimer = null;
+function showSlide(i) {
+  const slides = $$("#carousel .slide");
+  if (!slides.length) return;
+  slideIndex = (i + slides.length) % slides.length;
+  slides.forEach((s, n) => s.classList.toggle("on", n === slideIndex));
+  $$("#dots button").forEach((d, n) => d.classList.toggle("on", n === slideIndex));
+}
+function startCarousel() {
+  clearInterval(slideTimer);
+  slideTimer = setInterval(() => showSlide(slideIndex + 1), 5600);
+}
+function initCarousel() {
+  const slides = $$("#carousel .slide");
+  $("#dots").innerHTML = slides.map((s, i) => '<button type="button" data-slide="' + i + '" class="' + (i === 0 ? "on" : "") + '" aria-label="' + (i + 1) + '-slayd"></button>').join("");
+  const car = $("#carousel");
+  car.addEventListener("mouseenter", () => clearInterval(slideTimer));
+  car.addEventListener("mouseleave", startCarousel);
+  startCarousel();
+}
+
+/* ---------------- checkout ---------------- */
+function showCheckout() {
+  if (!cartCount()) { openCart(); return; }
+  $("#cartView").style.display = "none";
+  $("#cartFoot").style.display = "none";
+  $("#checkoutView").style.display = "block";
+  $("#checkoutTotal").textContent = money(cartTotal());
+}
+function backToCart() {
+  $("#cartView").style.display = "block";
+  $("#cartFoot").style.display = "block";
+  $("#checkoutView").style.display = "none";
+}
+function submitOrder(e) {
+  e.preventDefault();
+  const name = $("#coName").value.trim();
+  const phone = $("#coPhone").value.trim();
+  const address = $("#coAddress").value.trim();
+  const pay = (document.querySelector('input[name="pay"]:checked') || {}).value || "Naqd";
+  const note = $("#coNote").value.trim();
+  if (!name || !address || phone.replace(/\D/g, "").length < 9) {
+    toast("Iltimos, ism, telefon va manzilni to'ldiring");
+    return;
+  }
+  if (!cartCount()) { toast("Savat bo'sh"); return; }
+  const order = {
+    id: "BM-" + String(Date.now()).slice(-6),
+    name, phone, address, pay, note,
+    items: cartItems().map((x) => ({ id: x.p.id, name: x.p.name, qty: x.qty, price: x.p.price })),
+    total: cartTotal(),
+    date: new Date().toISOString()
+  };
+  const orders = load(STORAGE.orders, []);
+  orders.unshift(order);
+  save(STORAGE.orders, orders);
+
+  $("#successNum").textContent = order.id;
+  cart = {};
+  promoOn = false;
+  save(STORAGE.cart, cart);
+  $("#checkoutForm").reset();
+  renderCart();
+  updateCartBadges();
+  backToCart();
+  closeCart();
+  $("#successModal").classList.add("open");
+  syncScrim();
+}
+
+/* ---------------- toast ---------------- */
+let toastTimer = null;
+function toast(message) {
+  const el = $("#toast");
+  el.innerHTML = ICON.check + "<span>" + message + "</span>";
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+/* ---------------- bottom nav ---------------- */
+function setBottomActive(name) {
+  $$(".bn-item").forEach((b) => b.classList.toggle("on", b.dataset.bn === name));
+}
+
+/* ---------------- events ---------------- */
+function bindEvents() {
+  document.addEventListener("click", (e) => {
+    const t = e.target;
+    const catBtn = t.closest("[data-cat]");
+    if (catBtn) { e.preventDefault(); setCategory(catBtn.dataset.cat); return; }
+
+    const addBtn = t.closest("[data-add]");
+    if (addBtn) { e.preventDefault(); addToCart(addBtn.dataset.add, 1); return; }
+
+    const openBtn = t.closest("[data-open]");
+    if (openBtn) { e.preventDefault(); openProduct(openBtn.dataset.open); return; }
+
+    const favBtn = t.closest("[data-fav]");
+    if (favBtn) { e.preventDefault(); toggleFav(favBtn.dataset.fav); return; }
+
+    const inc = t.closest("[data-inc]");
+    if (inc) { setQty(inc.dataset.inc, (cart[inc.dataset.inc] || 0) + 1); return; }
+    const dec = t.closest("[data-dec]");
+    if (dec) { setQty(dec.dataset.dec, (cart[dec.dataset.dec] || 0) - 1); return; }
+    const del = t.closest("[data-del]");
+    if (del) { setQty(del.dataset.del, 0); toast("Olib tashlandi"); return; }
+
+    if (t.closest("[data-reset]")) {
+      state.favOnly = false;
+      state.category = "all";
+      state.query = "";
+      $("#searchInput").value = "";
+      renderCategories();
+      renderProducts();
+      return;
+    }
+    if (t.closest("[data-gocart]")) { closeCart(); scrollToCatalog(); setBottomActive("catalog"); return; }
+    if (t.closest("[data-open-quiz]")) { openAi(); return; }
+
+    if (t.closest("[data-qback]")) { quiz.step = Math.max(0, quiz.step - 1); renderQuiz(); return; }
+    if (t.closest("[data-qrestart]")) { quiz = { step: 0, answers: [] }; renderQuiz(); return; }
+    if (t.closest("[data-add-both]")) {
+      $$("#quizBox [data-add]").forEach((b) => addToCart(b.dataset.add, 1));
+      closeAi();
+      openCart();
+      return;
+    }
+    const opt = t.closest("[data-opt]");
+    if (opt) { answerQuiz(Number(opt.dataset.opt)); return; }
+
+    if (t.closest("[data-pclose]")) { closeProduct(); return; }
+    if (t.closest("[data-aclose]")) { closeAi(); return; }
+
+    const slideDot = t.closest("[data-slide]");
+    if (slideDot) { showSlide(Number(slideDot.dataset.slide)); startCarousel(); return; }
+
+    const bn = t.closest("[data-bn]");
+    if (bn) {
+      const which = bn.dataset.bn;
+      setBottomActive(which);
+      if (which === "home") window.scrollTo({ top: 0, behavior: "smooth" });
+      if (which === "catalog") { state.favOnly = false; state.category = "all"; renderCategories(); renderProducts(); scrollToCatalog(); }
+      if (which === "ai") openAi();
+      if (which === "fav") { state.favOnly = true; state.category = "all"; renderCategories(); renderProducts(); scrollToCatalog(); }
+      if (which === "cart") openCart();
+      return;
+    }
+  });
+
+  $("#cartBtn").addEventListener("click", openCart);
+  $("#favHeadBtn").addEventListener("click", toggleFavOnly);
+  $("#aiHeadBtn").addEventListener("click", openAi);
+  $("#catalogBtn").addEventListener("click", () => setCategory("all"));
+  $("#cartClose").addEventListener("click", closeCart);
+  $("#checkoutBtn").addEventListener("click", showCheckout);
+  $("#coBack").addEventListener("click", backToCart);
+  $("#checkoutForm").addEventListener("submit", submitOrder);
+  $("#promoBtn").addEventListener("click", applyPromo);
+  $("#promoInput").addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); applyPromo(); } });
+  $("#successClose").addEventListener("click", closeSuccess);
+  $("#slidePrev").addEventListener("click", () => { showSlide(slideIndex - 1); startCarousel(); });
+  $("#slideNext").addEventListener("click", () => { showSlide(slideIndex + 1); startCarousel(); });
+  $("#sortSelect").addEventListener("change", (e) => { state.sort = e.target.value; renderProducts(); });
+
+  $("#searchInput").addEventListener("input", (e) => {
+    state.query = e.target.value.trim();
+    if (state.query) { state.category = "all"; state.favOnly = false; renderCategories(); }
+    renderProducts();
+  });
+  $("#searchForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    state.query = $("#searchInput").value.trim();
+    if (state.query) { state.category = "all"; state.favOnly = false; renderCategories(); }
+    renderProducts();
+    if (state.query) scrollToCatalog();
+  });
+
+  $("#scrim").addEventListener("click", () => {
+    if ($("#successModal").classList.contains("open")) return;
+    if ($("#productModal").classList.contains("open")) closeProduct();
+    else if ($("#aiModal").classList.contains("open")) closeAi();
+    else if ($("#cartDrawer").classList.contains("open")) closeCart();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if ($("#productModal").classList.contains("open")) closeProduct();
+    else if ($("#aiModal").classList.contains("open")) closeAi();
+    else if ($("#cartDrawer").classList.contains("open")) closeCart();
+  });
+
+  // swipe carousel on touch
+  let sx = 0;
+  const car = $("#carousel");
+  car.addEventListener("touchstart", (e) => { sx = e.touches[0].clientX; }, { passive: true });
+  car.addEventListener("touchend", (e) => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) { showSlide(slideIndex + (dx < 0 ? 1 : -1)); startCarousel(); }
+  }, { passive: true });
+}
+
+/* ---------------- init ---------------- */
+function init() {
+  paintIcons(document);
+  initCarousel();
+  renderCategories();
+  renderProducts();
+  renderCart();
+  updateFavCounts();
+  updateCartBadges();
+  bindEvents();
+
+  if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+    window.addEventListener("load", () => {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    });
+  }
+}
+init();
+</script>
+</body>
+</html>
