@@ -1,0 +1,1961 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>BOZOR — AI bilan aqlli xarid</title>
+<meta name="description" content="BOZOR — yorqin va oson onlayn do'kon. AI 3 savolda sizga mos mahsulotni tanlaydi. Gadjetlar, audio, sport va sovg'alar.">
+<meta name="theme-color" content="#FBF3E4">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23111111'/%3E%3Cpath d='M32 12l4.5 13.5L50 30l-13.5 4.5L32 48l-4.5-13.5L14 30l13.5-4.5z' fill='%23C9F45B'/%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#FBF3E4;
+    --paper-2:#FFFDF7;
+    --ink:#111111;
+    --lime:#C9F45B;
+    --coral:#FF6B4A;
+    --lilac:#C9B6FF;
+    --sky:#8ED8FF;
+    --yellow:#FFD84D;
+    --pink:#FFB6D5;
+    --mint:#B6F0D3;
+    --muted:#5F5B51;
+    --shadow:6px 6px 0 var(--ink);
+    --shadow-sm:4px 4px 0 var(--ink);
+    --radius:18px;
+    --display:"Arial Black","Arial Bold","Segoe UI",system-ui,sans-serif;
+    --body:"Segoe UI","Trebuchet MS",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--body);
+    color:var(--ink);
+    background-color:var(--paper);
+    background-image:radial-gradient(rgba(17,17,17,.055) 1.3px,transparent 1.3px);
+    background-size:22px 22px;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  button{font-family:inherit;color:inherit;cursor:pointer;border:0;background:none}
+  input,select,textarea{font-family:inherit;font-size:inherit;color:inherit}
+  ::selection{background:var(--lime);color:var(--ink)}
+  :focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+  .wrap{width:min(1220px,100% - 40px);margin-inline:auto}
+  .display{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:-.035em}
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    background:var(--ink);
+    color:var(--lime);
+    border-bottom:3px solid var(--ink);
+    overflow:hidden;
+    padding:9px 0;
+  }
+  .ticker-track{display:flex;width:max-content;animation:ticker 34s linear infinite}
+  .ticker-set{display:flex;align-items:center}
+  .ticker-set span{
+    font-family:var(--display);
+    font-size:11.5px;
+    letter-spacing:.13em;
+    text-transform:uppercase;
+    padding:0 20px;
+    white-space:nowrap;
+  }
+  .ticker-set i{font-style:normal;color:var(--coral);font-size:13px}
+  @keyframes ticker{to{transform:translateX(-50%)}}
+
+  /* ---------- header ---------- */
+  .site-head{
+    position:sticky;top:0;z-index:60;
+    background:var(--paper);
+    border-bottom:3px solid var(--ink);
+  }
+  .head-row{display:flex;align-items:center;gap:22px;padding:14px 0;flex-wrap:wrap}
+  .logo{display:flex;align-items:center;gap:8px;flex-shrink:0}
+  .logo b{
+    font-family:var(--display);
+    font-size:27px;letter-spacing:-.045em;line-height:1;
+    text-transform:uppercase;
+  }
+  .logo .star{
+    font-family:var(--display);
+    color:var(--coral);
+    font-size:30px;line-height:1;
+    transform:translateY(-3px);
+  }
+  .logo .ai-chip{
+    font-family:var(--display);
+    font-size:10px;letter-spacing:.06em;
+    background:var(--lime);
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    padding:4px 6px;
+    box-shadow:2px 2px 0 var(--ink);
+    transform:rotate(-6deg) translateY(-2px);
+  }
+  .nav{display:flex;align-items:center;gap:24px;margin-left:8px}
+  .nav a{
+    font-size:13.5px;font-weight:800;
+    text-transform:uppercase;letter-spacing:.02em;
+    padding:4px 0;position:relative;
+  }
+  .nav a::after{
+    content:"";position:absolute;left:0;bottom:-1px;height:3px;width:100%;
+    background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .2s;
+  }
+  .nav a:hover::after{transform:scaleX(1)}
+  .head-tools{display:flex;align-items:center;gap:12px;margin-left:auto}
+  .search{
+    display:flex;align-items:center;gap:9px;
+    background:var(--paper-2);
+    border:3px solid var(--ink);
+    border-radius:12px;
+    padding:8px 12px;
+    width:236px;
+    box-shadow:3px 3px 0 var(--ink);
+    transition:box-shadow .15s,transform .15s,width .25s;
+  }
+  .search:focus-within{box-shadow:5px 5px 0 var(--ink);transform:translate(-2px,-2px);width:270px;background:#fff}
+  .search svg{width:16px;height:16px;flex-shrink:0}
+  .search input{background:none;border:0;outline:0;width:100%;font-size:13px;font-weight:600}
+  .search input::placeholder{color:#8B8578;font-weight:500}
+  .cart-btn{
+    display:flex;align-items:center;gap:8px;
+    background:var(--ink);
+    color:var(--lime);
+    border:3px solid var(--ink);
+    border-radius:12px;
+    padding:8px 13px;
+    font-family:var(--display);
+    font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;
+    box-shadow:3px 3px 0 rgba(17,17,17,.35);
+    transition:transform .12s,box-shadow .12s;
+  }
+  .cart-btn:hover{transform:translate(-1px,-1px);box-shadow:5px 5px 0 rgba(17,17,17,.35)}
+  .cart-btn:active{transform:translate(1px,1px);box-shadow:1px 1px 0 rgba(17,17,17,.35)}
+  .cart-btn svg{width:17px;height:17px}
+  .cart-count{
+    min-width:21px;height:21px;padding:0 6px;
+    display:grid;place-items:center;
+    background:var(--lime);color:var(--ink);
+    border:2px solid var(--ink);
+    border-radius:7px;
+    font-family:var(--body);
+    font-size:11px;font-weight:900;
+  }
+  .cart-count.pulse{animation:pop .35s ease}
+  @keyframes pop{0%{transform:scale(1)}45%{transform:scale(1.4)}100%{transform:scale(1)}}
+  .mobile-search{display:none;width:100%}
+  .mobile-search .search{width:100%}
+  .mobile-search .search:focus-within{width:100%}
+
+  /* ---------- buttons ---------- */
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    font-family:var(--display);
+    font-size:12.5px;letter-spacing:.03em;text-transform:uppercase;
+    padding:14px 22px;
+    border:3px solid var(--ink);
+    border-radius:13px;
+    background:var(--paper-2);
+    box-shadow:var(--shadow-sm);
+    transition:transform .12s,box-shadow .12s,background .15s;
+    white-space:nowrap;
+  }
+  .btn svg{width:17px;height:17px;flex-shrink:0}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:8px 8px 0 var(--ink)}
+  .btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+  .btn-dark{background:var(--ink);color:var(--lime)}
+  .btn-lime{background:var(--lime)}
+  .btn-coral{background:var(--coral)}
+  .btn-sm{padding:10px 16px;font-size:11px;box-shadow:3px 3px 0 var(--ink)}
+  .btn-sm:hover{box-shadow:5px 5px 0 var(--ink)}
+
+  /* ---------- hero ---------- */
+  .hero{padding:52px 0 48px;position:relative;overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.06fr .94fr;gap:40px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;
+    background:var(--yellow);
+    border:3px solid var(--ink);
+    border-radius:10px;
+    padding:6px 11px;
+    font-family:var(--display);
+    font-size:10.5px;letter-spacing:.07em;text-transform:uppercase;
+    box-shadow:3px 3px 0 var(--ink);
+    transform:rotate(-1.5deg);
+    margin-bottom:22px;
+  }
+  .eyebrow .dot{width:9px;height:9px;border-radius:50%;background:var(--coral);border:2px solid var(--ink)}
+  .hero-title{font-size:clamp(2.9rem,6.6vw,5.4rem);line-height:.98;margin-bottom:22px}
+  .hero-title .line{display:block;margin-bottom:6px}
+  .hero-title .mark{
+    display:inline-block;
+    padding:2px 12px 0;
+    border:3px solid var(--ink);
+    border-radius:14px;
+    box-shadow:5px 5px 0 var(--ink);
+    line-height:1.06;
+  }
+  .mark-lime{background:var(--lime);transform:rotate(-1.2deg)}
+  .mark-lilac{background:var(--lilac);transform:rotate(1deg)}
+  .mark-coral{background:var(--coral);transform:rotate(-1.8deg)}
+  .hero-sub{
+    font-size:16px;color:#37342D;max-width:490px;margin-bottom:26px;
+    font-weight:500;
+  }
+  .hero-sub b{background:var(--lime);padding:0 4px;border-radius:4px}
+  .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+  .hero-stats{display:flex;gap:10px;flex-wrap:wrap}
+  .stat{
+    background:var(--paper-2);
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    padding:7px 12px;
+    font-size:11.5px;font-weight:800;
+    box-shadow:2px 2px 0 var(--ink);
+    text-transform:uppercase;letter-spacing:.02em;
+  }
+  .stat b{font-family:var(--display)}
+
+  .hero-art{position:relative;height:470px;min-width:0}
+  .art-blob{
+    position:absolute;inset:8% 2% 6% 8%;
+    background:var(--lime);
+    border:3px solid var(--ink);
+    border-radius:46% 54% 58% 42% / 52% 44% 56% 48%;
+    box-shadow:8px 8px 0 var(--ink);
+    transform:rotate(-3deg);
+  }
+  .art-dots{
+    position:absolute;right:-6px;top:-6px;width:110px;height:110px;
+    background-image:radial-gradient(var(--ink) 2px,transparent 2px);
+    background-size:16px 16px;
+    opacity:.35;
+  }
+  .poster{
+    position:absolute;
+    background:var(--paper-2);
+    border:3px solid var(--ink);
+    border-radius:14px;
+    padding:9px 9px 11px;
+    box-shadow:7px 7px 0 var(--ink);
+  }
+  .poster img{width:100%;aspect-ratio:1;object-fit:cover;border:2.5px solid var(--ink);border-radius:9px}
+  .poster-a{width:56%;top:3%;left:1%;transform:rotate(-6deg);z-index:2}
+  .poster-b{width:52%;bottom:2%;right:1%;transform:rotate(5deg);z-index:3}
+  .poster-tag{
+    position:absolute;top:-12px;left:14px;
+    background:var(--coral);
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    padding:3px 9px;
+    font-family:var(--display);
+    font-size:9.5px;letter-spacing:.07em;text-transform:uppercase;
+    box-shadow:2px 2px 0 var(--ink);
+    transform:rotate(-3deg);
+  }
+  .poster-tag.alt{background:var(--sky)}
+  .poster-info{display:flex;align-items:center;justify-content:space-between;gap:8px;padding-top:8px}
+  .poster-info b{font-size:11.5px;font-weight:900;text-transform:uppercase;letter-spacing:-.01em}
+  .poster-info span{font-size:10.5px;font-weight:800;white-space:nowrap}
+  .art-sticker{
+    position:absolute;
+    right:2%;top:0;
+    width:104px;height:104px;
+    border-radius:50%;
+    background:var(--ink);
+    color:var(--lime);
+    border:3px solid var(--ink);
+    box-shadow:4px 4px 0 var(--coral);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    gap:1px;
+    transform:rotate(9deg);
+    z-index:4;
+    text-align:center;
+  }
+  .art-sticker b{font-family:var(--display);font-size:30px;line-height:1}
+  .art-sticker span{font-size:8px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;max-width:70px;line-height:1.3}
+  .art-note{
+    position:absolute;left:3%;bottom:27%;z-index:4;
+    background:var(--yellow);
+    border:2.5px solid var(--ink);
+    border-radius:8px;
+    padding:5px 10px;
+    font-size:10.5px;font-weight:800;
+    box-shadow:3px 3px 0 var(--ink);
+    transform:rotate(-4deg);
+  }
+
+  /* ---------- sections ---------- */
+  .sec{padding:54px 0;border-top:3px solid var(--ink)}
+  #katalog, #ai{scroll-margin-top:96px}
+  .sec-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+  .sec-index{
+    font-family:var(--display);
+    font-size:13px;
+    background:var(--ink);color:var(--lime);
+    border:3px solid var(--ink);
+    border-radius:9px;
+    padding:6px 9px;
+    box-shadow:3px 3px 0 rgba(17,17,17,.28);
+    flex-shrink:0;
+    margin-top:6px;
+  }
+  .sec-title{font-size:clamp(1.9rem,4vw,3rem);line-height:1;letter-spacing:-.04em}
+  .sec-title .hl{background:var(--lilac);padding:0 8px;border:3px solid var(--ink);border-radius:9px;display:inline-block;transform:rotate(-.6deg)}
+  .sec-sub{font-size:13.5px;color:var(--muted);font-weight:500;max-width:430px;margin-left:auto;align-self:flex-end;text-align:right}
+  .sec-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-left:auto}
+
+  /* ---------- catalog ---------- */
+  .chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 14px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{
+    flex-shrink:0;
+    background:var(--paper-2);
+    border:2.5px solid var(--ink);
+    border-radius:999px;
+    padding:8px 15px;
+    font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.03em;
+    box-shadow:2px 2px 0 var(--ink);
+    transition:transform .12s,box-shadow .12s,background .12s;
+  }
+  .chip:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+  .chip.active{background:var(--ink);color:var(--lime);box-shadow:2px 2px 0 rgba(17,17,17,.3)}
+  .sort-wrap{position:relative;flex-shrink:0}
+  .sort-wrap svg{position:absolute;right:10px;top:50%;transform:translateY(-50%);width:14px;height:14px;pointer-events:none}
+  .sort-wrap select{
+    appearance:none;-webkit-appearance:none;
+    background:var(--paper-2);
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    padding:9px 32px 9px 12px;
+    font-size:12px;font-weight:800;
+    box-shadow:2px 2px 0 var(--ink);
+    cursor:pointer;outline:0;
+  }
+  .catalog-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:4px}
+  .catalog-top .chips{margin-bottom:0;padding-bottom:4px}
+  .result-count{font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+
+  .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin-top:18px}
+  .card{
+    background:var(--paper-2);
+    border:3px solid var(--ink);
+    border-radius:16px;
+    box-shadow:5px 5px 0 var(--ink);
+    overflow:hidden;
+    display:flex;flex-direction:column;
+    transition:transform .18s,box-shadow .18s;
+  }
+  .card:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)}
+  .card-media{position:relative;aspect-ratio:1;cursor:pointer;overflow:hidden;background:var(--paper)}
+  .card-media img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+  .card:hover .card-media img{transform:scale(1.045)}
+  .card-badge{
+    position:absolute;top:10px;left:10px;
+    background:var(--lime);
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    padding:3px 8px;
+    font-family:var(--display);
+    font-size:8.5px;letter-spacing:.07em;text-transform:uppercase;
+    box-shadow:2px 2px 0 var(--ink);
+    transform:rotate(-4deg);
+    z-index:2;
+  }
+  .card-badge.hot{background:var(--coral)}
+  .card-badge.new{background:var(--sky)}
+  .card-badge.lilac{background:var(--lilac)}
+  .card-body{padding:11px 12px 13px;border-top:3px solid var(--ink);display:flex;flex-direction:column;flex:1}
+  .card-cat{font-size:9px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:#6E6A60;margin-bottom:2px}
+  .card-name{font-family:var(--display);font-size:14.5px;letter-spacing:-.02em;text-transform:uppercase;line-height:1.15}
+  .card-rating{display:flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;color:var(--muted);margin-top:4px}
+  .card-rating svg{width:11px;height:11px;fill:var(--ink)}
+  .card-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:9px}
+  .price{display:flex;flex-direction:column;line-height:1.1}
+  .price b{font-family:var(--display);font-size:14px;letter-spacing:-.02em;white-space:nowrap}
+  .price span{font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+  .add{
+    width:38px;height:38px;flex-shrink:0;
+    display:grid;place-items:center;
+    background:var(--lime);
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    box-shadow:3px 3px 0 var(--ink);
+    transition:transform .12s,box-shadow .12s,background .12s;
+  }
+  .add:hover{transform:translate(-1.5px,-1.5px);box-shadow:5px 5px 0 var(--ink)}
+  .add:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+  .add svg{width:18px;height:18px}
+  .add.done{background:var(--coral)}
+  .empty{
+    grid-column:1/-1;
+    text-align:center;
+    border:3px dashed var(--ink);
+    border-radius:16px;
+    padding:48px 20px;
+    background:var(--paper-2);
+  }
+  .empty b{display:block;font-family:var(--display);font-size:18px;text-transform:uppercase;margin-bottom:5px}
+  .empty span{font-size:13px;color:var(--muted)}
+
+  /* ---------- marquee band ---------- */
+  .band{
+    background:var(--coral);
+    border-top:3px solid var(--ink);
+    border-bottom:3px solid var(--ink);
+    overflow:hidden;
+    padding:11px 0;
+  }
+  .band .ticker-track{animation-duration:26s}
+  .band .ticker-set span{
+    font-family:var(--display);
+    font-size:15px;letter-spacing:.05em;text-transform:uppercase;
+    color:var(--ink);
+    padding:0 22px;
+  }
+  .band .ticker-set i{color:var(--paper);font-size:16px;font-style:normal}
+
+  /* ---------- AI quiz ---------- */
+  .ai-sec{padding:54px 0;border-top:0}
+  .ai-panel{
+    background:var(--lime);
+    border:3px solid var(--ink);
+    border-radius:24px;
+    box-shadow:10px 10px 0 var(--ink);
+    padding:clamp(20px,4vw,42px);
+    position:relative;
+  }
+  .ai-head{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+  .ai-badge{
+    width:54px;height:54px;flex-shrink:0;
+    display:grid;place-items:center;
+    background:var(--ink);color:var(--lime);
+    border:3px solid var(--ink);
+    border-radius:14px;
+    font-family:var(--display);
+    font-size:19px;
+    box-shadow:4px 4px 0 var(--coral);
+    transform:rotate(-7deg);
+  }
+  .ai-head h2{font-size:clamp(1.65rem,3.4vw,2.6rem);line-height:1.02;letter-spacing:-.04em;max-width:640px}
+  .ai-head p{font-size:13.5px;font-weight:600;color:#33301F;margin-top:5px;max-width:520px}
+  .quiz-card{
+    background:var(--paper-2);
+    border:3px solid var(--ink);
+    border-radius:18px;
+    box-shadow:6px 6px 0 var(--ink);
+    padding:clamp(16px,3vw,28px);
+    min-height:330px;
+    display:flex;flex-direction:column;
+  }
+  .quiz-progress{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .quiz-bars{display:flex;gap:5px;flex:1}
+  .quiz-bars i{
+    height:9px;flex:1;border:2.5px solid var(--ink);border-radius:5px;background:transparent;
+    transition:background .2s;
+  }
+  .quiz-bars i.done{background:var(--ink)}
+  .quiz-bars i.active{background:var(--coral)}
+  .quiz-step-label{font-family:var(--display);font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+  .quiz-q{font-family:var(--display);font-size:clamp(1.25rem,2.6vw,1.9rem);text-transform:uppercase;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px}
+  .quiz-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .quiz-opt{
+    display:flex;align-items:center;gap:11px;
+    text-align:left;
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    border-radius:12px;
+    padding:12px 13px;
+    box-shadow:3px 3px 0 var(--ink);
+    transition:transform .12s,box-shadow .12s,background .15s;
+  }
+  .quiz-opt:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink);background:var(--yellow)}
+  .quiz-opt:active{transform:translate(1px,1px);box-shadow:1px 1px 0 var(--ink)}
+  .quiz-key{
+    width:28px;height:28px;flex-shrink:0;
+    display:grid;place-items:center;
+    background:var(--ink);color:var(--lime);
+    border:2px solid var(--ink);
+    border-radius:8px;
+    font-family:var(--display);font-size:11px;
+  }
+  .quiz-opt b{display:block;font-size:12.5px;font-weight:900;text-transform:uppercase;letter-spacing:.01em}
+  .quiz-opt span{display:block;font-size:10.5px;color:var(--muted);margin-top:1px}
+  .quiz-actions{display:flex;align-items:center;gap:10px;margin-top:auto;padding-top:16px;flex-wrap:wrap}
+  .quiz-back{
+    display:inline-flex;align-items:center;gap:6px;
+    font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;
+    padding:8px 12px;border:2.5px solid var(--ink);border-radius:9px;background:transparent;
+  }
+  .quiz-back:hover{background:var(--paper)}
+  .quiz-note{font-size:10.5px;color:var(--muted);font-weight:600;margin-left:auto}
+  .quiz-result-head{display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .quiz-result-head .stamp{
+    background:var(--coral);
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    padding:4px 9px;
+    font-family:var(--display);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;
+    box-shadow:2px 2px 0 var(--ink);
+    transform:rotate(-2deg);
+  }
+  .quiz-result-head h3{font-family:var(--display);font-size:clamp(1.1rem,2.4vw,1.6rem);text-transform:uppercase;letter-spacing:-.02em}
+  .quiz-picks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+  .pick{
+    display:flex;gap:11px;align-items:center;
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    border-radius:13px;
+    padding:9px;
+    box-shadow:3px 3px 0 var(--ink);
+  }
+  .pick img{width:74px;height:74px;border:2.5px solid var(--ink);border-radius:9px;object-fit:cover;flex-shrink:0}
+  .pick-body{flex:1;min-width:0}
+  .pick-body b{display:block;font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:-.01em;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pick-body span{font-size:11px;font-weight:800;color:#4A463D;display:block;margin-top:2px}
+  .pick .add{width:33px;height:33px;border-radius:9px;box-shadow:2px 2px 0 var(--ink)}
+  .pick .add svg{width:15px;height:15px}
+  .quiz-fine{font-size:11px;font-weight:600;color:#3F3B2F;background:rgba(255,255,255,.55);border:2px dashed var(--ink);border-radius:9px;padding:8px 11px;margin-top:10px}
+
+  /* ---------- bento ---------- */
+  .bento{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .bento-tile{
+    border:3px solid var(--ink);
+    border-radius:18px;
+    box-shadow:6px 6px 0 var(--ink);
+    padding:clamp(18px,3vw,28px);
+    min-height:195px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    position:relative;overflow:hidden;
+  }
+  .bento-tile .big{font-family:var(--display);font-size:clamp(2.4rem,5vw,3.6rem);line-height:.92;letter-spacing:-.04em}
+  .bento-tile h3{font-family:var(--display);font-size:14px;text-transform:uppercase;letter-spacing:.01em;margin-top:10px}
+  .bento-tile p{font-size:12px;font-weight:600;color:#3E3A30;margin-top:4px;max-width:300px}
+  .bento-tile .corner{
+    position:absolute;top:14px;right:14px;
+    width:34px;height:34px;border:2.5px solid var(--ink);border-radius:9px;
+    display:grid;place-items:center;background:var(--paper-2);
+    font-family:var(--display);font-size:13px;
+  }
+  .tile-lime{background:var(--lime)}
+  .tile-coral{background:var(--coral)}
+  .tile-lilac{background:var(--lilac)}
+  .tile-sky{background:var(--sky)}
+  .tile-mint{background:var(--mint)}
+  .tile-yellow{background:var(--yellow)}
+  .tile-coral .big,.tile-coral h3,.tile-coral p{color:var(--ink)}
+  .stars{font-size:15px;letter-spacing:2px;margin-top:3px}
+
+  /* ---------- reviews ---------- */
+  .reviews{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .review{
+    background:var(--paper-2);
+    border:3px solid var(--ink);
+    border-radius:16px;
+    box-shadow:5px 5px 0 var(--ink);
+    padding:20px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .review-top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .review-quote-mark{font-family:var(--display);font-size:44px;line-height:.6;color:var(--coral)}
+  .review-stars{font-size:14px;letter-spacing:1px}
+  .review p{font-size:13.5px;font-weight:600;color:#333027;line-height:1.5;flex:1}
+  .review-foot{display:flex;align-items:center;gap:10px;border-top:2.5px dashed rgba(17,17,17,.35);padding-top:12px}
+  .avatar{
+    width:38px;height:38px;flex-shrink:0;
+    display:grid;place-items:center;
+    border:2.5px solid var(--ink);border-radius:10px;
+    font-family:var(--display);font-size:13px;
+    background:var(--lilac);
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .review-foot b{display:block;font-size:12.5px;font-weight:900}
+  .review-foot span{font-size:10.5px;color:var(--muted);font-weight:600}
+
+  /* ---------- footer ---------- */
+  .footer{background:var(--ink);color:var(--paper);padding:52px 0 0;border-top:3px solid var(--ink)}
+  .footer .logo b,.footer .logo .star{color:var(--paper)}
+  .footer .logo .star{color:var(--lime)}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:30px;padding-bottom:36px}
+  .foot-brand p{font-size:13px;color:#B9B2A2;margin:14px 0 18px;max-width:290px}
+  .socials{display:flex;gap:8px}
+  .socials a{
+    width:40px;height:40px;display:grid;place-items:center;
+    border:2.5px solid var(--paper);border-radius:10px;
+    color:var(--paper);transition:background .15s,color .15s,transform .12s;
+  }
+  .socials a:hover{background:var(--lime);color:var(--ink);border-color:var(--lime);transform:translateY(-2px)}
+  .socials svg{width:17px;height:17px}
+  .foot-col h4{font-family:var(--display);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+  .foot-col a,.foot-col p{display:block;color:#C4BDAD;font-size:13px;margin-bottom:9px;font-weight:500}
+  .foot-col a:hover{color:var(--lime)}
+  .foot-contact div{display:flex;align-items:center;gap:9px;color:#D9D2C2;font-size:12.5px;margin-bottom:10px}
+  .foot-contact svg{width:15px;height:15px;color:var(--lime);flex-shrink:0}
+  .copyright{
+    border-top:2px solid rgba(251,243,228,.22);
+    padding:18px 0;
+    display:flex;align-items:center;justify-content:space-between;gap:12px;
+    font-size:11.5px;color:#928B7C;flex-wrap:wrap;font-weight:600;
+  }
+
+  /* ---------- mobile nav ---------- */
+  .mobile-nav{
+    display:none;
+    position:fixed;left:0;right:0;bottom:0;z-index:65;
+    background:var(--paper);
+    border-top:3px solid var(--ink);
+    padding:7px 8px calc(7px + env(safe-area-inset-bottom));
+    gap:6px;
+  }
+  .mobile-nav button,.mobile-nav a{
+    flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:5px 4px;
+    font-size:9.5px;font-weight:900;text-transform:uppercase;letter-spacing:.03em;
+    border:2.5px solid transparent;border-radius:10px;
+  }
+  .mobile-nav svg{width:19px;height:19px}
+  .mobile-nav .active{border-color:var(--ink);background:var(--lime);box-shadow:2px 2px 0 var(--ink)}
+  .mobile-nav .nav-cart{position:relative}
+  .mobile-nav .nav-cart em{
+    position:absolute;top:0;right:calc(50% - 24px);
+    min-width:17px;height:17px;padding:0 4px;
+    display:grid;place-items:center;
+    background:var(--coral);color:var(--ink);
+    border:2px solid var(--ink);border-radius:6px;
+    font-style:normal;font-size:9px;font-weight:900;
+  }
+
+  /* ---------- overlay / drawer ---------- */
+  .overlay{
+    position:fixed;inset:0;z-index:80;
+    background:rgba(17,17,17,.48);
+    opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s;
+  }
+  .overlay.show{opacity:1;visibility:visible}
+  .drawer{
+    position:fixed;top:0;right:0;bottom:0;z-index:90;
+    width:min(440px,100%);
+    background:var(--paper);
+    border-left:3px solid var(--ink);
+    display:flex;flex-direction:column;
+    transform:translateX(103%);
+    transition:transform .3s cubic-bezier(.22,.8,.3,1);
+    box-shadow:-14px 0 0 rgba(17,17,17,.18);
+  }
+  .drawer.open{transform:none}
+  .drawer-head{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:16px 18px;border-bottom:3px solid var(--ink);
+    background:var(--lime);
+  }
+  .drawer-head h3{font-family:var(--display);font-size:17px;text-transform:uppercase;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  .drawer-head h3 svg{width:19px;height:19px}
+  .icon-btn{
+    width:38px;height:38px;display:grid;place-items:center;
+    background:var(--paper-2);
+    border:2.5px solid var(--ink);border-radius:10px;
+    box-shadow:2px 2px 0 var(--ink);
+    transition:transform .12s,box-shadow .12s;
+  }
+  .icon-btn:hover{transform:translate(-1px,-1px);box-shadow:4px 4px 0 var(--ink)}
+  .icon-btn svg{width:18px;height:18px}
+  .drawer-body{flex:1;overflow-y:auto;padding:16px 18px}
+  .cart-empty{text-align:center;padding:54px 8px}
+  .cart-empty .big{
+    width:76px;height:76px;margin:0 auto 16px;
+    display:grid;place-items:center;
+    background:var(--paper-2);border:3px solid var(--ink);border-radius:18px;
+    box-shadow:4px 4px 0 var(--ink);
+  }
+  .cart-empty .big svg{width:30px;height:30px}
+  .cart-empty b{display:block;font-family:var(--display);font-size:18px;text-transform:uppercase;margin-bottom:5px}
+  .cart-empty p{font-size:12.5px;color:var(--muted);margin-bottom:18px}
+  .citem{display:flex;gap:11px;padding:13px 0;border-bottom:2px dashed rgba(17,17,17,.28)}
+  .citem img{width:68px;height:68px;object-fit:cover;border:2.5px solid var(--ink);border-radius:11px;flex-shrink:0}
+  .citem-info{flex:1;min-width:0}
+  .citem-info b{display:block;font-family:var(--display);font-size:12.5px;text-transform:uppercase;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .citem-info .cp{font-size:11.5px;font-weight:800;color:#4A463D;margin-top:1px}
+  .qty{display:flex;align-items:center;gap:7px;margin-top:7px}
+  .qty button{
+    width:26px;height:26px;display:grid;place-items:center;
+    background:var(--paper-2);border:2px solid var(--ink);border-radius:7px;
+    box-shadow:1.5px 1.5px 0 var(--ink);
+  }
+  .qty button:hover{background:var(--yellow)}
+  .qty button svg{width:12px;height:12px}
+  .qty span{font-size:12px;font-weight:900;min-width:16px;text-align:center}
+  .citem .remove{margin-left:auto;align-self:flex-start;padding:3px;color:#6E6A60}
+  .citem .remove:hover{color:var(--coral)}
+  .citem .remove svg{width:16px;height:16px}
+  .drawer-foot{border-top:3px solid var(--ink);padding:14px 18px calc(16px + env(safe-area-inset-bottom));background:var(--paper-2)}
+  .trow{display:flex;justify-content:space-between;gap:12px;font-size:12.5px;font-weight:700;color:#4A463D;margin-bottom:7px}
+  .trow .minus{color:var(--coral);font-weight:900}
+  .trow.total{
+    color:var(--ink);font-family:var(--display);font-size:17px;letter-spacing:-.02em;
+    margin:10px 0 14px;padding-top:11px;border-top:2.5px solid var(--ink);
+  }
+  .drawer-foot .btn{width:100%}
+
+  /* checkout form */
+  .form{display:flex;flex-direction:column;gap:12px}
+  .field label{display:block;font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px}
+  .field input,.field textarea{
+    width:100%;
+    background:var(--paper-2);
+    border:2.5px solid var(--ink);
+    border-radius:10px;
+    padding:10px 12px;
+    font-size:13px;font-weight:600;
+    outline:0;
+    box-shadow:2px 2px 0 var(--ink);
+    transition:box-shadow .15s,transform .15s,background .15s;
+  }
+  .field input:focus,.field textarea:focus{box-shadow:4px 4px 0 var(--ink);transform:translate(-1px,-1px);background:#fff}
+  .field input::placeholder,.field textarea::placeholder{color:#938C7E;font-weight:500}
+  .field textarea{resize:vertical;min-height:66px}
+  .checkout-sum{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    background:var(--lime);
+    border:2.5px solid var(--ink);border-radius:10px;
+    padding:10px 12px;font-size:12px;font-weight:800;
+    box-shadow:2px 2px 0 var(--ink);
+  }
+  .checkout-sum b{font-family:var(--display);font-size:15px}
+  .success{text-align:center;padding:38px 10px;display:none}
+  .success.show{display:block;animation:popIn .4s ease}
+  @keyframes popIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+  .success .ok{
+    width:82px;height:82px;margin:0 auto 16px;
+    display:grid;place-items:center;
+    background:var(--lime);border:3px solid var(--ink);border-radius:50%;
+    box-shadow:5px 5px 0 var(--ink);
+  }
+  .success .ok svg{width:38px;height:38px}
+  .success h4{font-family:var(--display);font-size:21px;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:5px}
+  .success p{font-size:12.5px;color:var(--muted);margin-bottom:6px}
+  .success .order-no{
+    display:inline-block;margin:10px 0 20px;
+    background:var(--ink);color:var(--lime);
+    border-radius:8px;padding:6px 14px;
+    font-family:var(--display);font-size:12px;letter-spacing:.1em;
+  }
+
+  /* ---------- modal ---------- */
+  .modal{
+    position:fixed;inset:0;z-index:95;
+    display:grid;place-items:center;padding:18px;
+    opacity:0;visibility:hidden;transition:opacity .22s,visibility .22s;
+  }
+  .modal.show{opacity:1;visibility:visible}
+  .modal-back{position:absolute;inset:0;background:rgba(17,17,17,.55)}
+  .modal-card{
+    position:relative;
+    width:min(850px,100%);
+    max-height:90vh;overflow:auto;
+    background:var(--paper);
+    border:3px solid var(--ink);border-radius:20px;
+    box-shadow:10px 10px 0 var(--ink);
+    display:grid;grid-template-columns:1fr 1fr;
+    transform:translateY(12px) scale(.98);transition:transform .25s;
+  }
+  .modal.show .modal-card{transform:none}
+  .modal-media{position:relative;min-height:320px;border-right:3px solid var(--ink)}
+  .modal-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .modal-body{padding:26px 24px;display:flex;flex-direction:column}
+  .modal-close{position:absolute;top:12px;right:12px;z-index:2}
+  .modal-body .card-cat{margin-bottom:4px}
+  .modal-body h3{font-family:var(--display);font-size:24px;text-transform:uppercase;letter-spacing:-.03em;line-height:1.1;margin-bottom:6px}
+  .modal-body .card-rating{font-size:12px;margin-bottom:12px}
+  .modal-body p.desc{font-size:12.5px;color:#45412F;font-weight:500;margin-bottom:16px}
+  .specs{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+  .specs div{display:flex;gap:8px;align-items:flex-start;font-size:11.5px;font-weight:600}
+  .specs svg{width:13px;height:13px;flex-shrink:0;margin-top:2px}
+  .modal-price{display:flex;align-items:baseline;gap:8px;margin-bottom:16px}
+  .modal-price b{font-family:var(--display);font-size:24px;letter-spacing:-.02em}
+  .modal-price span{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase}
+  .modal-actions{display:flex;gap:9px;margin-top:auto}
+  .modal-actions .btn{flex:1}
+
+  /* ---------- toast / confetti ---------- */
+  .toast{
+    position:fixed;left:50%;bottom:24px;z-index:120;
+    transform:translate(-50%,80px);
+    background:var(--ink);color:var(--lime);
+    border:3px solid var(--ink);border-radius:11px;
+    padding:11px 18px;
+    font-size:12px;font-weight:800;
+    box-shadow:4px 4px 0 var(--coral);
+    opacity:0;visibility:hidden;transition:all .28s;
+    display:flex;align-items:center;gap:8px;
+    max-width:calc(100vw - 28px);text-align:center;
+  }
+  .toast.show{transform:translate(-50%,0);opacity:1;visibility:visible}
+  .toast svg{width:16px;height:16px;flex-shrink:0}
+  .confetti{
+    position:fixed;top:36%;z-index:200;pointer-events:none;
+    width:10px;height:14px;border:2px solid var(--ink);border-radius:2px;
+    animation:confettiFly 1.05s cubic-bezier(.2,.7,.3,1) forwards;
+  }
+  @keyframes confettiFly{
+    0%{opacity:1;transform:translate(0,0) rotate(0)}
+    100%{opacity:0;transform:translate(var(--dx),var(--dy)) rotate(var(--rot))}
+  }
+
+  body.locked{overflow:hidden}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:1080px){
+    .nav{display:none}
+    .hero-grid{grid-template-columns:1fr;gap:26px}
+    .hero-art{height:430px;max-width:620px;width:100%}
+    .grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+    .sec-sub{margin-left:0;text-align:left;align-self:auto}
+  }
+  @media (max-width:860px){
+    .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .reviews{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr 1fr}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .search{display:none}
+    .mobile-search{display:block;order:9}
+    .mobile-search .search{display:flex}
+    #katalog, #ai{scroll-margin-top:160px}
+  }
+  @media (max-width:760px){
+    .wrap{width:calc(100% - 28px)}
+    .head-row{padding:11px 0 12px;gap:10px}
+    .logo b{font-size:23px}
+    .logo .star{font-size:25px}
+    .cart-btn span{display:none}
+    .hero{padding:30px 0 34px}
+    .hero-title{font-size:clamp(2.5rem,11.5vw,3.4rem)}
+    .hero-art{height:360px}
+    .art-sticker{width:84px;height:84px}
+    .art-sticker b{font-size:24px}
+    .poster-a{width:58%}
+    .poster-b{width:54%}
+    .hero-cta .btn{flex:1}
+    .sec{padding:38px 0}
+    .sec-head{gap:10px;margin-bottom:18px}
+    .sec-tools{width:100%;margin-left:0}
+    .sec-tools .chips{flex:1}
+    .quiz-options{grid-template-columns:1fr}
+    .quiz-picks{grid-template-columns:1fr}
+    .bento{grid-template-columns:1fr}
+    .bento-tile{min-height:160px}
+    .modal-card{grid-template-columns:1fr;max-height:92vh}
+    .modal-media{min-height:0;aspect-ratio:1;border-right:0;border-bottom:3px solid var(--ink)}
+    .modal-body{padding:20px 18px 22px}
+    .drawer{width:100%;border-left:0}
+    .mobile-nav{display:flex}
+    body{padding-bottom:76px}
+    .toast{bottom:88px}
+    .footer{padding-bottom:18px}
+    .foot-grid{grid-template-columns:1fr;gap:22px}
+    .copyright{font-size:10.5px}
+  }
+  @media (max-width:430px){
+    .grid{gap:11px}
+    .card-body{padding:9px 10px 11px}
+    .card-name{font-size:12px}
+    .price b{font-size:12px}
+    .card-rating{font-size:9.5px}
+    .add{width:33px;height:33px;border-radius:8px}
+    .add svg{width:15px;height:15px}
+    .card-badge{font-size:7.5px;padding:2px 6px}
+    .hero-art{height:330px}
+    .poster-info b{font-size:10px}
+    .poster-info span{font-size:9px}
+    .hero-stats .stat{font-size:10px;padding:6px 9px}
+    .quiz-opt{padding:10px 11px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <div class="ticker-set">
+      <span>AI 3 savolda tanlaydi</span><i>★</i>
+      <span>2+ mahsulotga −10% chegirma</span><i>★</i>
+      <span>Bepul yetkazish</span><i>★</i>
+      <span>10 kun qaytarish</span><i>★</i>
+      <span>Sovg'a topish endi oson</span><i>★</i>
+    </div>
+    <div class="ticker-set">
+      <span>AI 3 savolda tanlaydi</span><i>★</i>
+      <span>2+ mahsulotga −10% chegirma</span><i>★</i>
+      <span>Bepul yetkazish</span><i>★</i>
+      <span>10 kun qaytarish</span><i>★</i>
+      <span>Sovg'a topish endi oson</span><i>★</i>
+    </div>
+  </div>
+</div>
+
+<header class="site-head">
+  <div class="wrap">
+    <div class="head-row">
+      <a class="logo" href="#" aria-label="BOZOR bosh sahifa">
+        <b>BOZOR</b><span class="star">*</span><span class="ai-chip">AI</span>
+      </a>
+      <nav class="nav" aria-label="Asosiy menyu">
+        <a href="#katalog">Katalog</a>
+        <a href="#ai">AI tanlov</a>
+        <a href="#nega">Nega biz?</a>
+        <a href="#aloqa">Aloqa</a>
+      </nav>
+      <div class="head-tools">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="searchInput" placeholder="Nima qidiryapsiz?" aria-label="Mahsulot qidirish">
+        </div>
+        <button class="cart-btn" type="button" id="cartBtn" aria-label="Savatcha">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span>Savatcha</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+      </div>
+      <div class="mobile-search">
+        <div class="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+          <input type="search" id="searchInputMobile" placeholder="Mahsulot qidirish..." aria-label="Mahsulot qidirish">
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow"><span class="dot"></span> Yangi · AI bilan xarid</span>
+          <h1 class="hero-title display">
+            <span class="line"><span class="mark mark-lime">KIR.</span></span>
+            <span class="line"><span class="mark mark-lilac">TANLA.</span></span>
+            <span class="line"><span class="mark mark-coral">OL.</span></span>
+          </h1>
+          <p class="hero-sub">BOZOR — oddiy do'kon emas. <b>AI 3 savolda</b> sizga mos mahsulotni topadi, siz faqat savatga bosasiz. Ortiqcha o'ylash yo'q.</p>
+          <div class="hero-cta">
+            <button class="btn btn-dark" type="button" data-scroll-quiz>
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.2 6.5L20.8 11l-6.6 2.5L12 20l-2.2-6.5L3.2 11l6.6-2.5z"/></svg>
+              AI tanlovni boshlash
+            </button>
+            <a class="btn" href="#katalog">Katalogni ko'rish</a>
+          </div>
+          <div class="hero-stats">
+            <span class="stat"><b>8</b> top mahsulot</span>
+            <span class="stat"><b>24</b> soat yetkazish</span>
+            <span class="stat"><b>10</b> kun qaytarish</span>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <div class="art-blob"></div>
+          <div class="art-dots"></div>
+          <div class="poster poster-a">
+            <span class="poster-tag">Top sotuv</span>
+            <img src="assets/products/headphones.jpg" alt="">
+            <div class="poster-info"><b>Bassline 2</b><span>1 190 000</span></div>
+          </div>
+          <div class="poster poster-b">
+            <span class="poster-tag alt">Yangi</span>
+            <img src="assets/products/phone.jpg" alt="">
+            <div class="poster-info"><b>Vision 13</b><span>8 900 000</span></div>
+          </div>
+          <div class="art-note">2+ mahsulot = −10%</div>
+          <div class="art-sticker"><b>AI</b><span>3 savolda tanlov</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATALOG -->
+  <section class="sec" id="katalog">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-index">01</span>
+        <div>
+          <h2 class="sec-title display">Katalog<span class="hl">.</span></h2>
+          <p class="sec-sub" style="margin-top:6px">Hammasi qo'lda tanlangan. Narxlar ochiq, yashirin to'lov yo'q.</p>
+        </div>
+        <div class="sec-tools">
+          <span class="result-count" id="resultCount">8 ta mahsulot</span>
+          <div class="sort-wrap">
+            <select id="sortSelect" aria-label="Saralash">
+              <option value="popular">Mashhur</option>
+              <option value="cheap">Arzon narx</option>
+              <option value="expensive">Qimmat narx</option>
+              <option value="rating">Reyting</option>
+            </select>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="catalog-top">
+        <div class="chips" id="categoryChips" role="tablist" aria-label="Kategoriyalar"></div>
+      </div>
+
+      <div class="grid" id="productGrid"></div>
+    </div>
+  </section>
+
+  <div class="band" aria-hidden="true">
+    <div class="ticker-track">
+      <div class="ticker-set">
+        <span>Sovg'a topish endi qiyin emas</span><i>✦</i>
+        <span>AI tanlov — 20 soniya</span><i>✦</i>
+        <span>2+ mahsulotga 10% chegirma</span><i>✦</i>
+        <span>O'zingga mosini top</span><i>✦</i>
+      </div>
+      <div class="ticker-set">
+        <span>Sovg'a topish endi qiyin emas</span><i>✦</i>
+        <span>AI tanlov — 20 soniya</span><i>✦</i>
+        <span>2+ mahsulotga 10% chegirma</span><i>✦</i>
+        <span>O'zingga mosini top</span><i>✦</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI QUIZ -->
+  <section class="ai-sec" id="ai">
+    <div class="wrap">
+      <div class="ai-panel">
+        <div class="ai-head">
+          <span class="ai-badge">AI</span>
+          <div>
+            <h2 class="display">3 savol. 1 ta to'g'ri tanlov.</h2>
+            <p>Byudjet, maqsad va didingizni ayting — AI mos mahsulotlarni bir zumda tanlab beradi.</p>
+          </div>
+        </div>
+        <div class="quiz-card" id="quizBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENTO -->
+  <section class="sec" id="nega">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-index">03</span>
+        <div>
+          <h2 class="sec-title display">Nega <span class="hl">BOZOR?</span></h2>
+          <p class="sec-sub" style="margin-top:6px">Chunki xarid ham qiziqarli bo'lishi kerak.</p>
+        </div>
+      </div>
+
+      <div class="bento">
+        <div class="bento-tile tile-lime">
+          <span class="corner">%</span>
+          <div>
+            <div class="big">10%</div>
+            <h3>2+ mahsulotga chegirma</h3>
+            <p>Savatda 2 yoki undan ko'p narsa bo'lsa, chegirma avtomatik hisoblanadi. Hech qanday promo kod kerak emas.</p>
+          </div>
+        </div>
+        <div class="bento-tile tile-coral">
+          <span class="corner">24</span>
+          <div>
+            <div class="big">24 soat</div>
+            <h3>Toshkent bo'ylab yetkazish</h3>
+            <p>Ertaga kerakmi? Bugun buyurtma bering — ertaga qo'lingizda bo'ladi.</p>
+          </div>
+        </div>
+        <div class="bento-tile tile-lilac">
+          <span class="corner">10</span>
+          <div>
+            <div class="big">10 kun</div>
+            <h3>Yoqmasa — qaytaring</h3>
+            <p>Mahsulot yoqmasa yoki mos kelmasa, 10 kun ichida muammosiz qaytarib berasiz.</p>
+          </div>
+        </div>
+        <div class="bento-tile tile-sky">
+          <span class="corner">★</span>
+          <div>
+            <div class="big">4.9</div>
+            <h3>Mijozlar bahosi</h3>
+            <div class="stars">★★★★★</div>
+            <p>1 200+ mijoz xarid qilgan. 98% qaytib keladi.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="sec" id="fikrlar">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="sec-index">04</span>
+        <div>
+          <h2 class="sec-title display">Mijozlar <span class="hl">nima deydi</span></h2>
+        </div>
+      </div>
+      <div class="reviews">
+        <div class="review">
+          <div class="review-top"><span class="review-quote-mark">“</span><span class="review-stars">★★★★★</span></div>
+          <p>AI tanlov menga 2 daqiqada sovg'a topdi. Do'stim juda xursand bo'ldi — o'zim ham kutmagan edim.</p>
+          <div class="review-foot">
+            <span class="avatar" style="background:var(--lime)">D</span>
+            <div><b>Dilnoza R.</b><span>Toshkent</span></div>
+          </div>
+        </div>
+        <div class="review">
+          <div class="review-top"><span class="review-quote-mark">“</span><span class="review-stars">★★★★★</span></div>
+          <p>Buyurtma ertasi kuni keldi. Narxi bozorda eng arzon chiqdi, ustiga 10% chegirma ham tushdi.</p>
+          <div class="review-foot">
+            <span class="avatar" style="background:var(--sky)">A</span>
+            <div><b>Aziz K.</b><span>Chirchiq</span></div>
+          </div>
+        </div>
+        <div class="review">
+          <div class="review-top"><span class="review-quote-mark">“</span><span class="review-stars">★★★★☆</span></div>
+          <p>Saytda nima olishni bilmay qolgandim. 3 savolga javob berdim — AI menga kerakli narsani topdi.</p>
+          <div class="review-foot">
+            <span class="avatar" style="background:var(--coral)">M</span>
+            <div><b>Madina S.</b><span>Samarqand</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="aloqa">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#" style="display:inline-flex">
+          <b>BOZOR</b><span class="star">*</span><span class="ai-chip" style="background:var(--lime);color:var(--ink)">AI</span>
+        </a>
+        <p>Yorqin xarid, aqlli tanlov. AI yordamida o'zingizga mos narsani toping — qolganini biz qilamiz.</p>
+        <div class="socials">
+          <a href="#" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.9 4.3l-3.2 15.1c-.2 1.1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.4-5 9.1-8.2c.4-.4-.1-.6-.6-.2L7 13.3l-4.8-1.5c-1.1-.3-1.1-1 .2-1.4l18.4-7.1c.9-.3 1.6.2 1.1 1z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Telefon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4>Bo'limlar</h4>
+        <a href="#katalog">Katalog</a>
+        <a href="#ai">AI tanlov</a>
+        <a href="#nega">Nega biz?</a>
+        <a href="#fikrlar">Fikrlar</a>
+      </div>
+      <div class="foot-col">
+        <h4>Yordam</h4>
+        <a href="#nega">Yetkazib berish</a>
+        <a href="#nega">Qaytarish</a>
+        <a href="#nega">Chegirma sharti</a>
+        <a href="#" data-scroll-quiz>Savol berish</a>
+      </div>
+      <div class="foot-col foot-contact">
+        <h4>Aloqa</h4>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg> +998 90 000 00 00</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Toshkent, Amir Temur ko'chasi</div>
+        <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16v16H4z"/><path d="M4 7l8 6 8-6"/></svg> salom@bozor.uz</div>
+      </div>
+    </div>
+    <div class="copyright">
+      <span>© 2026 BOZOR. Barcha huquqlar himoyalangan.</span>
+      <span>Namuna loyiha · AI bilan qilingan</span>
+    </div>
+  </div>
+</footer>
+
+<nav class="mobile-nav" aria-label="Mobil menyu">
+  <a href="#katalog" class="active">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+    Katalog
+  </a>
+  <button type="button" data-scroll-quiz>
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.2 6.5L20.8 11l-6.6 2.5L12 20l-2.2-6.5L3.2 11l6.6-2.5z"/></svg>
+    AI tanlov
+  </button>
+  <button type="button" id="mobileCartBtn" class="nav-cart">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+    Savat <em id="mobileCartCount">0</em>
+  </button>
+</nav>
+
+<div class="overlay" id="overlay"></div>
+
+<!-- CART -->
+<aside class="drawer" id="cartDrawer" aria-label="Savatcha" aria-hidden="true">
+  <div class="drawer-head">
+    <h3>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Savatcha
+    </h3>
+    <button class="icon-btn" type="button" id="cartClose" aria-label="Yopish">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="drawer-body">
+    <div id="cartView"><div id="cartItems"></div></div>
+    <div id="checkoutView" style="display:none">
+      <button class="quiz-back" type="button" id="checkoutBack" style="margin-bottom:16px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Savatga qaytish
+      </button>
+      <h4 class="display" style="font-size:15px;margin-bottom:12px">Buyurtma ma'lumotlari</h4>
+      <form class="form" id="checkoutForm" novalidate>
+        <div class="field">
+          <label for="coName">Ism-familiya</label>
+          <input type="text" id="coName" placeholder="Aziz Karimov" autocomplete="name">
+        </div>
+        <div class="field">
+          <label for="coPhone">Telefon</label>
+          <input type="tel" id="coPhone" placeholder="+998 90 123 45 67" autocomplete="tel">
+        </div>
+        <div class="field">
+          <label for="coAddress">Manzil</label>
+          <textarea id="coAddress" placeholder="Tuman, ko'cha, uy"></textarea>
+        </div>
+        <div class="field">
+          <label for="coNote">Izoh (ixtiyoriy)</label>
+          <input type="text" id="coNote" placeholder="Qo'shimcha ma'lumot">
+        </div>
+        <div class="checkout-sum"><span>Jami to'lov</span><b id="checkoutTotal">0 so'm</b></div>
+        <button class="btn btn-dark" type="submit">Buyurtmani tasdiqlash</button>
+      </form>
+    </div>
+    <div class="success" id="orderSuccess">
+      <div class="ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
+      <h4>Buyurtma qabul qilindi!</h4>
+      <p>Operatorimiz tez orada qo'ng'iroq qiladi.</p>
+      <div class="order-no" id="orderNumber">BZ-000000</div>
+      <button class="btn btn-lime" type="button" id="successClose" style="width:100%">Xaridni davom ettirish</button>
+    </div>
+  </div>
+
+  <div class="drawer-foot" id="cartFoot">
+    <div class="trow"><span>Mahsulotlar</span><span id="cartSubtotal">0 so'm</span></div>
+    <div class="trow"><span>2+ mahsulotga −10%</span><span class="minus" id="cartDiscount">—</span></div>
+    <div class="trow"><span>Yetkazish</span><span style="color:var(--coral);font-weight:900">BEPUL</span></div>
+    <div class="trow total"><span>JAMI</span><span id="cartTotal">0 so'm</span></div>
+    <button class="btn btn-lime" type="button" id="checkoutBtn">Buyurtma berish</button>
+  </div>
+</aside>
+
+<!-- MODAL -->
+<div class="modal" id="productModal" role="dialog" aria-hidden="true" aria-label="Mahsulot">
+  <div class="modal-back" data-modal-close></div>
+  <div class="modal-card">
+    <button class="icon-btn modal-close" type="button" data-modal-close aria-label="Yopish">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="modal-media"><img id="modalImg" src="" alt=""></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+"use strict";
+
+/* ---------------- data ---------------- */
+const PRODUCTS = [
+  {
+    id: "phone",
+    name: "Vision 13",
+    cat: "gadget",
+    catLabel: "Gadjet",
+    price: 8900000,
+    rating: 4.9,
+    reviews: 312,
+    badge: "TOP",
+    badgeCls: "",
+    img: "assets/products/phone.jpg",
+    tags: ["gadget", "premium", "self", "useful"],
+    kw: "telefon smartfon phone smartphone",
+    short: "Yorqin ekranli flagman smartfon",
+    desc: "Vision 13 — kun bo'yi ishlaydigan batareya, tez 120 Hz ekran va AI kamera. O'yin ham, ish ham, surat ham — hammasi bitta qurilmada.",
+    specs: ["6.7\" AMOLED, 120 Hz", "256 GB xotira, 12 GB RAM", "50 MP kamera, 5000 mAh"]
+  },
+  {
+    id: "headphones",
+    name: "Bassline 2",
+    cat: "audio",
+    catLabel: "Audio",
+    price: 1190000,
+    rating: 4.8,
+    reviews: 268,
+    badge: "TOP",
+    badgeCls: "",
+    img: "assets/products/headphones.jpg",
+    tags: ["audio", "music", "gift", "teen"],
+    kw: "quloqchin naushnik headphone headphones",
+    short: "Shovqin bosuvchi simsiz quloqchin",
+    desc: "Bassline 2 — kuchli bas, yumshoq yostiqchalar va 40 soatgacha ishlash. Musiqa, podkast yoki o'yin uchun zo'r tanlov.",
+    specs: ["Aktiv shovqin bosish", "40 soat batareya", "Bluetooth 5.3, USB-C"]
+  },
+  {
+    id: "sneakers",
+    name: "StreetRun 90",
+    cat: "sport",
+    catLabel: "Sport",
+    price: 890000,
+    rating: 4.7,
+    reviews: 197,
+    badge: "YANGI",
+    badgeCls: "new",
+    img: "assets/products/sneakers.jpg",
+    tags: ["sport", "style", "self", "gift", "teen"],
+    kw: "krossovka poyabzal shoes sneaker sneakers",
+    short: "Yengil va chidamli krossovka",
+    desc: "StreetRun 90 — shahar yugurishi va kunlik kiyish uchun. Yengil tagcharm, nafas oluvchi to'r va yorqin dizayn.",
+    specs: ["Yengil EVA tagcharm", "Nafas oluvchi to'r mato", "36–45 o'lchamlar"]
+  },
+  {
+    id: "coffee",
+    name: "Barista One",
+    cat: "home",
+    catLabel: "Uy",
+    price: 2450000,
+    rating: 4.7,
+    reviews: 154,
+    badge: "AI TANLOV",
+    badgeCls: "lilac",
+    img: "assets/products/coffee.jpg",
+    tags: ["home", "gift", "useful", "premium"],
+    kw: "kofe kofemashen coffee kofeapparat",
+    short: "Uy uchun espresso apparati",
+    desc: "Barista One — 20 barda haqiqiy kofe. Bosimli ekstraksiya va bug' bilan sut ko'pirtirish. Uy kafesi uchun ideal sovg'a.",
+    specs: ["15 bar bosim", "Sut ko'pirtirgich", "1.2 l suv idishi"]
+  },
+  {
+    id: "watch",
+    name: "Pulse Watch",
+    cat: "gadget",
+    catLabel: "Gadjet",
+    price: 1390000,
+    rating: 4.8,
+    reviews: 221,
+    badge: "TOP",
+    badgeCls: "",
+    img: "assets/products/watch.jpg",
+    tags: ["gadget", "sport", "style", "self", "gift"],
+    kw: "soat smart watch aqlli soat",
+    short: "Sport va salomatlik uchun aqlli soat",
+    desc: "Pulse Watch — yurak urishi, uyqu, qadam va 20+ sport rejimi. Yorqin ekran va 10 kunlik batareya.",
+    specs: ["AMOLED doimiy ekran", "SpO2 va yurak sensorlari", "10 kun batareya, 5 ATM"]
+  },
+  {
+    id: "speaker",
+    name: "BoomBox Go",
+    cat: "audio",
+    catLabel: "Audio",
+    price: 750000,
+    rating: 4.6,
+    reviews: 189,
+    badge: "ARZON",
+    badgeCls: "hot",
+    img: "assets/products/speaker.jpg",
+    tags: ["audio", "music", "gift", "budget", "teen", "self", "useful"],
+    kw: "kolonka dinamik speaker audio",
+    short: "Kuchli portativ kolonka",
+    desc: "BoomBox Go — cho'ntakka sig'adigan, lekin xonani to'ldiradigan ovoz. Suvga chidamli, 16 soat ishlaydi.",
+    specs: ["360° ovoz", "IPX7 suv himoyasi", "16 soat batareya"]
+  },
+  {
+    id: "controller",
+    name: "PlayPad X",
+    cat: "play",
+    catLabel: "O'yin",
+    price: 620000,
+    rating: 4.7,
+    reviews: 176,
+    badge: "ARZON",
+    badgeCls: "hot",
+    img: "assets/products/controller.jpg",
+    tags: ["game", "teen", "fun", "gift", "budget"],
+    kw: "joystik gamepad controller pult o'yin",
+    short: "Simsiz o'yin joystiki",
+    desc: "PlayPad X — kam kechikish, yorqin RGB yorug'lik va qulay tutqich. Telefon, kompyuter va konsolga ulanadi.",
+    specs: ["Bluetooth + USB-C", "20 soat batareya", "Telefon ushlagichi sovg'a"]
+  },
+  {
+    id: "drone",
+    name: "SkyMini",
+    cat: "gadget",
+    catLabel: "Gadjet",
+    price: 3900000,
+    rating: 4.8,
+    reviews: 132,
+    badge: "YANGI",
+    badgeCls: "new",
+    img: "assets/products/drone.jpg",
+    tags: ["gadget", "premium", "fun", "photo", "gift"],
+    kw: "dron drone kvadrokopter quadcopter samolyot",
+    short: "Buklanadigan 4K dron",
+    desc: "SkyMini — cho'ntakka sig'adigan dron. 4K kamera, barqaror uchish va 25 daqiqalik parvoz. Sayohat uchun ajoyib.",
+    specs: ["4K kamera, 3 o'qli gimbal", "25 daqiqa parvoz", "Buklanadigan korpus, 249 g"]
+  }
+];
+
+const CATEGORIES = [
+  { id: "all", label: "Hammasi" },
+  { id: "gadget", label: "Gadjet" },
+  { id: "audio", label: "Audio" },
+  { id: "home", label: "Uy" },
+  { id: "sport", label: "Sport" },
+  { id: "play", label: "O'yin" }
+];
+
+const STORAGE = {
+  cart: "bozor_cart_v1",
+  orders: "bozor_orders_v1"
+};
+
+const QUIZ = [
+  {
+    q: "Kim uchun tanlaymiz?",
+    options: [
+      { t: "O'zim uchun", s: "O'zimga sovg'a", v: "self" },
+      { t: "Do'stimga", s: "Sovg'a kerak", v: "gift" },
+      { t: "Uy uchun", s: "Foydali narsa", v: "home" },
+      { t: "Bola / uka-uka", s: "O'yin-kulgi", v: "teen" }
+    ]
+  },
+  {
+    q: "Byudjet qancha?",
+    options: [
+      { t: "1 mln gacha", s: "Talabalar uchun", v: 1000000 },
+      { t: "1–3 mln", s: "Optimal", v: 3000000 },
+      { t: "3–8 mln", s: "Yaxshiroq variant", v: 8000000 },
+      { t: "Muhim emas", s: "Eng yaxshisini ko'r", v: Infinity }
+    ]
+  },
+  {
+    q: "Nima muhim?",
+    options: [
+      { t: "Foydali", s: "Har kuni ishlataman", v: "useful" },
+      { t: "Chiroyli", s: "Ko'zga yoqadi", v: "style" },
+      { t: "Qiziqarli", s: "Yangi tajriba", v: "fun" },
+      { t: "Sovg'a", s: "Kimnidir xursand qilaman", v: "gift" }
+    ]
+  }
+];
+
+/* ---------------- helpers ---------------- */
+const $ = (sel, root = document) => root.querySelector(sel);
+const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+const findProduct = (id) => PRODUCTS.find((p) => p.id === id) || null;
+const money = (n) => new Intl.NumberFormat("ru-RU").format(n) + " so'm";
+
+function load(key, fallback) {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : fallback;
+  } catch (e) { return fallback; }
+}
+function save(key, value) {
+  try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {}
+}
+
+const ICON = {
+  star: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.9 6.3 6.6.8-4.9 4.6 1.3 6.6L12 17l-5.9 3.3 1.3-6.6L2.5 9.1l6.6-.8z"/></svg>',
+  plus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>',
+  minus: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h14"/></svg>',
+  cart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>',
+  trash: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg>',
+  check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>',
+  heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21.2l7.8-7.7 1.1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>'
+};
+
+const state = {
+  category: "all",
+  query: "",
+  sort: "popular",
+  cart: load(STORAGE.cart, {})
+};
+
+/* ---------------- toast ---------------- */
+let toastTimer = null;
+function toast(message) {
+  const el = $("#toast");
+  el.innerHTML = ICON.check + "<span>" + message + "</span>";
+  el.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+/* ---------------- catalog ---------------- */
+function filteredProducts() {
+  let list = PRODUCTS.filter((p) => state.category === "all" || p.cat === state.category);
+  if (state.query) {
+    const q = state.query.toLowerCase();
+    list = list.filter((p) => (p.name + " " + p.catLabel + " " + p.short + " " + (p.kw || "")).toLowerCase().includes(q));
+  }
+  list = list.slice();
+  if (state.sort === "cheap") list.sort((a, b) => a.price - b.price);
+  else if (state.sort === "expensive") list.sort((a, b) => b.price - a.price);
+  else if (state.sort === "rating") list.sort((a, b) => b.rating - a.rating);
+  else list.sort((a, b) => b.reviews - a.reviews);
+  return list;
+}
+
+function productCard(p) {
+  return (
+    '<article class="card" data-id="' + p.id + '">' +
+      '<div class="card-media" data-open="' + p.id + '" role="button" tabindex="0" aria-label="' + p.name + ' haqida">' +
+        '<span class="card-badge ' + p.badgeCls + '">' + p.badge + '</span>' +
+        '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy">' +
+      '</div>' +
+      '<div class="card-body">' +
+        '<span class="card-cat">' + p.catLabel + '</span>' +
+        '<h3 class="card-name">' + p.name + '</h3>' +
+        '<div class="card-rating">' + ICON.star + p.rating.toFixed(1) + '<span>(' + p.reviews + ')</span></div>' +
+        '<div class="card-foot">' +
+          '<div class="price"><b>' + money(p.price) + '</b><span>narx</span></div>' +
+          '<button class="add" type="button" data-add="' + p.id + '" aria-label="Savatga qo\'shish">' + ICON.plus + '</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>'
+  );
+}
+
+function renderProducts() {
+  const list = filteredProducts();
+  const grid = $("#productGrid");
+  if (!list.length) {
+    grid.innerHTML = '<div class="empty"><b>Hech narsa topilmadi</b><span>Boshqa so\'z bilan qidiring yoki kategoriyani o\'zgartiring.</span></div>';
+  } else {
+    grid.innerHTML = list.map(productCard).join("");
+  }
+  $("#resultCount").textContent = list.length + " ta mahsulot";
+}
+
+function renderChips() {
+  $("#categoryChips").innerHTML = CATEGORIES.map((c) =>
+    '<button type="button" class="chip' + (c.id === state.category ? " active" : "") + '" data-cat="' + c.id + '" role="tab" aria-selected="' + (c.id === state.category) + '">' + c.label + '</button>'
+  ).join("");
+}
+
+/* ---------------- cart ---------------- */
+function cartCount() {
+  return Object.values(state.cart).reduce((sum, qty) => sum + qty, 0);
+}
+function cartSubtotal() {
+  return Object.entries(state.cart).reduce((sum, entry) => {
+    const p = findProduct(entry[0]);
+    return p ? sum + p.price * entry[1] : sum;
+  }, 0);
+}
+function cartDiscount() {
+  return cartCount() >= 2 ? Math.round(cartSubtotal() * 0.1) : 0;
+}
+function cartTotal() {
+  return cartSubtotal() - cartDiscount();
+}
+
+function updateCartBadges() {
+  const count = cartCount();
+  $$(".cart-count, #mobileCartCount").forEach((el) => {
+    el.textContent = count;
+    el.classList.remove("pulse");
+    void el.offsetWidth;
+    el.classList.add("pulse");
+  });
+}
+
+function addToCart(id) {
+  const p = findProduct(id);
+  if (!p) return;
+  state.cart[id] = (state.cart[id] || 0) + 1;
+  save(STORAGE.cart, state.cart);
+  updateCartBadges();
+  renderCart();
+  toast(p.name + " savatga qo'shildi");
+}
+
+function changeQty(id, delta) {
+  if (!state.cart[id]) return;
+  state.cart[id] += delta;
+  if (state.cart[id] <= 0) delete state.cart[id];
+  save(STORAGE.cart, state.cart);
+  updateCartBadges();
+  renderCart();
+}
+
+function removeFromCart(id) {
+  delete state.cart[id];
+  save(STORAGE.cart, state.cart);
+  updateCartBadges();
+  renderCart();
+}
+
+function renderCart() {
+  const itemsEl = $("#cartItems");
+  const entries = Object.entries(state.cart);
+  if (!entries.length) {
+    itemsEl.innerHTML =
+      '<div class="cart-empty">' +
+        '<div class="big">' + ICON.cart + '</div>' +
+        '<b>Savat bo\'sh</b>' +
+        '<p>Katalogdan tanlang yoki AI tanlovdan foydalaning.</p>' +
+        '<button class="btn btn-lime btn-sm" type="button" id="emptyGoShop">Katalogga o\'tish</button>' +
+      '</div>';
+    $("#cartFoot").style.display = "none";
+    return;
+  }
+  $("#cartFoot").style.display = "block";
+  itemsEl.innerHTML = entries.map((entry) => {
+    const p = findProduct(entry[0]);
+    if (!p) return "";
+    const qty = entry[1];
+    return (
+      '<div class="citem">' +
+        '<img src="' + p.img + '" alt="' + p.name + '">' +
+        '<div class="citem-info">' +
+          '<b>' + p.name + '</b>' +
+          '<div class="cp">' + money(p.price) + '</div>' +
+          '<div class="qty">' +
+            '<button type="button" data-dec="' + p.id + '" aria-label="Kamaytirish">' + ICON.minus + '</button>' +
+            '<span>' + qty + '</span>' +
+            '<button type="button" data-inc="' + p.id + '" aria-label="Ko\'paytirish">' + ICON.plus + '</button>' +
+          '</div>' +
+        '</div>' +
+        '<button class="remove" type="button" data-remove="' + p.id + '" aria-label="O\'chirish">' + ICON.trash + '</button>' +
+      '</div>'
+    );
+  }).join("");
+  const discount = cartDiscount();
+  $("#cartSubtotal").textContent = money(cartSubtotal());
+  $("#cartDiscount").textContent = discount ? "−" + money(discount) : "—";
+  $("#cartTotal").textContent = money(cartTotal());
+  $("#checkoutTotal").textContent = money(cartTotal());
+}
+
+/* ---------------- overlays ---------------- */
+function syncLock() {
+  const open = $("#cartDrawer").classList.contains("open") || $("#productModal").classList.contains("show");
+  document.body.classList.toggle("locked", open);
+}
+function openCart() {
+  resetCartView();
+  clearTimeout(toastTimer);
+  $("#toast").classList.remove("show");
+  $("#cartDrawer").classList.add("open");
+  $("#cartDrawer").setAttribute("aria-hidden", "false");
+  $("#overlay").classList.add("show");
+  syncLock();
+}
+function closeCart() {
+  $("#cartDrawer").classList.remove("open");
+  $("#cartDrawer").setAttribute("aria-hidden", "true");
+  if (!$("#productModal").classList.contains("show")) $("#overlay").classList.remove("show");
+  syncLock();
+}
+function resetCartView() {
+  $("#cartView").style.display = "block";
+  $("#checkoutView").style.display = "none";
+  $("#orderSuccess").classList.remove("show");
+  $("#cartFoot").style.display = Object.keys(state.cart).length ? "block" : "none";
+  renderCart();
+}
+function openProduct(id) {
+  const p = findProduct(id);
+  if (!p) return;
+  $("#modalImg").src = p.img;
+  $("#modalImg").alt = p.name;
+  $("#modalBody").innerHTML =
+    '<span class="card-cat">' + p.catLabel + '</span>' +
+    '<h3>' + p.name + '</h3>' +
+    '<div class="card-rating">' + ICON.star + p.rating.toFixed(1) + '<span>(' + p.reviews + ' ta sharh)</span></div>' +
+    '<p class="desc">' + p.desc + '</p>' +
+    '<div class="specs">' + p.specs.map((s) => '<div>' + ICON.check + '<span>' + s + '</span></div>').join("") + '</div>' +
+    '<div class="modal-price"><b>' + money(p.price) + '</b><span>narx</span></div>' +
+    '<div class="modal-actions">' +
+      '<button class="btn btn-lime" type="button" data-add="' + p.id + '">' + ICON.cart + ' Savatga</button>' +
+      '<button class="btn" type="button" data-modal-close>Yopish</button>' +
+    '</div>';
+  $("#productModal").classList.add("show");
+  $("#productModal").setAttribute("aria-hidden", "false");
+  $("#overlay").classList.add("show");
+  syncLock();
+}
+function closeProduct() {
+  $("#productModal").classList.remove("show");
+  $("#productModal").setAttribute("aria-hidden", "true");
+  if (!$("#cartDrawer").classList.contains("open")) $("#overlay").classList.remove("show");
+  syncLock();
+}
+
+/* ---------------- quiz ---------------- */
+const quiz = { step: 0, answers: [] };
+
+function resetQuiz() {
+  quiz.step = 0;
+  quiz.answers = [];
+  renderQuiz();
+}
+function quizPicks() {
+  const answers = quiz.answers;
+  const tags = answers.filter((v) => typeof v === "string");
+  const budget = answers[1] || Infinity;
+  let pool = PRODUCTS.filter((p) => p.price <= budget);
+  let note = "";
+  if (!pool.length) {
+    pool = PRODUCTS.slice();
+    note = "Bu byudjetda aniq variant yo'q — eng arzonlarini ko'rsatdim.";
+  }
+  const scored = pool.map((p) => {
+    let score = 0;
+    tags.forEach((t) => { if (p.tags.includes(t)) score += 10; });
+    score += p.rating;
+    return { p, score };
+  }).sort((a, b) => b.score - a.score || b.p.reviews - a.p.reviews);
+  return { picks: scored.slice(0, 2).map((x) => x.p), note };
+}
+
+function renderQuiz() {
+  const box = $("#quizBox");
+  if (quiz.step >= QUIZ.length) {
+    const result = quizPicks();
+    box.innerHTML =
+      '<div class="quiz-result-head">' +
+        '<span class="stamp">AI tanladi</span>' +
+        '<h3>Mana sizga mos ' + result.picks.length + ' ta variant</h3>' +
+      '</div>' +
+      '<div class="quiz-picks">' +
+        result.picks.map((p) =>
+          '<div class="pick">' +
+            '<img src="' + p.img + '" alt="' + p.name + '">' +
+            '<div class="pick-body"><b>' + p.name + '</b><span>' + money(p.price) + '</span></div>' +
+            '<button class="add" type="button" data-add="' + p.id + '" aria-label="Savatga">' + ICON.plus + '</button>' +
+          '</div>'
+        ).join("") +
+      '</div>' +
+      '<div class="quiz-actions">' +
+        '<button class="quiz-back" type="button" data-quiz-back>← Orqaga</button>' +
+        '<button class="btn btn-sm" type="button" data-quiz-restart>Qaytadan tanlash</button>' +
+        '<span class="quiz-note">AI javoblaringizga qarab tanladi</span>' +
+      '</div>' +
+      (result.note ? '<div class="quiz-fine">' + result.note + '</div>' : '');
+    return;
+  }
+
+  const step = QUIZ[quiz.step];
+  const bars = QUIZ.map((_, i) => {
+    const cls = i < quiz.step ? "done" : (i === quiz.step ? "active" : "");
+    return '<i class="' + cls + '"></i>';
+  }).join("");
+
+  box.innerHTML =
+    '<div class="quiz-progress">' +
+      '<div class="quiz-bars">' + bars + '</div>' +
+      '<span class="quiz-step-label">Savol ' + (quiz.step + 1) + ' / ' + QUIZ.length + '</span>' +
+    '</div>' +
+    '<h3 class="quiz-q">' + step.q + '</h3>' +
+    '<div class="quiz-options">' +
+      step.options.map((opt, i) =>
+        '<button class="quiz-opt" type="button" data-opt="' + i + '">' +
+          '<span class="quiz-key">' + String.fromCharCode(65 + i) + '</span>' +
+          '<span><b>' + opt.t + '</b><span>' + opt.s + '</span></span>' +
+        '</button>'
+      ).join("") +
+    '</div>' +
+    '<div class="quiz-actions">' +
+      (quiz.step > 0 ? '<button class="quiz-back" type="button" data-quiz-back>← Orqaga</button>' : '') +
+      '<span class="quiz-note">Jami 20 soniya</span>' +
+    '</div>';
+}
+
+$("#quizBox").addEventListener("click", (event) => {
+  const opt = event.target.closest("[data-opt]");
+  if (opt) {
+    quiz.answers.push(QUIZ[quiz.step].options[Number(opt.dataset.opt)].v);
+    quiz.step += 1;
+    renderQuiz();
+    return;
+  }
+  if (event.target.closest("[data-quiz-back]")) {
+    if (quiz.step > 0) { quiz.step -= 1; quiz.answers.pop(); renderQuiz(); }
+    return;
+  }
+  if (event.target.closest("[data-quiz-restart]")) resetQuiz();
+});
+
+/* ---------------- checkout ---------------- */
+$("#checkoutBtn").addEventListener("click", () => {
+  if (!Object.keys(state.cart).length) return;
+  $("#cartView").style.display = "none";
+  $("#orderSuccess").classList.remove("show");
+  $("#checkoutView").style.display = "block";
+  $("#cartFoot").style.display = "none";
+  $("#checkoutTotal").textContent = money(cartTotal());
+});
+$("#checkoutBack").addEventListener("click", () => {
+  $("#checkoutView").style.display = "none";
+  $("#cartView").style.display = "block";
+  $("#cartFoot").style.display = Object.keys(state.cart).length ? "block" : "none";
+});
+$("#checkoutForm").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const name = $("#coName").value.trim();
+  const phone = $("#coPhone").value.trim();
+  const address = $("#coAddress").value.trim();
+  if (name.length < 3) { toast("Ismingizni to'liq kiriting"); $("#coName").focus(); return; }
+  if (phone.replace(/\D/g, "").length < 9) { toast("Telefon raqamni to'g'ri kiriting"); $("#coPhone").focus(); return; }
+  if (address.length < 5) { toast("Manzilni kiriting"); $("#coAddress").focus(); return; }
+  if (!Object.keys(state.cart).length) { toast("Savatcha bo'sh"); resetCartView(); return; }
+
+  const order = {
+    id: "BZ-" + String(Date.now()).slice(-6),
+    date: new Date().toISOString(),
+    name: name,
+    phone: phone,
+    address: address,
+    note: $("#coNote").value.trim(),
+    items: Object.entries(state.cart).map((e) => {
+      const p = findProduct(e[0]);
+      return { id: e[0], name: p ? p.name : e[0], price: p ? p.price : 0, qty: e[1] };
+    }),
+    subtotal: cartSubtotal(),
+    discount: cartDiscount(),
+    total: cartTotal()
+  };
+  const orders = load(STORAGE.orders, []);
+  orders.push(order);
+  save(STORAGE.orders, orders);
+
+  state.cart = {};
+  save(STORAGE.cart, state.cart);
+  updateCartBadges();
+  renderCart();
+
+  $("#checkoutView").style.display = "none";
+  $("#orderNumber").textContent = order.id;
+  $("#orderSuccess").classList.add("show");
+  $("#cartFoot").style.display = "none";
+  $("#checkoutForm").reset();
+  burstConfetti();
+  toast("Buyurtma qabul qilindi: " + order.id);
+});
+$("#successClose").addEventListener("click", () => {
+  closeCart();
+  setTimeout(resetCartView, 300);
+});
+
+/* ---------------- confetti ---------------- */
+function burstConfetti() {
+  const colors = ["#C9F45B", "#FF6B4A", "#C9B6FF", "#8ED8FF", "#FFD84D", "#FFB6D5"];
+  for (let i = 0; i < 28; i++) {
+    const el = document.createElement("i");
+    el.className = "confetti";
+    el.style.background = colors[i % colors.length];
+    el.style.left = (46 + Math.random() * 8) + "vw";
+    el.style.setProperty("--dx", (Math.random() * 440 - 220).toFixed(0) + "px");
+    el.style.setProperty("--dy", (Math.random() * -380 - 40).toFixed(0) + "px");
+    el.style.setProperty("--rot", (Math.random() * 720 - 360).toFixed(0) + "deg");
+    el.style.animationDelay = (Math.random() * 0.12).toFixed(2) + "s";
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500);
+  }
+}
+
+/* ---------------- events ---------------- */
+document.addEventListener("click", (event) => {
+  const chip = event.target.closest("[data-cat]");
+  if (chip) {
+    state.category = chip.dataset.cat;
+    renderChips();
+    renderProducts();
+    return;
+  }
+  const add = event.target.closest("[data-add]");
+  if (add) {
+    addToCart(add.dataset.add);
+    if (add.classList.contains("add")) {
+      add.classList.add("done");
+      add.innerHTML = ICON.check;
+      setTimeout(() => { add.classList.remove("done"); add.innerHTML = ICON.plus; }, 850);
+    }
+    return;
+  }
+  const open = event.target.closest("[data-open]");
+  if (open) { openProduct(open.dataset.open); return; }
+  const dec = event.target.closest("[data-dec]");
+  if (dec) { changeQty(dec.dataset.dec, -1); return; }
+  const inc = event.target.closest("[data-inc]");
+  if (inc) { changeQty(inc.dataset.inc, 1); return; }
+  const remove = event.target.closest("[data-remove]");
+  if (remove) { removeFromCart(remove.dataset.remove); return; }
+  if (event.target.closest("#emptyGoShop")) {
+    closeCart();
+    $("#katalog").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+  if (event.target.closest("[data-scroll-quiz]")) {
+    event.preventDefault();
+    closeCart();
+    $("#ai").scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+});
+
+function setSearch(value) {
+  state.query = value.trim();
+  if (state.query) state.category = "all";
+  renderChips();
+  renderProducts();
+}
+$("#searchInput").addEventListener("input", (event) => {
+  $("#searchInputMobile").value = event.target.value;
+  setSearch(event.target.value);
+});
+$("#searchInputMobile").addEventListener("input", (event) => {
+  $("#searchInput").value = event.target.value;
+  setSearch(event.target.value);
+});
+$("#sortSelect").addEventListener("change", (event) => {
+  state.sort = event.target.value;
+  renderProducts();
+});
+
+$("#cartBtn").addEventListener("click", openCart);
+$("#mobileCartBtn").addEventListener("click", openCart);
+$("#cartClose").addEventListener("click", closeCart);
+$("#overlay").addEventListener("click", () => { closeProduct(); closeCart(); });
+document.addEventListener("click", (event) => {
+  if (event.target.closest("[data-modal-close]")) closeProduct();
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") { closeProduct(); closeCart(); }
+  if ((event.key === "Enter" || event.key === " ") && event.target.closest("[data-open]")) {
+    event.preventDefault();
+    openProduct(event.target.closest("[data-open]").dataset.open);
+  }
+});
+
+/* ---------------- init ---------------- */
+renderChips();
+renderProducts();
+renderCart();
+updateCartBadges();
+renderQuiz();
+
+if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+</script>
+</body>
+</html>
